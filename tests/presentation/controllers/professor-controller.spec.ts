@@ -83,7 +83,7 @@ describe('Professor Controller', () => {
     expect(httpResponse).toEqual(badRequest(new MissingParamError('cpf')))
   })
 
-  test('Should return 500 if an invalid /email/ is provided', async () => {
+  test('Should return 400 if an invalid /email/ is provided', async () => {
     const { sut, emailValidatorSpy } = makeSut()
     jest.spyOn(emailValidatorSpy, 'isValid').mockReturnValueOnce(false)
     const httpRequest = {
