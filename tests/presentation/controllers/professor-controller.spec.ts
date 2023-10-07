@@ -1,6 +1,6 @@
 import { ProfessorController } from '@/presentation/controllers'
-import { MissingParamError, InvalidParamError, ServerError } from '@/presentation/errors'
-import { badRequest } from '@/presentation/helpers'
+import { MissingParamError, InvalidParamError } from '@/presentation/errors'
+import { badRequest, serverError } from '@/presentation/helpers'
 import { type EmailValidator } from '@/presentation/protocols'
 
 const mockEmailValidator = (): EmailValidator => {
@@ -128,6 +128,6 @@ describe('Professor Controller', () => {
     }
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(500)
-    expect(httpResponse.body).toEqual(new ServerError())
+    expect(httpResponse).toEqual(serverError())
   })
 })
