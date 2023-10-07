@@ -1,0 +1,20 @@
+name: Continuous Integration
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push, pull_request]
+jobs:
+  continuous-integration:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Using Node.js
+        uses: actions/setup-node@v3
+        with: 
+          node-version: 18.x
+      - name: Run install
+        run: npm install  
+      - name: Building project
+        run: npm run build
+      - name: Testing project
+        run: npm run test:ci
+      
