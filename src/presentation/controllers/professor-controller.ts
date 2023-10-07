@@ -4,7 +4,7 @@ export class ProfessorController implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     return {
       statusCode: 400,
-      body: 'ok'
+      body: new Error('Missing param: nome')
     }
   }
 }
