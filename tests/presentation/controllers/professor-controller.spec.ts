@@ -2,6 +2,16 @@ import { ProfessorController } from '@/presentation/controllers'
 import { MissingParamError, InvalidParamError } from '@/presentation/errors'
 import { badRequest, serverError } from '@/presentation/helpers'
 import { type EmailValidator } from '@/presentation/protocols'
+import { type AddProfessor, type AddProfessorParams } from '@/domain/usecases/add-professor'
+import { type ProfessorModel } from '@/domain/models/professor'
+
+const makeFakeProfessorModel = (): ProfessorModel => ({
+  id: 'valid_id',
+  nome: 'valid_name',
+  telefone: 123456789,
+  email: 'valid_email@mail.com',
+  cpf: 12345678910
+})
 
 const mockEmailValidator = (): EmailValidator => {
   class EmailValidatorSpy implements EmailValidator {
@@ -12,17 +22,29 @@ const mockEmailValidator = (): EmailValidator => {
   return new EmailValidatorSpy()
 }
 
+const mockAddProfessor = (): AddProfessor => {
+  class AddProfessorSpy implements AddProfessor {
+    async add (data: AddProfessorParams): Promise<ProfessorModel | null> {
+      return makeFakeProfessorModel()
+    }
+  }
+  return new AddProfessorSpy()
+}
+
 type SutTypes = {
   sut: ProfessorController
   emailValidatorSpy: EmailValidator
+  addProfessorSpy: AddProfessor
 }
 
 const makeSut = (): SutTypes => {
   const emailValidatorSpy = mockEmailValidator()
-  const sut = new ProfessorController(emailValidatorSpy)
+  const addProfessorSpy = mockAddProfessor()
+  const sut = new ProfessorController(emailValidatorSpy, addProfessorSpy)
   return {
     sut,
-    emailValidatorSpy
+    emailValidatorSpy,
+    addProfessorSpy
   }
 }
 
@@ -129,5 +151,25 @@ describe('Professor Controller', () => {
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(500)
     expect(httpResponse).toEqual(serverError())
+  })
+
+  test('Should call AddProfessor with correct values', async () => {
+    const { sut, addProfessorSpy } = makeSut()
+    const addSpy = jest.spyOn(addProfessorSpy, 'add')
+    const httpRequest = {
+      body: {
+        nome: 'any_nome',
+        telefone: 123456789,
+        email: 'any_email@mail.com',
+        cpf: 12345678910
+      }
+    }
+    await sut.handle(httpRequest)
+    expect(addSpy).toHaveBeenCalledWith({
+      nome: 'any_nome',
+      telefone: 123456789,
+      email: 'any_email@mail.com',
+      cpf: 12345678910
+    })
   })
 })
