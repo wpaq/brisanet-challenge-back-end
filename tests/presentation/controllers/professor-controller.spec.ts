@@ -16,4 +16,19 @@ describe('Professor Controller', () => {
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('nome'))
   })
+
+  test('Should return 400 if no /telefone/ is provided', async () => {
+    const sut = new ProfessorController()
+    const httpRequest = {
+      body: {
+        nome: 'any_nome',
+        // telefone: 123456789,
+        email: 'any_email@mail.com',
+        cpf: 12345678910
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.body).toEqual(new MissingParamError('telefone'))
+  })
 })
