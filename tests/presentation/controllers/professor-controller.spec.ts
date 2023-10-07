@@ -44,4 +44,18 @@ describe('Professor Controller', () => {
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(badRequest(new MissingParamError('email')))
   })
+
+  test('Should return 400 if no /cpf/ is provided', async () => {
+    const sut = new ProfessorController()
+    const httpRequest = {
+      body: {
+        nome: 'any_nome',
+        telefone: 123456789,
+        email: 'any_email@mail.com'
+        // cpf: 12345678910
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(badRequest(new MissingParamError('cpf')))
+  })
 })
