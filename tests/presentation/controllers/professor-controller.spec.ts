@@ -1,4 +1,5 @@
 import { ProfessorController } from '@/presentation/controllers/index'
+import { MissingParamError } from '@/presentation/errors'
 
 describe('Professor Controller', () => {
   test('Should return 400 if no /nome/ is provided', async () => {
@@ -13,6 +14,6 @@ describe('Professor Controller', () => {
     }
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new Error('Missing param: nome'))
+    expect(httpResponse.body).toEqual(new MissingParamError('nome'))
   })
 })
