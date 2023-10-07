@@ -1,9 +1,13 @@
 import { type EmailValidator, type Controller, type HttpRequest, type HttpResponse } from '@/presentation/protocols'
 import { InvalidParamError, MissingParamError } from '@/presentation/errors'
 import { badRequest, serverError } from '@/presentation/helpers'
+import { type AddProfessor } from '@/domain/usecases/add-professor'
 
 export class ProfessorController implements Controller {
-  constructor (private readonly emailValidator: EmailValidator) {}
+  constructor (
+    private readonly emailValidator: EmailValidator,
+    private readonly addProfessor: AddProfessor
+  ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
@@ -14,15 +18,22 @@ export class ProfessorController implements Controller {
         }
       }
 
-      const { email } = httpRequest.body
+      const { nome, telefone, email, cpf } = httpRequest.body
       const isValid = this.emailValidator.isValid(email)
       if (!isValid) {
         return badRequest(new InvalidParamError('email'))
       }
 
+      const professor = await this.addProfessor.add({
+        nome,
+        telefone,
+        email,
+        cpf
+      })
+
       return {
         statusCode: 200,
-        body: 'ok'
+        body: professor
       }
     } catch (error) {
       return serverError()
