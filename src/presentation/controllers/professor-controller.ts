@@ -4,7 +4,7 @@ import { badRequest } from '@/presentation/helpers'
 
 export class ProfessorController implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-    const requiredFields = ['nome', 'telefone']
+    const requiredFields = ['nome', 'telefone', 'email']
     for (const field of requiredFields) {
       if (!httpRequest.body[field]) {
         return badRequest(new MissingParamError(field))
