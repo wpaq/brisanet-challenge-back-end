@@ -1,4 +1,4 @@
-import { ProfessorController } from '@/presentation/index'
+import { ProfessorController } from '@/presentation/controllers/index'
 
 describe('Professor Controller', () => {
   test('Should return 400 if no /nome/ is provided', async () => {
