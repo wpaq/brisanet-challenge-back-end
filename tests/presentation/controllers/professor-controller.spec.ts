@@ -1,5 +1,5 @@
 import { ProfessorController } from '@/presentation/controllers'
-import { MissingParamError, InvalidParamError } from '@/presentation/errors'
+import { MissingParamError, InvalidParamError, ServerError } from '@/presentation/errors'
 import { badRequest } from '@/presentation/helpers'
 import { type EmailValidator } from '@/presentation/protocols'
 
@@ -111,5 +111,23 @@ describe('Professor Controller', () => {
     }
     await sut.handle(httpRequest)
     expect(isValidSpy).toHaveBeenCalledWith('any_email@mail.com')
+  })
+
+  test('Should return 500 if EmailValidator throws', async () => {
+    const { sut, emailValidatorSpy } = makeSut()
+    jest.spyOn(emailValidatorSpy, 'isValid').mockImplementationOnce(() => {
+      throw new Error()
+    })
+    const httpRequest = {
+      body: {
+        nome: 'any_nome',
+        telefone: 123456789,
+        email: 'any_email@mail.com',
+        cpf: 12345678910
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(500)
+    expect(httpResponse.body).toEqual(new ServerError())
   })
 })
