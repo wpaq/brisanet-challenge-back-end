@@ -17,7 +17,7 @@ const makeSut = (): SutTypes => {
 }
 
 describe('DbAddProfessor Usecase', () => {
-  test('Should call AddProfessorRepository with correct data', async () => {
+  test('Should call addProfessorParams with correct data', async () => {
     const { sut, addProfessorRepositorySpy } = makeSut()
     const addProfessorParams = mockAddProfessorParams()
     await sut.add(addProfessorParams)
@@ -27,5 +27,13 @@ describe('DbAddProfessor Usecase', () => {
       email: addProfessorParams.email,
       cpf: addProfessorParams.cpf
     })
+  })
+
+  test('Should throw if AddProfessorRepository throws', async () => {
+    const { sut, addProfessorRepositorySpy } = makeSut()
+    jest.spyOn(addProfessorRepositorySpy, 'add').mockRejectedValueOnce(new Error())
+    const addProfessorParams = mockAddProfessorParams()
+    const promise = sut.add(addProfessorParams)
+    await expect(promise).rejects.toThrow()
   })
 })
