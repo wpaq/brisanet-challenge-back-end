@@ -143,4 +143,20 @@ describe('Professor Controller', () => {
       cpf: 12345678910
     })
   })
+
+  test('Should return 500 if AddProfessor throws', async () => {
+    const { sut, addProfessorSpy } = makeSut()
+    jest.spyOn(addProfessorSpy, 'add').mockRejectedValueOnce(new Error())
+    const httpRequest = {
+      body: {
+        nome: 'any_nome',
+        telefone: 123456789,
+        email: 'any_email@mail.com',
+        cpf: 12345678910
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(500)
+    expect(httpResponse).toEqual(serverError())
+  })
 })
