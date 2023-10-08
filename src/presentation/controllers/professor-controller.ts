@@ -1,6 +1,6 @@
 import { type EmailValidator, type Controller, type HttpRequest, type HttpResponse } from '@/presentation/protocols'
 import { InvalidParamError, MissingParamError } from '@/presentation/errors'
-import { badRequest, serverError } from '@/presentation/helpers'
+import { badRequest, ok, serverError } from '@/presentation/helpers'
 import { type AddProfessor } from '@/domain/usecases/add-professor'
 
 export class ProfessorController implements Controller {
@@ -31,10 +31,7 @@ export class ProfessorController implements Controller {
         cpf
       })
 
-      return {
-        statusCode: 200,
-        body: professor
-      }
+      return ok(professor)
     } catch (error) {
       return serverError()
     }
