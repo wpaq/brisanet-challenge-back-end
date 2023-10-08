@@ -158,4 +158,24 @@ describe('Professor Controller', () => {
     expect(httpResponse.statusCode).toBe(500)
     expect(httpResponse).toEqual(serverError())
   })
+
+  test('Should return 200 if valid data is provided', async () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        nome: 'any_nome',
+        telefone: 123456789,
+        email: 'any_email@mail.com',
+        cpf: 12345678910
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(200)
+    expect(httpRequest.body).toEqual({
+      nome: 'any_nome',
+      telefone: 123456789,
+      email: 'any_email@mail.com',
+      cpf: 12345678910
+    })
+  })
 })
