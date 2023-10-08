@@ -36,4 +36,10 @@ describe('DbAddProfessor Usecase', () => {
     const promise = sut.add(addProfessorParams)
     await expect(promise).rejects.toThrow()
   })
+
+  test('Should return an professor on success', async () => {
+    const { sut, addProfessorRepositorySpy } = makeSut()
+    const professor = await sut.add(mockAddProfessorParams())
+    expect(professor).toEqual(addProfessorRepositorySpy.professorModel)
+  })
 })
