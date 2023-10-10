@@ -1,28 +1,24 @@
 import { LogControllerDecorator } from '@/main/decorators'
+import { ok } from '@/presentation/helpers'
 import { type Controller, type HttpRequest, type HttpResponse } from '@/presentation/protocols'
+
+class ControllerSpy implements Controller {
+  httpResponse = ok('any_data')
+  request: HttpRequest
+
+  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+    this.request = httpRequest
+    return this.httpResponse
+  }
+}
 
 interface SutTypes {
   sut: LogControllerDecorator
-  controllerSpy: Controller
-}
-
-const makeController = (): Controller => {
-  class ControllerSpy implements Controller {
-    async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-      const httpResponse: HttpResponse = {
-        statusCode: 200,
-        body: {
-          nome: 'Wallyson'
-        }
-      }
-      return await Promise.resolve(httpResponse)
-    }
-  }
-  return new ControllerSpy()
+  controllerSpy: ControllerSpy
 }
 
 const makeSut = (): SutTypes => {
-  const controllerSpy = makeController()
+  const controllerSpy = new ControllerSpy()
   const sut = new LogControllerDecorator(controllerSpy)
   return {
     sut,
