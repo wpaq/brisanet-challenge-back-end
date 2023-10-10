@@ -33,4 +33,12 @@ describe('Email Validation', () => {
     sut.validate({ [field]: email })
     expect(emailValidatorSpy.email).toBe(email)
   })
+
+  test('Should throws if EmailValidator throws', () => {
+    const { sut, emailValidatorSpy } = makeSut()
+    jest.spyOn(emailValidatorSpy, 'isValid').mockImplementationOnce(() => {
+      throw new Error()
+    })
+    expect(sut.validate).toThrow()
+  })
 })
