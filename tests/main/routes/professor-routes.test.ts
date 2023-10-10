@@ -1,7 +1,12 @@
-import request from 'supertest'
 import app from '@/main/config/app'
+import { PrismaHelper } from '@/infra/db/prisma'
+import request from 'supertest'
 
 describe('Professor Routes', () => {
+  beforeEach(async () => {
+    await PrismaHelper.deleteMany()
+  })
+
   test('should return an professor on success', async () => {
     await request(app)
       .post('/api/professor')
