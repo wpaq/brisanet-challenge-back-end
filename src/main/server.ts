@@ -1,6 +1,10 @@
 import 'module-alias/register'
+import app from '@/main/config/app'
 import env from '@/main/config/env'
-import express from 'express'
+import { PrismaHelper } from '@/infra/db/prisma'
 
-const app = express()
-app.listen(5050, () => { console.log(`Server running at http://localhost:${env.port}`) })
+PrismaHelper.connect()
+  .then(() => {
+    app.listen(5050, () => { console.log(`Server running at http://localhost:${env.port}`) })
+  })
+  .catch(console.error)
