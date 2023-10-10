@@ -2,7 +2,7 @@ import { InvalidParamError } from '@/presentation/errors'
 import { EmailValidatorSpy } from '@/tests/validation/mocks/mock-email-validation'
 import { EmailValidation } from '@/validation/validators/email-validation'
 
-const field = 'any_email@mail.com'
+const field = 'any_field'
 
 type SutTypes = {
   sut: EmailValidation
@@ -25,5 +25,12 @@ describe('Email Validation', () => {
     const email = 'invalid_email@mail.com'
     const error = sut.validate({ [field]: email })
     expect(error).toEqual(new InvalidParamError(field))
+  })
+
+  test('Should call EmailValidator with correct email', () => {
+    const { sut, emailValidatorSpy } = makeSut()
+    const email = 'any_email@mail.com'
+    sut.validate({ [field]: email })
+    expect(emailValidatorSpy.email).toBe(email)
   })
 })
