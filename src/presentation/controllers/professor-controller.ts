@@ -33,7 +33,7 @@ export class ProfessorController implements Controller {
 
       return ok(professor)
     } catch (error) {
-      return serverError()
+      return serverError(error)
     }
   }
 }

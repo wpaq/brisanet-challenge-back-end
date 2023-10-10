@@ -121,7 +121,7 @@ describe('Professor Controller', () => {
     }
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(500)
-    expect(httpResponse).toEqual(serverError())
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 
   test('Should call AddProfessor with correct values', async () => {
@@ -156,7 +156,7 @@ describe('Professor Controller', () => {
     }
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(500)
-    expect(httpResponse).toEqual(serverError())
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 
   test('Should return 200 if valid data is provided', async () => {
