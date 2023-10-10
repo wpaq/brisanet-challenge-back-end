@@ -1,1 +1,1 @@
-export * from './add-professor'
+export * from './db-add-professor'
