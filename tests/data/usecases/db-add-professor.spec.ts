@@ -1,8 +1,6 @@
-import { mockAddProfessorParams, mockProfessorModel } from '@/tests/domain/mock-professor'
+import { mockAddProfessorParams } from '@/tests/domain/mock-professor'
 import { AddProfessorRepositorySpy } from '../mocks/mock-db-professor'
 import { DbAddProfessor } from '@/data/usecases'
-import { createMockContext, type Context, type MockContext } from '@/tests/infra/db/prisma/context'
-import { createProfessor } from '@/tests/infra/db/prisma/function-with-context'
 import { PrismaHelper } from '@/infra/db/prisma/prisma-helper'
 
 type SutTypes = {
@@ -20,16 +18,11 @@ const makeSut = (): SutTypes => {
 }
 
 describe('DbAddProfessor Usecase', () => {
-  let mockCtx: MockContext
-  let ctx: Context
-
   beforeEach(async () => {
-    mockCtx = createMockContext()
-    ctx = mockCtx as unknown as Context
     await PrismaHelper.deleteMany()
   })
 
-  test('Should call addProfessorParams with correct data', async () => {
+  test('Should call AddProfessorRepository with correct data', async () => {
     const { sut, addProfessorRepositorySpy } = makeSut()
     const addProfessorParams = mockAddProfessorParams()
     await sut.add(addProfessorParams)
@@ -51,14 +44,11 @@ describe('DbAddProfessor Usecase', () => {
   })
 
   test('Should return an professor on success', async () => {
-    const { sut } = makeSut()
-    const addProfessorModel = mockProfessorModel()
-    const result = await sut.add(mockAddProfessorParams())
+    const { sut, addProfessorRepositorySpy } = makeSut()
+    const addSpy = jest.spyOn(addProfessorRepositorySpy, 'add')
+    await sut.add(mockAddProfessorParams())
 
-    mockCtx.prisma.professor.create.mockResolvedValue(addProfessorModel)
-
-    await expect(createProfessor(result, ctx)).resolves.toEqual({
-      id: 'valid_id',
+    expect(addSpy).toHaveBeenCalledWith({
       nome: 'valid_nome',
       telefone: '123456789',
       email: 'valid_email@mail.com',

@@ -15,8 +15,6 @@ export class ProfessorPrismaRepository implements AddProfessorRepository {
         cpf: data.cpf
       }
     })
-
-    // const users = await prisma.user.findMany()
     return newProfessor
   }
 }
