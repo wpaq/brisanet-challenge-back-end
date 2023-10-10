@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "professores" ALTER COLUMN "telefone" SET DATA TYPE TEXT,
+ALTER COLUMN "cpf" SET DATA TYPE TEXT;

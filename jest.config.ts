@@ -15,7 +15,8 @@ const config: Config = {
   moduleNameMapper: {
     '@/tests/(.*)': '<rootDir>/tests/$1',
     '@/(.*)': '<rootDir>/src/$1'
-  }
+  },
+  setupFilesAfterEnv: ['<rootDir>/tests/infra/db/prisma/context.ts'],
 }
 
 export default config

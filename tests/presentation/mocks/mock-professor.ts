@@ -1,13 +1,12 @@
 import { type ProfessorModel } from '@/domain/models/professor'
 import { type AddProfessor, type AddProfessorParams } from '@/domain/usecases/add-professor'
-import { mockProfessorModel } from '@/tests/domain/mock-professor'
 
 export class AddProfessorSpy implements AddProfessor {
   addProfessorParams: AddProfessorParams
-  professorModel = mockProfessorModel() || null
+  professorModel: ProfessorModel
 
-  async add (data: AddProfessorParams): Promise<ProfessorModel | null> {
+  async add (data: AddProfessorParams): Promise<ProfessorModel> {
     this.addProfessorParams = data
-    return await Promise.resolve(this.professorModel)
+    return this.professorModel
   }
 }

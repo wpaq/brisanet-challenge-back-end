@@ -1,12 +1,12 @@
-import { type ProfessorModel } from '@/domain/models/professor'
+import { type ProfessorModel } from '../models/professor'
 
 export type AddProfessorParams = {
   nome: string
-  telefone: number
+  telefone: string
   email: string
-  cpf: number
+  cpf: string
 }
 
 export interface AddProfessor {
-  add: (data: AddProfessorParams) => Promise<ProfessorModel | null>
+  add: (data: AddProfessorParams) => Promise<ProfessorModel>
 }

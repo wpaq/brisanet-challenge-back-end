@@ -7,7 +7,7 @@ export class DbAddProfessor implements AddProfessor {
     private readonly addProfessorRepository: AddProfessorRepository
   ) {}
 
-  async add (data: AddProfessorParams): Promise<ProfessorModel | null> {
+  async add (data: AddProfessorParams): Promise<ProfessorModel> {
     const newProfessor = await this.addProfessorRepository.add(data)
     return newProfessor
   }

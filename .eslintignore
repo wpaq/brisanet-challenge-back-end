@@ -5,3 +5,5 @@ coverage
 jest.config.ts
 jest-integration-config.ts
 jest-unit-config.ts
+
+prisma/prisma-client.ts

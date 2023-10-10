@@ -1,7 +1,7 @@
 export type ProfessorModel = {
   id: string
   nome: string
-  telefone: number
+  telefone: string
   email: string
-  cpf: number
+  cpf: string
 }
