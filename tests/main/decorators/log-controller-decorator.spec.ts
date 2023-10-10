@@ -2,6 +2,15 @@ import { LogControllerDecorator } from '@/main/decorators'
 import { ok } from '@/presentation/helpers'
 import { type Controller, type HttpRequest, type HttpResponse } from '@/presentation/protocols'
 
+const mockFakeRequest = (): HttpRequest => ({
+  body: {
+    nome: 'any_nome',
+    telefone: '0123456789',
+    email: 'any_email@mail.com',
+    cpf: '12345678910'
+  }
+})
+
 class ControllerSpy implements Controller {
   httpResponse = ok('any_data')
   request: HttpRequest
@@ -30,28 +39,14 @@ describe('LogController Decorator', () => {
   test('Should call controller handle', async () => {
     const { sut, controllerSpy } = makeSut()
     const handleSpy = jest.spyOn(controllerSpy, 'handle')
-    const httpRequest = {
-      body: {
-        nome: 'any_nome',
-        telefone: '0123456789',
-        email: 'any_email@mail.com',
-        cpf: '12345678910'
-      }
-    }
+    const httpRequest = mockFakeRequest()
     await sut.handle(httpRequest)
     expect(handleSpy).toHaveBeenCalledWith(httpRequest)
   })
 
   test('Should return the same result of the controller', async () => {
     const { sut, controllerSpy } = makeSut()
-    const httpRequest = {
-      body: {
-        nome: 'any_nome',
-        telefone: '0123456789',
-        email: 'any_email@mail.com',
-        cpf: '12345678910'
-      }
-    }
+    const httpRequest = mockFakeRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(controllerSpy.httpResponse)
   })
