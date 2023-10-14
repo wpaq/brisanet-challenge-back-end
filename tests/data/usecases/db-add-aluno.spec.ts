@@ -30,4 +30,12 @@ describe('DbAddAluno Usecase', () => {
       matricula: addAlunoParams.matricula
     })
   })
+
+  test('Should throw if AddAlunoRepository throws', async () => {
+    const { sut, addAlunoRepositorySpy } = makeSut()
+    jest.spyOn(addAlunoRepositorySpy, 'add').mockRejectedValueOnce(new Error())
+    const addAlunoParams = mockAddAlunoParams()
+    const promise = sut.add(addAlunoParams)
+    await expect(promise).rejects.toThrow()
+  })
 })
