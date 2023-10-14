@@ -1,6 +1,6 @@
 import { AlunoController } from '@/presentation/controllers'
 import { AddAlunoSpy, EmailValidatorSpy } from '@/tests/presentation/mocks'
-import { badRequest } from '@/presentation/helpers'
+import { badRequest, serverError } from '@/presentation/helpers'
 import { InvalidParamError, MissingParamError } from '@/presentation/errors'
 
 type SutTypes = {
@@ -125,5 +125,24 @@ describe('Aluno Controller', () => {
     }
     await sut.handle(httpRequest)
     expect(emailValidatorSpy.email).toBe('any_email@mail.com')
+  })
+
+  test('Should return 500 if EmailValidator throws', async () => {
+    const { sut, emailValidatorSpy } = makeSut()
+    jest.spyOn(emailValidatorSpy, 'isValid').mockImplementationOnce(() => {
+      throw new Error()
+    })
+    const httpRequest = {
+      body: {
+        nome: 'any_nome',
+        telefone: 123456789,
+        email: 'any_email@mail.com',
+        cpf: 12345678910,
+        matricula: 'any_matricula'
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(500)
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
