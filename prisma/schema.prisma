@@ -27,3 +27,14 @@ model LogError {
 
   @@map("log_error")  
 }
+
+model Aluno {
+  id          String    @id @default(uuid())
+  nome        String   
+  telefone    String
+  email       String    @unique
+  cpf         String   
+  matricula   String 
+
+  @@map("alunos")  
+}
