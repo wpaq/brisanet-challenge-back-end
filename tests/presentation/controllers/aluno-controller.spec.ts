@@ -111,4 +111,19 @@ describe('Aluno Controller', () => {
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(badRequest(new InvalidParamError('email')))
   })
+
+  test('Should call EmailValidator with correct email', async () => {
+    const { sut, emailValidatorSpy } = makeSut()
+    const httpRequest = {
+      body: {
+        nome: 'any_nome',
+        telefone: 123456789,
+        email: 'any_email@mail.com',
+        cpf: 12345678910,
+        matricula: 'any_matricula'
+      }
+    }
+    await sut.handle(httpRequest)
+    expect(emailValidatorSpy.email).toBe('any_email@mail.com')
+  })
 })
