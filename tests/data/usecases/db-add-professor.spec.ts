@@ -1,7 +1,6 @@
 import { mockAddProfessorParams } from '@/tests/domain/mock-professor'
 import { AddProfessorRepositorySpy } from '../mocks/mock-db-professor'
 import { DbAddProfessor } from '@/data/usecases'
-import { PrismaHelper } from '@/infra/db/prisma/prisma-helper'
 
 type SutTypes = {
   sut: DbAddProfessor
@@ -18,10 +17,6 @@ const makeSut = (): SutTypes => {
 }
 
 describe('DbAddProfessor Usecase', () => {
-  beforeEach(async () => {
-    await PrismaHelper.deleteMany()
-  })
-
   test('Should call AddProfessorRepository with correct data', async () => {
     const { sut, addProfessorRepositorySpy } = makeSut()
     const addProfessorParams = mockAddProfessorParams()
