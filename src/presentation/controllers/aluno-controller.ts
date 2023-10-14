@@ -18,11 +18,20 @@ export class AlunoController implements Controller {
         }
       }
 
-      const { email } = httpRequest.body
+      const { nome, telefone, email, cpf, matricula } = httpRequest.body
       const isValid = this.emailValidator.isValid(email)
       if (!isValid) {
         return badRequest(new InvalidParamError('email'))
       }
+
+      await this.addAluno.add({
+        nome,
+        telefone,
+        email,
+        cpf,
+        matricula
+      })
+
       return ok('any')
     } catch (error) {
       return serverError(error)
