@@ -5,9 +5,7 @@ import { PrismaHelper } from '@/infra/db/prisma'
 
 export class ProfessorPrismaRepository implements AddProfessorRepository {
   async add (data: AddProfessorParams): Promise<ProfessorModel> {
-    const prisma = await PrismaHelper.connect()
-
-    const newProfessor = await prisma.professor.create({
+    const newProfessor = await PrismaHelper.client.professor.create({
       data: {
         nome: data.nome,
         telefone: data.telefone,

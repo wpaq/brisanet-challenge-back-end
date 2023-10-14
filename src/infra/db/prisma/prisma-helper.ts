@@ -1,20 +1,29 @@
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import { clientTest, clientProd } from './prisma-client'
 
 export const PrismaHelper = {
-  prisma,
+  client: clientTest || clientProd,
 
-  async connect () {
-    await prisma.$connect()
-    return this.prisma
+  async connect (database: string) {
+    if (database === 'test') {
+      await clientTest.$connect()
+      this.client = clientTest
+      return this.client
+    }
+
+    if (database === 'prod') {
+      await clientProd.$connect()
+      this.client = clientProd
+      return this.client
+    }
   },
 
-  async disconnect () {
-    await prisma.$disconnect()
-  },
+  async disconnect (database: string) {
+    if (database === 'test') {
+      await clientTest.$disconnect()
+    }
 
-  async deleteMany () {
-    await this.prisma.professor.deleteMany()
+    if (database === 'prod') {
+      await clientProd.$disconnect()
+    }
   }
 }
