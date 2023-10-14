@@ -2,8 +2,17 @@ import { mockAddProfessorParams } from '@/tests/domain/mock-professor'
 import { PrismaHelper, ProfessorPrismaRepository } from '@/infra/db/prisma'
 
 describe('ProfessorPrismaRepository', () => {
+  beforeAll(async () => {
+    await PrismaHelper.connect('test')
+  })
+
+  afterAll(async () => {
+    await PrismaHelper.client.professor.deleteMany({})
+    await PrismaHelper.disconnect('test')
+  })
+
   beforeEach(async () => {
-    await PrismaHelper.deleteMany()
+    await PrismaHelper.client.professor.deleteMany({})
   })
 
   test('Should return an professor on success', async () => {

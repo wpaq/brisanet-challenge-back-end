@@ -1,10 +1,19 @@
 import app from '@/main/config/app'
-import { PrismaHelper } from '@/infra/db/prisma'
 import request from 'supertest'
+import { PrismaHelper } from '@/infra/db/prisma'
 
 describe('Professor Routes', () => {
+  beforeAll(async () => {
+    await PrismaHelper.connect('test')
+  })
+
+  afterAll(async () => {
+    await PrismaHelper.client.professor.deleteMany({})
+    await PrismaHelper.disconnect('test')
+  })
+
   beforeEach(async () => {
-    await PrismaHelper.deleteMany()
+    await PrismaHelper.client.professor.deleteMany({})
   })
 
   test('should return an professor on success', async () => {
