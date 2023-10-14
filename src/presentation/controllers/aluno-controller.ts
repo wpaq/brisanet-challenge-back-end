@@ -1,5 +1,5 @@
 import { type EmailValidator, type Controller, type HttpRequest, type HttpResponse } from '@/presentation/protocols'
-import { MissingParamError } from '@/presentation/errors'
+import { InvalidParamError, MissingParamError } from '@/presentation/errors'
 import { badRequest, ok } from '@/presentation/helpers'
 import { type AddAluno } from '@/domain/usecases/add-aluno'
 
@@ -17,6 +17,11 @@ export class AlunoController implements Controller {
       }
     }
 
+    const { email } = httpRequest.body
+    const isValid = this.emailValidator.isValid(email)
+    if (!isValid) {
+      return badRequest(new InvalidParamError('email'))
+    }
     return ok('any')
   }
 }
