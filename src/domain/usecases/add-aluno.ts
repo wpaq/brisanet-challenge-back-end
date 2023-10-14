@@ -1,6 +1,6 @@
 import { type AlunoModel } from '../models/aluno'
 
-type AlunoParams = {
+export type AddAlunoParams = {
   nome: string
   telefone: string
   email: string
@@ -9,5 +9,5 @@ type AlunoParams = {
 }
 
 export interface AddAluno {
-  add: (data: AlunoParams) => Promise<AlunoModel>
+  add: (data: AddAlunoParams) => Promise<AlunoModel>
 }
