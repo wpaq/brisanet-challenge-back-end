@@ -22,9 +22,9 @@ describe('ProfessorPrismaRepository', () => {
 
     expect(result).toBeTruthy()
     expect(result.id).toBeTruthy()
-    expect(result.nome).toBe('valid_nome')
-    expect(result.telefone).toBe('123456789')
-    expect(result.email).toBe('valid_email@mail.com')
-    expect(result.cpf).toBe('12345678910')
+    expect(result.nome).toBe(addProfessorParams.nome)
+    expect(result.telefone).toBe(addProfessorParams.telefone)
+    expect(result.email).toBe(addProfessorParams.email)
+    expect(result.cpf).toBe(addProfessorParams.cpf)
   })
 })
