@@ -7,8 +7,9 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:admin@localhost:5432/brisanet_challenger?schema=public"
+  url      = "postgresql://postgres:admin@localhost:5432/brisanet_challenger_tests?schema=public"
 }
+
 
 model Professor {
   id        String    @id @default(uuid())
