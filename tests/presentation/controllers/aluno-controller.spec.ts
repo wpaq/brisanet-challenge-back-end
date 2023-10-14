@@ -145,4 +145,25 @@ describe('Aluno Controller', () => {
     expect(httpResponse.statusCode).toBe(500)
     expect(httpResponse).toEqual(serverError(new Error()))
   })
+
+  test('Should call AddAluno with correct values', async () => {
+    const { sut, addAlunoSpy } = makeSut()
+    const httpRequest = {
+      body: {
+        nome: 'any_nome',
+        telefone: 123456789,
+        email: 'any_email@mail.com',
+        cpf: 12345678910,
+        matricula: 'any_matricula'
+      }
+    }
+    await sut.handle(httpRequest)
+    expect(addAlunoSpy.addAlunoParams).toEqual({
+      nome: 'any_nome',
+      telefone: 123456789,
+      email: 'any_email@mail.com',
+      cpf: 12345678910,
+      matricula: 'any_matricula'
+    })
+  })
 })
