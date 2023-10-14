@@ -166,4 +166,21 @@ describe('Aluno Controller', () => {
       matricula: 'any_matricula'
     })
   })
+
+  test('Should return 500 if AddAluno throws', async () => {
+    const { sut, addAlunoSpy } = makeSut()
+    jest.spyOn(addAlunoSpy, 'add').mockRejectedValueOnce(new Error())
+    const httpRequest = {
+      body: {
+        nome: 'any_nome',
+        telefone: 123456789,
+        email: 'any_email@mail.com',
+        cpf: 12345678910,
+        matricula: 'any_matricula'
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(500)
+    expect(httpResponse).toEqual(serverError(new Error()))
+  })
 })
