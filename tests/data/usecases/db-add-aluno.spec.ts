@@ -38,4 +38,18 @@ describe('DbAddAluno Usecase', () => {
     const promise = sut.add(addAlunoParams)
     await expect(promise).rejects.toThrow()
   })
+
+  test('Should return an aluno on success', async () => {
+    const { sut, addAlunoRepositorySpy } = makeSut()
+    const addSpy = jest.spyOn(addAlunoRepositorySpy, 'add')
+    await sut.add(mockAddAlunoParams())
+
+    expect(addSpy).toHaveBeenCalledWith({
+      nome: 'valid_nome',
+      telefone: '123456789',
+      email: 'valid_email@mail.com',
+      cpf: '12345678910',
+      matricula: 'valid_matricula'
+    })
+  })
 })
