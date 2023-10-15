@@ -1,5 +1,5 @@
 import { type EmailValidator, type Controller, type HttpRequest, type HttpResponse, type Validation } from '@/presentation/protocols'
-import { InvalidParamError, MissingParamError } from '@/presentation/errors'
+import { InvalidParamError } from '@/presentation/errors'
 import { badRequest, ok, serverError } from '@/presentation/helpers'
 import { type AddProfessor } from '@/domain/usecases/add-professor'
 
@@ -15,13 +15,6 @@ export class ProfessorController implements Controller {
       const error = this.validation.validate(httpRequest.body)
       if (error) {
         return badRequest(error)
-      }
-
-      const requiredFields = ['nome', 'telefone', 'email', 'cpf']
-      for (const field of requiredFields) {
-        if (!httpRequest.body[field]) {
-          return badRequest(new MissingParamError(field))
-        }
       }
 
       const { nome, telefone, email, cpf } = httpRequest.body
