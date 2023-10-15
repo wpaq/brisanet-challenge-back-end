@@ -1,11 +1,9 @@
-import { type EmailValidator, type Controller, type HttpRequest, type HttpResponse, type Validation } from '@/presentation/protocols'
-import { InvalidParamError } from '@/presentation/errors'
+import { type Controller, type HttpRequest, type HttpResponse, type Validation } from '@/presentation/protocols'
 import { badRequest, ok, serverError } from '@/presentation/helpers'
 import { type AddProfessor } from '@/domain/usecases/add-professor'
 
 export class ProfessorController implements Controller {
   constructor (
-    private readonly emailValidator: EmailValidator,
     private readonly addProfessor: AddProfessor,
     private readonly validation: Validation
   ) {}
@@ -18,11 +16,6 @@ export class ProfessorController implements Controller {
       }
 
       const { nome, telefone, email, cpf } = httpRequest.body
-      const isValid = this.emailValidator.isValid(email)
-      if (!isValid) {
-        return badRequest(new InvalidParamError('email'))
-      }
-
       const professor = await this.addProfessor.add({
         nome,
         telefone,
