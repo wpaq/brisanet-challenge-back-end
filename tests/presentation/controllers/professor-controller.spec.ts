@@ -160,7 +160,7 @@ describe('Professor Controller', () => {
   })
 
   test('Should return 200 if valid data is provided', async () => {
-    const { sut } = makeSut()
+    const { sut, addProfessorSpy } = makeSut()
     const httpRequest = {
       body: {
         nome: 'any_nome',
@@ -171,11 +171,6 @@ describe('Professor Controller', () => {
     }
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(200)
-    expect(httpRequest.body).toEqual({
-      nome: 'any_nome',
-      telefone: 123456789,
-      email: 'any_email@mail.com',
-      cpf: 12345678910
-    })
+    expect(httpResponse.body).toEqual(addProfessorSpy.professorModel)
   })
 })
