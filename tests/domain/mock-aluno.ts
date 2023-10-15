@@ -1,19 +1,21 @@
 import { type AlunoModel } from '@/domain/models/aluno'
 import { type AddAlunoParams } from '@/domain/usecases/add-aluno'
 
+import { faker } from '@faker-js/faker'
+
 export const mockAlunoModel = (): AlunoModel => ({
-  id: 'valid_id',
-  nome: 'valid_nome',
-  telefone: '123456789',
-  email: 'valid_email@mail.com',
-  cpf: '12345678910',
-  matricula: 'valid_matricula'
+  id: faker.string.uuid(),
+  nome: faker.person.fullName(),
+  telefone: faker.phone.number(),
+  email: faker.internet.email(),
+  cpf: faker.string.numeric(11),
+  matricula: faker.string.numeric(6)
 })
 
 export const mockAddAlunoParams = (): AddAlunoParams => ({
-  nome: 'valid_nome',
-  telefone: '123456789',
-  email: 'valid_email@mail.com',
-  cpf: '12345678910',
-  matricula: 'valid_matricula'
+  nome: faker.person.fullName(),
+  telefone: faker.phone.number(),
+  email: faker.internet.email(),
+  cpf: faker.string.numeric(11),
+  matricula: faker.string.numeric(6)
 })

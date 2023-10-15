@@ -1,6 +1,7 @@
 import app from '@/main/config/app'
-import request from 'supertest'
 import { PrismaHelper } from '@/infra/db/prisma'
+
+import request from 'supertest'
 
 describe('Professor Routes', () => {
   beforeAll(async () => {

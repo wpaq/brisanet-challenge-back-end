@@ -40,14 +40,7 @@ describe('DbAddProfessor Usecase', () => {
 
   test('Should return an professor on success', async () => {
     const { sut, addProfessorRepositorySpy } = makeSut()
-    const addSpy = jest.spyOn(addProfessorRepositorySpy, 'add')
-    await sut.add(mockAddProfessorParams())
-
-    expect(addSpy).toHaveBeenCalledWith({
-      nome: 'valid_nome',
-      telefone: '123456789',
-      email: 'valid_email@mail.com',
-      cpf: '12345678910'
-    })
+    const result = await sut.add(mockAddProfessorParams())
+    expect(result).toEqual(addProfessorRepositorySpy.result)
   })
 })

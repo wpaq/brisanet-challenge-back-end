@@ -1,31 +1,33 @@
+import { LogErrorRepositorySpy } from '@/tests/data/mocks/mock-db-log'
 import { LogControllerDecorator } from '@/main/decorators'
 import { ok, serverError } from '@/presentation/helpers'
 import { type Controller, type HttpRequest, type HttpResponse } from '@/presentation/protocols'
-import { LogErrorRepositorySpy } from '@/tests/data/mocks/mock-db-log'
+
+import { faker } from '@faker-js/faker'
 
 const mockFakeRequest = (): HttpRequest => ({
   body: {
-    nome: 'any_nome',
-    telefone: '0123456789',
-    email: 'any_email@mail.com',
-    cpf: '12345678910'
+    nome: faker.person.fullName(),
+    telefone: faker.phone.number(),
+    email: faker.internet.email(),
+    cpf: faker.string.numeric(11)
   }
 })
 
-const mockServerError = (): HttpResponse => {
-  const fakeError = new Error()
-  fakeError.stack = 'any_stack'
-  return serverError(fakeError)
-}
-
 class ControllerSpy implements Controller {
-  httpResponse = ok('any_data')
+  httpResponse = ok(faker.string.uuid())
   request: HttpRequest
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     this.request = httpRequest
     return this.httpResponse
   }
+}
+
+const mockServerError = (): HttpResponse => {
+  const fakeError = new Error()
+  fakeError.stack = faker.word.words()
+  return serverError(fakeError)
 }
 
 interface SutTypes {
@@ -48,16 +50,14 @@ const makeSut = (): SutTypes => {
 describe('LogController Decorator', () => {
   test('Should call controller handle', async () => {
     const { sut, controllerSpy } = makeSut()
-    const handleSpy = jest.spyOn(controllerSpy, 'handle')
     const httpRequest = mockFakeRequest()
     await sut.handle(httpRequest)
-    expect(handleSpy).toHaveBeenCalledWith(httpRequest)
+    expect(controllerSpy.request).toEqual(httpRequest)
   })
 
   test('Should return the same result of the controller', async () => {
     const { sut, controllerSpy } = makeSut()
-    const httpRequest = mockFakeRequest()
-    const httpResponse = await sut.handle(httpRequest)
+    const httpResponse = await sut.handle(mockFakeRequest())
     expect(httpResponse).toEqual(controllerSpy.httpResponse)
   })
 

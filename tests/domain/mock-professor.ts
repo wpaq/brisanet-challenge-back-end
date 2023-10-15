@@ -1,17 +1,19 @@
 import { type ProfessorModel } from '@/domain/models/professor'
 import { type AddProfessorParams } from '@/domain/usecases/add-professor'
 
+import { faker } from '@faker-js/faker'
+
 export const mockProfessorModel = (): ProfessorModel => ({
-  id: 'valid_id',
-  nome: 'valid_nome',
-  telefone: '123456789',
-  email: 'valid_email@mail.com',
-  cpf: '12345678910'
+  id: faker.string.uuid(),
+  nome: faker.person.fullName(),
+  telefone: faker.phone.number(),
+  email: faker.internet.email(),
+  cpf: faker.string.numeric(11)
 })
 
 export const mockAddProfessorParams = (): AddProfessorParams => ({
-  nome: 'valid_nome',
-  telefone: '123456789',
-  email: 'valid_email@mail.com',
-  cpf: '12345678910'
+  nome: faker.person.fullName(),
+  telefone: faker.phone.number(),
+  email: faker.internet.email(),
+  cpf: faker.string.numeric(11)
 })
