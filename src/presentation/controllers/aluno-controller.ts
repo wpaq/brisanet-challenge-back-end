@@ -24,7 +24,7 @@ export class AlunoController implements Controller {
         return badRequest(new InvalidParamError('email'))
       }
 
-      await this.addAluno.add({
+      const aluno = await this.addAluno.add({
         nome,
         telefone,
         email,
@@ -32,7 +32,7 @@ export class AlunoController implements Controller {
         matricula
       })
 
-      return ok('any')
+      return ok(aluno)
     } catch (error) {
       return serverError(error)
     }
