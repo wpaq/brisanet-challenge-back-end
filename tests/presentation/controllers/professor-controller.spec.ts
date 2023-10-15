@@ -1,26 +1,43 @@
 import { ProfessorController } from '@/presentation/controllers'
 import { MissingParamError, InvalidParamError } from '@/presentation/errors'
 import { badRequest, serverError } from '@/presentation/helpers'
-import { AddProfessorSpy, EmailValidatorSpy } from '../mocks'
+import { AddProfessorSpy, EmailValidatorSpy, ValidationSpy } from '../mocks'
 
 type SutTypes = {
   sut: ProfessorController
   emailValidatorSpy: EmailValidatorSpy
   addProfessorSpy: AddProfessorSpy
+  validationSpy: ValidationSpy
 }
 
 const makeSut = (): SutTypes => {
   const emailValidatorSpy = new EmailValidatorSpy()
   const addProfessorSpy = new AddProfessorSpy()
-  const sut = new ProfessorController(emailValidatorSpy, addProfessorSpy)
+  const validationSpy = new ValidationSpy()
+  const sut = new ProfessorController(emailValidatorSpy, addProfessorSpy, validationSpy)
   return {
     sut,
     emailValidatorSpy,
-    addProfessorSpy
+    addProfessorSpy,
+    validationSpy
   }
 }
 
 describe('Professor Controller', () => {
+  test('Should call Validation with correct value', async () => {
+    const { sut, validationSpy } = makeSut()
+    const httpRequest = {
+      body: {
+        nome: 'any_nome',
+        telefone: 123456789,
+        email: 'any_email@mail.com',
+        cpf: 12345678910
+      }
+    }
+    await sut.handle(httpRequest)
+    expect(validationSpy.input).toEqual(httpRequest.body)
+  })
+
   test('Should return 400 if no /nome/ is provided', async () => {
     const { sut } = makeSut()
     const httpRequest = {
