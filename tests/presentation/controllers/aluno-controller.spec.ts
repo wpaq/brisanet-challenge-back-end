@@ -183,4 +183,20 @@ describe('Aluno Controller', () => {
     expect(httpResponse.statusCode).toBe(500)
     expect(httpResponse).toEqual(serverError(new Error()))
   })
+
+  test('Should return 200 if valid data is provided', async () => {
+    const { sut, addAlunoSpy } = makeSut()
+    const httpRequest = {
+      body: {
+        nome: 'valid_nome',
+        telefone: 123456789,
+        email: 'valid_email@mail.com',
+        cpf: 12345678910,
+        matricula: 'valid_matricula'
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(200)
+    expect(httpResponse.body).toEqual(addAlunoSpy.alunoModel)
+  })
 })
