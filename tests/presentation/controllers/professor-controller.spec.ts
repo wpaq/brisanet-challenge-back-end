@@ -38,6 +38,21 @@ describe('Professor Controller', () => {
     expect(validationSpy.input).toEqual(httpRequest.body)
   })
 
+  test('Should return 400 if Validation returns an error', async () => {
+    const { sut, validationSpy } = makeSut()
+    validationSpy.error = new MissingParamError('any_field')
+    const httpRequest = {
+      body: {
+        nome: 'any_nome',
+        telefone: 123456789,
+        email: 'any_email@mail.com',
+        cpf: 12345678910
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(badRequest(validationSpy.error))
+  })
+
   test('Should return 400 if no /nome/ is provided', async () => {
     const { sut } = makeSut()
     const httpRequest = {
