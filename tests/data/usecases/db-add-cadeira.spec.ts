@@ -38,4 +38,10 @@ describe('DbAddCadeira Usecase', () => {
     const promise = sut.add(mockAddCadeiraParams())
     await expect(promise).rejects.toThrow()
   })
+
+  test('Should return an cadeira on success', async () => {
+    const { sut, addCadeiraRepositorySpy } = makeSut()
+    const result = await sut.add(mockAddCadeiraParams())
+    expect(result).toEqual(addCadeiraRepositorySpy.result)
+  })
 })
