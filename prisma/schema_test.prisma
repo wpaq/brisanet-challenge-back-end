@@ -17,7 +17,6 @@ model Professor {
   telefone    String
   email       String    @unique
   cpf         String    
-
   cadeiras    Cadeira[]
 
   @@map("professores")  
@@ -46,12 +45,12 @@ model Cadeira {
   id              String      @id @default(uuid())
   nome            String   
   slug            String
-  data_inicio     DateTime
-  data_fim        DateTime   
-  carga_horaria   Int
+  dataInicio      DateTime
+  dataFim         DateTime   
+  cargaHoraria    Int
 
-  professor       Professor   @relation(fields: [professor_id], references: [id])
-  professor_id    String
+  professor       Professor   @relation(fields: [professorId], references: [id])
+  professorId     String      @unique
 
   @@map("cadeiras")  
 }
