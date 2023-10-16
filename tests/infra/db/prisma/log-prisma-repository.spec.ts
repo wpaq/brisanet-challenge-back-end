@@ -1,6 +1,5 @@
 import { LogPrismaRepository, PrismaHelper } from '@/infra/db/prisma'
 
-import MockDate from 'mockdate'
 import { faker } from '@faker-js/faker'
 
 const makeSut = (): LogPrismaRepository => {
@@ -10,13 +9,11 @@ const makeSut = (): LogPrismaRepository => {
 describe('LogPrisma Repository', () => {
   beforeAll(async () => {
     await PrismaHelper.connect('test')
-    MockDate.set(new Date())
   })
 
   afterAll(async () => {
     await PrismaHelper.client.logError.deleteMany({})
     await PrismaHelper.disconnect('test')
-    MockDate.reset()
   })
 
   beforeEach(async () => {
