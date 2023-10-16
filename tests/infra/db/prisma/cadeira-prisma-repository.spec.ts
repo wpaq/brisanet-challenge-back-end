@@ -1,20 +1,16 @@
 import { mockAddProfessorParams } from '@/tests/domain/mock-professor'
-import { CadeiraPrismaRepository, PrismaHelper, ProfessorPrismaRepository } from '@/infra/db/prisma'
 import { mockAddCadeiraParams } from '@/tests/domain/mock-cadeira'
-
-import MockDate from 'mockdate'
+import { CadeiraPrismaRepository, PrismaHelper, ProfessorPrismaRepository } from '@/infra/db/prisma'
 
 describe('CadeiraPrismaRepository', () => {
   beforeAll(async () => {
     await PrismaHelper.connect('test')
-    MockDate.set(new Date())
   })
 
   afterAll(async () => {
     await PrismaHelper.client.cadeira.deleteMany({})
     await PrismaHelper.client.professor.deleteMany({})
     await PrismaHelper.disconnect('test')
-    MockDate.reset()
   })
 
   test('Should return an cadeira on success', async () => {
