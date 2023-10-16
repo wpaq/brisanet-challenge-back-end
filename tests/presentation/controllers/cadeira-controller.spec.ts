@@ -2,7 +2,7 @@ import { AddCadeiraSpy, ValidationSpy } from '@/tests/presentation/mocks'
 import { type HttpRequest } from '@/presentation/protocols'
 import { CadeiraController } from '@/presentation/controllers'
 import { MissingParamError } from '@/presentation/errors'
-import { badRequest, serverError } from '@/presentation/helpers'
+import { badRequest, ok, serverError } from '@/presentation/helpers'
 
 import { faker } from '@faker-js/faker'
 
@@ -61,5 +61,11 @@ describe('Cadeira Controller', () => {
     jest.spyOn(addCadeiraSpy, 'add').mockRejectedValueOnce(new Error())
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should return 200 if valid data is provided', async () => {
+    const { sut, addCadeiraSpy } = makeSut()
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(ok(addCadeiraSpy.result))
   })
 })
