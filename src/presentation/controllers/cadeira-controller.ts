@@ -14,6 +14,16 @@ export class CadeiraController implements Controller {
       return badRequest(error)
     }
 
-    return ok('any_data')
+    const { nome, slug, dataInicio, dataFim, cargaHoraria, professorId } = httpRequest.body
+    const cadeira = await this.addCadeira.add({
+      nome,
+      slug,
+      dataInicio,
+      dataFim,
+      cargaHoraria,
+      professorId
+    })
+
+    return ok(cadeira)
   }
 }
