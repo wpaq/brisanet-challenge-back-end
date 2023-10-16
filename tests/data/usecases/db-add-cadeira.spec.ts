@@ -25,10 +25,10 @@ describe('DbAddCadeira Usecase', () => {
     expect(addCadeiraRepositorySpy.addCadeiraParams).toEqual({
       nome: addCadeiraParams.nome,
       slug: addCadeiraParams.slug,
-      data_inicio: addCadeiraParams.data_inicio,
-      data_fim: addCadeiraParams.data_fim,
-      carga_horaria: addCadeiraParams.carga_horaria,
-      professor_id: addCadeiraParams.professor_id
+      dataInicio: addCadeiraParams.dataInicio,
+      dataFim: addCadeiraParams.dataFim,
+      cargaHoraria: addCadeiraParams.cargaHoraria,
+      professorId: addCadeiraParams.professorId
     })
   })
 

@@ -7,17 +7,17 @@ export const mockCadeiraModel = (): CadeiraModel => ({
   id: faker.string.uuid(),
   nome: faker.person.fullName(),
   slug: faker.word.words(),
-  data_inicio: faker.date.anytime(),
-  data_fim: faker.date.anytime(),
-  carga_horaria: faker.number.int({ max: 100 }),
-  professor_id: faker.string.uuid()
+  dataInicio: faker.date.anytime(),
+  dataFim: faker.date.anytime(),
+  cargaHoraria: faker.number.int({ max: 100 }),
+  professorId: faker.string.uuid()
 })
 
 export const mockAddCadeiraParams = (): AddCadeiraParams => ({
   nome: faker.person.fullName(),
   slug: faker.word.words(),
-  data_inicio: faker.date.anytime(),
-  data_fim: faker.date.anytime(),
-  carga_horaria: faker.number.int({ max: 100 }),
-  professor_id: faker.string.uuid()
+  dataInicio: faker.date.anytime(),
+  dataFim: faker.date.anytime(),
+  cargaHoraria: faker.number.int({ max: 100 }),
+  professorId: faker.string.uuid()
 })
