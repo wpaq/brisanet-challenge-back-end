@@ -31,4 +31,11 @@ describe('DbAddCadeira Usecase', () => {
       professor_id: addCadeiraParams.professor_id
     })
   })
+
+  test('Should throw if AddCadeiraRepository throws', async () => {
+    const { sut, addCadeiraRepositorySpy } = makeSut()
+    jest.spyOn(addCadeiraRepositorySpy, 'add').mockRejectedValueOnce(new Error())
+    const promise = sut.add(mockAddCadeiraParams())
+    await expect(promise).rejects.toThrow()
+  })
 })
