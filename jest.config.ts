@@ -15,7 +15,12 @@ const config: Config = {
   moduleNameMapper: {
     '@/tests/(.*)': '<rootDir>/tests/$1',
     '@/(.*)': '<rootDir>/src/$1'
-  }
+  },
+  coveragePathIgnorePatterns: [
+    '<rootDir>/src/main/',
+    '<rootDir>/tests',
+    '<rootDir>/src/infra/db/prisma/prisma-helper.ts'
+  ]
 }
 
 export default config
