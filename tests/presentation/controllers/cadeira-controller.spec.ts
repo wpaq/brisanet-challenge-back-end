@@ -48,4 +48,11 @@ describe('Cadeira Controller', () => {
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(badRequest(validationSpy.error))
   })
+
+  test('Should call AddCadeira with correct value', async () => {
+    const { sut, addCadeiraSpy } = makeSut()
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(addCadeiraSpy.addCadeiraParams).toEqual(request.body)
+  })
 })
