@@ -44,8 +44,8 @@ model Cadeira {
   id              String      @id @default(uuid())
   nome            String   
   slug            String
-  dataInicio      DateTime
-  dataFim         DateTime   
+  dataInicio      DateTime    @db.Date
+  dataFim         DateTime    @db.Date
   cargaHoraria    Int
 
   professor       Professor   @relation(fields: [professorId], references: [id])
