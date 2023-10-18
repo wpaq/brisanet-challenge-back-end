@@ -8,5 +8,5 @@ export type AddProfessorParams = {
 }
 
 export interface AddProfessor {
-  add: (data: AddProfessorParams) => Promise<ProfessorModel>
+  add: (data: AddProfessorParams) => Promise<ProfessorModel | boolean>
 }
