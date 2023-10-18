@@ -9,5 +9,5 @@ export type AddAlunoParams = {
 }
 
 export interface AddAluno {
-  add: (data: AddAlunoParams) => Promise<AlunoModel>
+  add: (data: AddAlunoParams) => Promise<AlunoModel | boolean>
 }
