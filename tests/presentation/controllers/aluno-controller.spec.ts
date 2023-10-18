@@ -1,7 +1,7 @@
 import { AddAlunoSpy, ValidationSpy } from '@/tests/presentation/mocks'
-import { badRequest, ok, serverError } from '@/presentation/helpers'
+import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers'
 import { AlunoController } from '@/presentation/controllers'
-import { MissingParamError } from '@/presentation/errors'
+import { EmailInUseError, MissingParamError } from '@/presentation/errors'
 import { type HttpRequest } from '@/presentation/protocols'
 
 import { faker } from '@faker-js/faker'
@@ -66,5 +66,12 @@ describe('Aluno Controller', () => {
     const { sut, addAlunoSpy } = makeSut()
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(ok(addAlunoSpy.result))
+  })
+
+  test('Should return 403 if AddAluno returns false', async () => {
+    const { sut, addAlunoSpy } = makeSut()
+    addAlunoSpy.result = false
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(forbidden(new EmailInUseError()))
   })
 })

@@ -1,6 +1,6 @@
 import { type Controller, type HttpRequest, type HttpResponse, type Validation } from '@/presentation/protocols'
-
-import { badRequest, ok, serverError } from '@/presentation/helpers'
+import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers'
+import { EmailInUseError } from '@/presentation/errors'
 import { type AddAluno } from '@/domain/usecases/add-aluno'
 
 export class AlunoController implements Controller {
@@ -24,6 +24,9 @@ export class AlunoController implements Controller {
         cpf,
         matricula
       })
+      if (!aluno) {
+        return forbidden(new EmailInUseError())
+      }
 
       return ok(aluno)
     } catch (error) {
