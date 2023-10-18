@@ -1,5 +1,5 @@
-import { type ProfessorModel } from '@/domain/models/professor'
-import { type AddProfessorParams } from '@/domain/usecases/add-professor'
+import { type ProfessorModel } from '@/domain/models'
+import { type AddProfessorParams } from '@/domain/usecases'
 
 import { faker } from '@faker-js/faker'
 

@@ -1,6 +1,6 @@
-import { PrismaHelper } from '@/infra/db/prisma'
-import { mockAddAlunoParams } from '@/tests/domain/mock-aluno'
-import { AlunoPrismaRepository } from '@/infra/db/prisma/aluno-prisma-repository'
+import { mockAddAlunoParams } from '@/tests/domain'
+
+import { PrismaHelper, AlunoPrismaRepository } from '@/infra/db/prisma'
 
 describe('AlunoPrismaRepository', () => {
   beforeAll(async () => {

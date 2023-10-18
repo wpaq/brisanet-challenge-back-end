@@ -1,7 +1,8 @@
 import { mockCadeiraModel } from '@/tests/domain/mock-cadeira'
+
 import { type AddCadeiraRepository } from '@/data/protocols'
-import { type CadeiraModel } from '@/domain/models/cadeira'
-import { type AddCadeiraParams } from '@/domain/usecases/add-cadeira'
+import { type CadeiraModel } from '@/domain/models'
+import { type AddCadeiraParams } from '@/domain/usecases'
 
 export class AddCadeiraRepositorySpy implements AddCadeiraRepository {
   addCadeiraParams: AddCadeiraParams

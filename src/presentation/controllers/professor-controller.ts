@@ -1,7 +1,7 @@
 import { type Controller, type HttpRequest, type HttpResponse, type Validation } from '@/presentation/protocols'
 import { badRequest, ok, serverError, forbidden } from '@/presentation/helpers'
 import { EmailInUseError } from '@/presentation/errors/'
-import { type AddProfessor } from '@/domain/usecases/add-professor'
+import { type AddProfessor } from '@/domain/usecases'
 
 export class ProfessorController implements Controller {
   constructor (

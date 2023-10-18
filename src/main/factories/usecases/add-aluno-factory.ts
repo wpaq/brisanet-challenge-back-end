@@ -1,6 +1,6 @@
 import { DbAddAluno } from '@/data/usecases'
-import { type AddAluno } from '@/domain/usecases/add-aluno'
-import { AlunoPrismaRepository } from '@/infra/db/prisma/aluno-prisma-repository'
+import { type AddAluno } from '@/domain/usecases'
+import { AlunoPrismaRepository } from '@/infra/db/prisma'
 
 export const makeDbAddAluno = (): AddAluno => {
   const alunoPrismaRepository = new AlunoPrismaRepository()

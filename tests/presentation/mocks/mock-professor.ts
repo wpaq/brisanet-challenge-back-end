@@ -1,6 +1,5 @@
-import { type ProfessorModel } from '@/domain/models/professor'
-import { type AddProfessor, type AddProfessorParams } from '@/domain/usecases/add-professor'
-import { type CheckProfessorById } from '@/domain/usecases/check-professor-by-id'
+import { type ProfessorModel } from '@/domain/models'
+import { type AddProfessor, type AddProfessorParams, type CheckProfessorById } from '@/domain/usecases'
 
 export class AddProfessorSpy implements AddProfessor {
   addProfessorParams: AddProfessorParams

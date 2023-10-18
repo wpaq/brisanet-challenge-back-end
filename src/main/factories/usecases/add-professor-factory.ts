@@ -1,5 +1,5 @@
 import { DbAddProfessor } from '@/data/usecases'
-import { type AddProfessor } from '@/domain/usecases/add-professor'
+import { type AddProfessor } from '@/domain/usecases'
 import { ProfessorPrismaRepository } from '@/infra/db/prisma'
 
 export const makeDbAddProfessor = (): AddProfessor => {

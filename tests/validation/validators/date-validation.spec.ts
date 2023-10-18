@@ -1,6 +1,7 @@
-import { InvalidParamError } from '@/presentation/errors'
-import { DateValidatorSpy } from '@/tests/validation/mocks/mock-date-validation'
+import { DateValidatorSpy } from '@/tests/validation/mocks'
+
 import { DateValidation } from '@/validation/validators'
+import { InvalidParamError } from '@/presentation/errors'
 
 const field = 'any_field'
 

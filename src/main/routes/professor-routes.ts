@@ -1,5 +1,5 @@
 import { adaptRoute } from '@/main/adapters/express-route-adapter'
-import { makeProfessorController } from '../factories/controllers/professor-controller-factory'
+import { makeProfessorController } from '@/main/factories/controllers/professor-controller-factory'
 
 import { type Router } from 'express'
 

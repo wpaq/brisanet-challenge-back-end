@@ -1,5 +1,6 @@
-import { AddProfessorRepositorySpy, CheckProfessorByEmailRepositorySpy } from '@/tests/data/mocks/mock-db-professor'
-import { mockAddProfessorParams } from '@/tests/domain/mock-professor'
+import { AddProfessorRepositorySpy, CheckProfessorByEmailRepositorySpy } from '@/tests/data/mocks'
+import { mockAddProfessorParams } from '@/tests/domain'
+
 import { DbAddProfessor } from '@/data/usecases'
 
 type SutTypes = {

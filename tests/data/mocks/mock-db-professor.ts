@@ -1,7 +1,8 @@
 import { mockProfessorModel } from '@/tests/domain/mock-professor'
+
 import { type CheckProfessorByEmailRepository, type AddProfessorRepository, type CheckProfessorByIdRepository } from '@/data/protocols'
-import { type ProfessorModel } from '@/domain/models/professor'
-import { type AddProfessorParams } from '@/domain/usecases/add-professor'
+import { type ProfessorModel } from '@/domain/models'
+import { type AddProfessorParams } from '@/domain/usecases'
 
 export class AddProfessorRepositorySpy implements AddProfessorRepository {
   addProfessorParams: AddProfessorParams

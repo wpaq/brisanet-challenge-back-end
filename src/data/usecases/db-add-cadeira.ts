@@ -1,7 +1,6 @@
 import { type AddCadeiraRepository } from '@/data/protocols'
-import { type CadeiraModel } from '@/domain/models/cadeira'
-import { type AddCadeira, type AddCadeiraParams } from '@/domain/usecases/add-cadeira'
-import { type CheckProfessorById } from '@/domain/usecases/check-professor-by-id'
+import { type CadeiraModel } from '@/domain/models'
+import { type AddCadeira, type AddCadeiraParams, type CheckProfessorById } from '@/domain/usecases'
 
 export class DbAddCadeira implements AddCadeira {
   constructor (

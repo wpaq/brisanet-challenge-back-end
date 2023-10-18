@@ -1,4 +1,5 @@
 import { AddCadeiraSpy, CheckProfessorByIdSpy, ValidationSpy } from '@/tests/presentation/mocks'
+
 import { type HttpRequest } from '@/presentation/protocols'
 import { CadeiraController } from '@/presentation/controllers'
 import { InvalidParamError, MissingParamError } from '@/presentation/errors'

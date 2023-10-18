@@ -1,4 +1,5 @@
-import { LogErrorRepositorySpy } from '@/tests/data/mocks/mock-db-log'
+import { LogErrorRepositorySpy } from '@/tests/data/mocks'
+
 import { LogControllerDecorator } from '@/main/decorators'
 import { ok, serverError } from '@/presentation/helpers'
 import { type Controller, type HttpRequest, type HttpResponse } from '@/presentation/protocols'

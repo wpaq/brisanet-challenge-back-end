@@ -1,4 +1,5 @@
-import { AddProfessorSpy, ValidationSpy } from '../mocks'
+import { AddProfessorSpy, ValidationSpy } from '@/tests/presentation/mocks'
+
 import { ProfessorController } from '@/presentation/controllers'
 import { EmailInUseError, MissingParamError } from '@/presentation/errors'
 import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers'

@@ -1,5 +1,5 @@
-import { type AddCadeiraParams } from './usecases/add-cadeira'
-import { type CadeiraModel } from './models/cadeira'
+import { type CadeiraModel } from '@/domain/models'
+import { type AddCadeiraParams } from '@/domain/usecases'
 
 import { faker } from '@faker-js/faker'
 

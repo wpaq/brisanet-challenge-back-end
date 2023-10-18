@@ -1,5 +1,6 @@
-import { mockAddAlunoParams } from '@/tests/domain/mock-aluno'
-import { AddAlunoRepositorySpy, CheckAlunoByEmailRepositorySpy } from '@/tests/data/mocks/mock-db-aluno'
+import { mockAddAlunoParams } from '@/tests/domain'
+import { AddAlunoRepositorySpy, CheckAlunoByEmailRepositorySpy } from '@/tests/data/mocks'
+
 import { DbAddAluno } from '@/data/usecases'
 
 type SutTypes = {

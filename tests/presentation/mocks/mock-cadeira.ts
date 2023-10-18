@@ -1,6 +1,7 @@
-import { mockCadeiraModel } from '@/tests/domain/mock-cadeira'
-import { type CadeiraModel } from '@/domain/models/cadeira'
-import { type AddCadeira, type AddCadeiraParams } from '@/domain/usecases/add-cadeira'
+import { mockCadeiraModel } from '@/tests/domain'
+
+import { type CadeiraModel } from '@/domain/models'
+import { type AddCadeira, type AddCadeiraParams } from '@/domain/usecases'
 
 export class AddCadeiraSpy implements AddCadeira {
   addCadeiraParams: AddCadeiraParams

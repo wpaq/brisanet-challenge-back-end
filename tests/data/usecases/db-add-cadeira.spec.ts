@@ -1,7 +1,7 @@
+import { CheckProfessorByIdRepositorySpy, AddCadeiraRepositorySpy } from '@/tests/data/mocks'
+import { mockAddCadeiraParams } from '@/tests/domain'
+
 import { DbAddCadeira } from '@/data/usecases'
-import { CheckProfessorByIdRepositorySpy } from '@/tests/data/mocks/mock-db-professor'
-import { AddCadeiraRepositorySpy } from '@/tests/data/mocks/mock-db-cadeira'
-import { mockAddCadeiraParams } from '@/tests/domain/mock-cadeira'
 
 type SutTypes = {
   sut: DbAddCadeira

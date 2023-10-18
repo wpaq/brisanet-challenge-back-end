@@ -1,7 +1,7 @@
-import { PrismaHelper } from './prisma-helper'
+import { PrismaHelper } from './helpers/prisma-helper'
 import { type CheckAlunoByEmailRepository, type AddAlunoRepository } from '@/data/protocols'
-import { type AlunoModel } from '@/domain/models/aluno'
-import { type AddAlunoParams } from '@/domain/usecases/add-aluno'
+import { type AlunoModel } from '@/domain/models'
+import { type AddAlunoParams } from '@/domain/usecases'
 
 export class AlunoPrismaRepository implements AddAlunoRepository, CheckAlunoByEmailRepository {
   async add (data: AddAlunoParams): Promise<AlunoModel> {

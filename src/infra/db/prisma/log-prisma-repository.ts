@@ -1,5 +1,5 @@
-import { type LogErrorRepository } from '@/data/protocols/'
-import { PrismaHelper } from './prisma-helper'
+import { PrismaHelper } from './helpers/prisma-helper'
+import { type LogErrorRepository } from '@/data/protocols'
 
 export class LogPrismaRepository implements LogErrorRepository {
   async logError (stack: string): Promise<void> {

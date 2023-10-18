@@ -1,6 +1,7 @@
+import { EmailValidatorSpy } from '@/tests/validation/mocks'
+
+import { EmailValidation } from '@/validation/validators'
 import { InvalidParamError } from '@/presentation/errors'
-import { EmailValidatorSpy } from '@/tests/validation/mocks/mock-email-validation'
-import { EmailValidation } from '@/validation/validators/email-validation'
 
 const field = 'any_field'
 

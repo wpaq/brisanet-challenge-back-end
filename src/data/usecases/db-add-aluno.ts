@@ -1,6 +1,6 @@
 import { type CheckAlunoByEmailRepository, type AddAlunoRepository } from '@/data/protocols'
-import { type AlunoModel } from '@/domain/models/aluno'
-import { type AddAlunoParams, type AddAluno } from '@/domain/usecases/add-aluno'
+import { type AlunoModel } from '@/domain/models'
+import { type AddAlunoParams, type AddAluno } from '@/domain/usecases'
 
 export class DbAddAluno implements AddAluno {
   constructor (

@@ -1,4 +1,5 @@
-import { mockAddProfessorParams } from '@/tests/domain/mock-professor'
+import { mockAddProfessorParams } from '@/tests/domain'
+
 import { PrismaHelper, ProfessorPrismaRepository } from '@/infra/db/prisma'
 
 describe('ProfessorPrismaRepository', () => {

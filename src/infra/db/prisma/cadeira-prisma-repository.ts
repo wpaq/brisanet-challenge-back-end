@@ -1,7 +1,7 @@
-import { PrismaHelper } from './prisma-helper'
+import { PrismaHelper } from './helpers/prisma-helper'
 import { type AddCadeiraRepository } from '@/data/protocols'
-import { type CadeiraModel } from '@/domain/models/cadeira'
-import { type AddCadeiraParams } from '@/domain/usecases/add-cadeira'
+import { type CadeiraModel } from '@/domain/models'
+import { type AddCadeiraParams } from '@/domain/usecases'
 
 export class CadeiraPrismaRepository implements AddCadeiraRepository {
   async add (data: AddCadeiraParams): Promise<CadeiraModel> {

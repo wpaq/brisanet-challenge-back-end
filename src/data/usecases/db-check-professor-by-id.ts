@@ -1,5 +1,5 @@
 import { type CheckProfessorByIdRepository } from '@/data/protocols'
-import { type CheckProfessorById } from '@/domain/usecases/check-professor-by-id'
+import { type CheckProfessorById } from '@/domain/usecases'
 
 export class DbCheckProfessorById implements CheckProfessorById {
   constructor (private readonly checkProfessorByIdRepository: CheckProfessorByIdRepository) {}

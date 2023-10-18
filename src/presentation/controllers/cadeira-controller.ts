@@ -1,8 +1,7 @@
 import { type Validation, type Controller, type HttpRequest, type HttpResponse } from '@/presentation/protocols'
 import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers'
 import { InvalidParamError } from '@/presentation/errors'
-import { type AddCadeira } from '@/domain/usecases/add-cadeira'
-import { type CheckProfessorById } from '@/domain/usecases/check-professor-by-id'
+import { type AddCadeira, type CheckProfessorById } from '@/domain/usecases'
 
 export class CadeiraController implements Controller {
   constructor (

@@ -1,6 +1,6 @@
 import { type CheckProfessorByEmailRepository, type AddProfessorRepository } from '@/data/protocols'
-import { type ProfessorModel } from '@/domain/models/professor'
-import { type AddProfessor, type AddProfessorParams } from '@/domain/usecases/add-professor'
+import { type ProfessorModel } from '@/domain/models'
+import { type AddProfessor, type AddProfessorParams } from '@/domain/usecases'
 
 export class DbAddProfessor implements AddProfessor {
   constructor (
