@@ -1,18 +1,21 @@
+import { AddProfessorRepositorySpy, CheckProfessorByEmailRepositorySpy } from '@/tests/data/mocks/mock-db-professor'
 import { mockAddProfessorParams } from '@/tests/domain/mock-professor'
-import { AddProfessorRepositorySpy } from '../mocks/mock-db-professor'
 import { DbAddProfessor } from '@/data/usecases'
 
 type SutTypes = {
   sut: DbAddProfessor
   addProfessorRepositorySpy: AddProfessorRepositorySpy
+  checkProfessorByEmailRepositorySpy: CheckProfessorByEmailRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
   const addProfessorRepositorySpy = new AddProfessorRepositorySpy()
-  const sut = new DbAddProfessor(addProfessorRepositorySpy)
+  const checkProfessorByEmailRepositorySpy = new CheckProfessorByEmailRepositorySpy()
+  const sut = new DbAddProfessor(addProfessorRepositorySpy, checkProfessorByEmailRepositorySpy)
   return {
     sut,
-    addProfessorRepositorySpy
+    addProfessorRepositorySpy,
+    checkProfessorByEmailRepositorySpy
   }
 }
 
@@ -36,6 +39,13 @@ describe('DbAddProfessor Usecase', () => {
     const addProfessorParams = mockAddProfessorParams()
     const promise = sut.add(addProfessorParams)
     await expect(promise).rejects.toThrow()
+  })
+
+  test('Should return false if CheckProfessorByEmailRepository returns true', async () => {
+    const { sut, checkProfessorByEmailRepositorySpy } = makeSut()
+    checkProfessorByEmailRepositorySpy.result = true
+    const isValid = await sut.add(mockAddProfessorParams())
+    expect(isValid).toBe(false)
   })
 
   test('Should return an professor on success', async () => {
