@@ -10,5 +10,5 @@ export type AddCadeiraParams = {
 }
 
 export interface AddCadeira {
-  add: (data: AddCadeiraParams) => Promise<CadeiraModel>
+  add: (data: AddCadeiraParams) => Promise<CadeiraModel | boolean>
 }
