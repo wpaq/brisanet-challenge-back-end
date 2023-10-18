@@ -37,19 +37,35 @@ model Aluno {
   cpf         String   
   matricula   String 
 
+  cadeirasAlunos    CadeirasAlunos[] 
+
   @@map("alunos")  
 }
 
 model Cadeira {
-  id              String      @id @default(uuid())
-  nome            String   
-  slug            String
-  dataInicio      DateTime    @db.Date
-  dataFim         DateTime    @db.Date
-  cargaHoraria    Int
+  id                String      @id @default(uuid())
+  nome              String   
+  slug              String
+  dataInicio        DateTime    @db.Date
+  dataFim           DateTime    @db.Date
+  cargaHoraria      Int
 
-  professor       Professor   @relation(fields: [professorId], references: [id])
-  professorId     String      
+  professor         Professor   @relation(fields: [professorId], references: [id])
+  professorId       String    
+
+  cadeirasAlunos    CadeirasAlunos[]  
 
   @@map("cadeiras")  
+}
+
+model CadeirasAlunos {
+  id             String     @id @default(uuid())
+  
+  cadeira        Cadeira    @relation(fields: [cadeiraId], references: [id])
+  cadeiraId      String   
+
+  aluno          Aluno      @relation(fields: [alunoId], references: [id])
+  alunoId        String     
+
+  @@map("cadeiras_alunos")  
 }
