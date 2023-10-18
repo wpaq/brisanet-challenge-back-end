@@ -1,5 +1,5 @@
-import { type AddCadeiraRepository } from '../protocols'
 import { mockCadeiraModel } from '@/tests/domain/mock-cadeira'
+import { type AddCadeiraRepository } from '@/data/protocols'
 import { type CadeiraModel } from '@/domain/models/cadeira'
 import { type AddCadeiraParams } from '@/domain/usecases/add-cadeira'
 

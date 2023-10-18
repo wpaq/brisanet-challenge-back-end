@@ -1,7 +1,7 @@
+import { mockAlunoModel } from '@/tests/domain/mock-aluno'
 import { type CheckAlunoByEmailRepository, type AddAlunoRepository } from '@/data/protocols'
 import { type AlunoModel } from '@/domain/models/aluno'
 import { type AddAlunoParams } from '@/domain/usecases/add-aluno'
-import { mockAlunoModel } from '@/tests/domain/mock-aluno'
 
 export class AddAlunoRepositorySpy implements AddAlunoRepository {
   addAlunoParams: AddAlunoParams
