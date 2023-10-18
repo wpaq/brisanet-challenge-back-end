@@ -9,8 +9,8 @@ export class CadeiraPrismaRepository implements AddCadeiraRepository {
       data: {
         nome: data.nome,
         slug: data.slug,
-        dataInicio: data.dataInicio,
-        dataFim: data.dataFim,
+        dataInicio: new Date(data.dataInicio),
+        dataFim: new Date(data.dataFim),
         cargaHoraria: data.cargaHoraria,
         professor: {
           connect: { id: data.professorId }
