@@ -1,7 +1,7 @@
 import { AddProfessorSpy, ValidationSpy } from '../mocks'
 import { ProfessorController } from '@/presentation/controllers'
-import { MissingParamError } from '@/presentation/errors'
-import { badRequest, ok, serverError } from '@/presentation/helpers'
+import { EmailInUseError, MissingParamError } from '@/presentation/errors'
+import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers'
 import { type HttpRequest } from '@/presentation/protocols'
 
 import { faker } from '@faker-js/faker'
@@ -65,5 +65,12 @@ describe('Professor Controller', () => {
     const { sut, addProfessorSpy } = makeSut()
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(ok(addProfessorSpy.result))
+  })
+
+  test('Should return 403 if AddProfessor returns false', async () => {
+    const { sut, addProfessorSpy } = makeSut()
+    addProfessorSpy.result = false
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(forbidden(new EmailInUseError()))
   })
 })
