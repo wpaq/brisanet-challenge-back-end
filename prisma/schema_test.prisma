@@ -50,7 +50,7 @@ model Cadeira {
   cargaHoraria    Int
 
   professor       Professor   @relation(fields: [professorId], references: [id])
-  professorId     String      @unique
+  professorId     String      
 
   @@map("cadeiras")  
 }
