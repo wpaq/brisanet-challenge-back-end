@@ -19,7 +19,7 @@ const config: Config = {
   coveragePathIgnorePatterns: [
     '<rootDir>/src/main/',
     '<rootDir>/tests',
-    '<rootDir>/src/infra/db/prisma/prisma-helper.ts'
+    '<rootDir>/src/infra/db/prisma/helpers/prisma-helper.ts'
   ]
 }
 
