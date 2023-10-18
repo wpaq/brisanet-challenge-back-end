@@ -26,4 +26,11 @@ describe('Date Validation', () => {
     const error = sut.validate({ [field]: date })
     expect(error).toEqual(new InvalidParamError(field))
   })
+
+  test('Should call DateValidator with correct date', () => {
+    const { sut, dateValidatorSpy } = makeSut()
+    const date = '00/00/000'
+    sut.validate({ [field]: date })
+    expect(dateValidatorSpy.date).toBe(date)
+  })
 })
