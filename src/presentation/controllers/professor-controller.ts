@@ -1,5 +1,6 @@
 import { type Controller, type HttpRequest, type HttpResponse, type Validation } from '@/presentation/protocols'
-import { badRequest, ok, serverError } from '@/presentation/helpers'
+import { badRequest, ok, serverError, forbidden } from '@/presentation/helpers'
+import { EmailInUseError } from '@/presentation/errors/'
 import { type AddProfessor } from '@/domain/usecases/add-professor'
 
 export class ProfessorController implements Controller {
@@ -22,6 +23,9 @@ export class ProfessorController implements Controller {
         email,
         cpf
       })
+      if (!professor) {
+        return forbidden(new EmailInUseError())
+      }
 
       return ok(professor)
     } catch (error) {

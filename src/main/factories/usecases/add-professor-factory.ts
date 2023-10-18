@@ -4,5 +4,5 @@ import { ProfessorPrismaRepository } from '@/infra/db/prisma'
 
 export const makeDbAddProfessor = (): AddProfessor => {
   const professorPrismaRepository = new ProfessorPrismaRepository()
-  return new DbAddProfessor(professorPrismaRepository)
+  return new DbAddProfessor(professorPrismaRepository, professorPrismaRepository)
 }
