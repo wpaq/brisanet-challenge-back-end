@@ -24,7 +24,7 @@ describe('Cadeira Routes', () => {
         cpf: '000.000.000-70'
       })
 
-    const cadeira = await request(app)
+    await request(app)
       .post('/api/cadeira')
       .send({
         nome: 'Informática',
@@ -35,7 +35,5 @@ describe('Cadeira Routes', () => {
         professorId: professor.body.id
       })
       .expect(200)
-
-    console.log(cadeira.body)
   })
 })
