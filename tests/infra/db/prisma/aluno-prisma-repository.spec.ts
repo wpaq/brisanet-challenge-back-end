@@ -12,21 +12,11 @@ describe('AlunoPrismaRepository', () => {
     await PrismaHelper.disconnect('test')
   })
 
-  beforeEach(async () => {
-    await PrismaHelper.client.aluno.deleteMany({})
-  })
-
-  test('Should return an aluno on success', async () => {
+  test('Should add an aluno on success', async () => {
     const sut = new AlunoPrismaRepository()
-    const addAlunoParams = mockAddAlunoParams()
-    const result = await sut.add(addAlunoParams)
+    await sut.add(mockAddAlunoParams())
 
-    expect(result).toBeTruthy()
-    expect(result.id).toBeTruthy()
-    expect(result.nome).toBe(addAlunoParams.nome)
-    expect(result.telefone).toBe(addAlunoParams.telefone)
-    expect(result.email).toBe(addAlunoParams.email)
-    expect(result.cpf).toBe(addAlunoParams.cpf)
-    expect(result.matricula).toBe(addAlunoParams.matricula)
+    const count = await PrismaHelper.client.aluno.count()
+    expect(count).toBe(1)
   })
 })

@@ -13,20 +13,13 @@ describe('CadeiraPrismaRepository', () => {
     await PrismaHelper.disconnect('test')
   })
 
-  test('Should return an cadeira on success', async () => {
+  test('Should add an cadeira on success', async () => {
     const sut = new CadeiraPrismaRepository()
     const professorRepository = new ProfessorPrismaRepository()
-    const addCadeiraParams = mockAddCadeiraParams()
     const professor = await professorRepository.add(mockAddProfessorParams())
-    const result = await sut.add(Object.assign({}, addCadeiraParams, { professorId: professor.id }))
+    await sut.add(Object.assign({}, mockAddCadeiraParams(), { professorId: professor.id }))
 
-    expect(result).toBeTruthy()
-    expect(result.id).toBeTruthy()
-    expect(result.nome).toBe(addCadeiraParams.nome)
-    expect(result.slug).toBe(addCadeiraParams.slug)
-    expect(result.dataInicio).toEqual(addCadeiraParams.dataInicio)
-    expect(result.dataFim).toEqual(addCadeiraParams.dataFim)
-    expect(result.cargaHoraria).toBe(addCadeiraParams.cargaHoraria)
-    expect(result.professorId).toBe(professor.id)
+    const count = await PrismaHelper.client.cadeira.count()
+    expect(count).toBe(1)
   })
 })

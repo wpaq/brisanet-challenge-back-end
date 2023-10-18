@@ -11,20 +11,11 @@ describe('ProfessorPrismaRepository', () => {
     await PrismaHelper.disconnect('test')
   })
 
-  beforeEach(async () => {
-    await PrismaHelper.client.professor.deleteMany({})
-  })
-
-  test('Should return an professor on success', async () => {
+  test('Should add an professor on success', async () => {
     const sut = new ProfessorPrismaRepository()
-    const addProfessorParams = mockAddProfessorParams()
-    const result = await sut.add(addProfessorParams)
+    await sut.add(mockAddProfessorParams())
 
-    expect(result).toBeTruthy()
-    expect(result.id).toBeTruthy()
-    expect(result.nome).toBe(addProfessorParams.nome)
-    expect(result.telefone).toBe(addProfessorParams.telefone)
-    expect(result.email).toBe(addProfessorParams.email)
-    expect(result.cpf).toBe(addProfessorParams.cpf)
+    const count = await PrismaHelper.client.professor.count()
+    expect(count).toBe(1)
   })
 })

@@ -16,10 +16,6 @@ describe('LogPrisma Repository', () => {
     await PrismaHelper.disconnect('test')
   })
 
-  beforeEach(async () => {
-    await PrismaHelper.client.logError.deleteMany({})
-  })
-
   test('Should create an error log on success', async () => {
     const sut = makeSut()
     await sut.logError(faker.word.words())
