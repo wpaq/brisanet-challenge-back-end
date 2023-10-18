@@ -33,4 +33,12 @@ describe('Date Validation', () => {
     sut.validate({ [field]: date })
     expect(dateValidatorSpy.date).toBe(date)
   })
+
+  test('Should throws if DateValidator throws', () => {
+    const { sut, dateValidatorSpy } = makeSut()
+    jest.spyOn(dateValidatorSpy, 'isDate').mockImplementationOnce(() => {
+      throw new Error()
+    })
+    expect(sut.validate).toThrow()
+  })
 })
