@@ -4,5 +4,5 @@ import { AlunoPrismaRepository } from '@/infra/db/prisma/aluno-prisma-repository
 
 export const makeDbAddAluno = (): AddAluno => {
   const alunoPrismaRepository = new AlunoPrismaRepository()
-  return new DbAddAluno(alunoPrismaRepository)
+  return new DbAddAluno(alunoPrismaRepository, alunoPrismaRepository)
 }
