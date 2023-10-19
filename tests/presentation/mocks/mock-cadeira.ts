@@ -1,7 +1,7 @@
 import { mockCadeiraModel } from '@/tests/domain'
 
 import { type CadeiraModel } from '@/domain/models'
-import { type CheckCadeiraById, type AddCadeira, type AddCadeiraParams } from '@/domain/usecases'
+import { type CheckCadeiraById, type AddCadeira, type AddCadeiraParams, type CheckCadeiraByPeriod } from '@/domain/usecases'
 
 export class AddCadeiraSpy implements AddCadeira {
   addCadeiraParams: AddCadeiraParams
@@ -19,6 +19,18 @@ export class CheckCadeiraByIdSpy implements CheckCadeiraById {
 
   async checkById (id: string): Promise<boolean> {
     this.id = id
+    return this.result
+  }
+}
+
+export class CheckCadeiraByPeriodSpy implements CheckCadeiraByPeriod {
+  dataInicio: Date
+  dataFim: Date
+  result = false
+
+  async checkByPeriod (dataInicio: Date, dataFim: Date): Promise<boolean> {
+    this.dataInicio = dataInicio
+    this.dataFim = dataFim
     return this.result
   }
 }
