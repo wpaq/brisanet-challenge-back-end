@@ -51,7 +51,7 @@ model Cadeira {
   dataFim           DateTime    @db.Date
   cargaHoraria      Int
 
-  professor         Professor   @relation(fields: [professorId], references: [id])
+  professor         Professor   @relation(fields: [professorId], references: [id], onDelete: Cascade)
   professorId       String    
 
   cadeirasAlunos    CadeirasAlunos[]  
@@ -62,10 +62,10 @@ model Cadeira {
 model CadeirasAlunos {
   id             String     @id @default(uuid())
   
-  cadeira        Cadeira    @relation(fields: [cadeiraId], references: [id])
+  cadeira        Cadeira    @relation(fields: [cadeiraId], references: [id], onDelete: Cascade)
   cadeiraId      String   
 
-  aluno          Aluno      @relation(fields: [alunoId], references: [id])
+  aluno          Aluno      @relation(fields: [alunoId], references: [id], onDelete: Cascade)
   alunoId        String     
 
   @@map("cadeiras_alunos")  
