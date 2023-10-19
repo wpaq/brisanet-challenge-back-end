@@ -1,4 +1,5 @@
 export * from './add-aluno'
 export * from './add-cadeira'
+export * from './add-cadeiras-alunos'
 export * from './add-professor'
 export * from './check-professor-by-id'
