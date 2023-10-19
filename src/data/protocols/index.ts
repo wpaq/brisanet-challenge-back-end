@@ -3,6 +3,7 @@ export * from './aluno/check-aluno-by-email-repository'
 export * from './aluno/check-aluno-by-id-repository'
 
 export * from './cadeira/add-cadeira-repository'
+export * from './cadeira/check-cadeira-by-id-repository'
 
 export * from './log/log-error-repository'
 
