@@ -1,5 +1,5 @@
 import { mockAddCadeirasAlunosParams } from '@/tests/domain'
-import { AddCadeirasAlunosRepositorySpy, CheckAlunoByIdRepositorySpy } from '@/tests/data/mocks'
+import { AddCadeirasAlunosRepositorySpy, CheckAlunoByIdRepositorySpy, CheckCadeiraByIdRepositorySpy } from '@/tests/data/mocks'
 
 import { DbAddCadeirasAlunos } from '@/data/usecases'
 
@@ -7,16 +7,19 @@ type SutTypes = {
   sut: DbAddCadeirasAlunos
   addCadeirasAlunosRepositorySpy: AddCadeirasAlunosRepositorySpy
   checkAlunoByIdRepositorySpy: CheckAlunoByIdRepositorySpy
+  checkCadeiraByIdRepositorySpy: CheckCadeiraByIdRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
   const addCadeirasAlunosRepositorySpy = new AddCadeirasAlunosRepositorySpy()
   const checkAlunoByIdRepositorySpy = new CheckAlunoByIdRepositorySpy()
-  const sut = new DbAddCadeirasAlunos(addCadeirasAlunosRepositorySpy, checkAlunoByIdRepositorySpy)
+  const checkCadeiraByIdRepositorySpy = new CheckCadeiraByIdRepositorySpy()
+  const sut = new DbAddCadeirasAlunos(addCadeirasAlunosRepositorySpy, checkAlunoByIdRepositorySpy, checkCadeiraByIdRepositorySpy)
   return {
     sut,
     addCadeirasAlunosRepositorySpy,
-    checkAlunoByIdRepositorySpy
+    checkAlunoByIdRepositorySpy,
+    checkCadeiraByIdRepositorySpy
   }
 }
 
@@ -48,6 +51,13 @@ describe('DbAddCadeirasAlunos Usecase', () => {
   test('Should return false if CheckAlunoByIdRepository returns false', async () => {
     const { sut, checkAlunoByIdRepositorySpy } = makeSut()
     checkAlunoByIdRepositorySpy.result = false
+    const isValid = await sut.add(mockAddCadeirasAlunosParams())
+    expect(isValid).toBe(false)
+  })
+
+  test('Should return false if CheckCadeiraByIdRepository returns false', async () => {
+    const { sut, checkCadeiraByIdRepositorySpy } = makeSut()
+    checkCadeiraByIdRepositorySpy.result = false
     const isValid = await sut.add(mockAddCadeirasAlunosParams())
     expect(isValid).toBe(false)
   })
