@@ -1,5 +1,6 @@
 export * from './aluno/add-aluno-repository'
 export * from './aluno/check-aluno-by-email-repository'
+export * from './aluno/check-aluno-by-id-repository'
 
 export * from './cadeira/add-cadeira-repository'
 
