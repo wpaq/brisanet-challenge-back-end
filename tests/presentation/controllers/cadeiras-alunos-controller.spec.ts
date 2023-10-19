@@ -1,4 +1,4 @@
-import { AddCadeirasAlunosSpy, CheckAlunoByIdSpy, ValidationSpy } from '@/tests/presentation/mocks'
+import { AddCadeirasAlunosSpy, CheckAlunoByIdSpy, CheckCadeiraByIdSpy, ValidationSpy } from '@/tests/presentation/mocks'
 
 import { type HttpRequest } from '@/presentation/protocols'
 import { CadeirasAlunosController } from '@/presentation/controllers'
@@ -19,18 +19,21 @@ type SutTypes = {
   addCadeirasAlunosSpy: AddCadeirasAlunosSpy
   validationSpy: ValidationSpy
   checkAlunoByIdSpy: CheckAlunoByIdSpy
+  checkCadeiraByIdSpy: CheckCadeiraByIdSpy
 }
 
 const makeSut = (): SutTypes => {
   const addCadeirasAlunosSpy = new AddCadeirasAlunosSpy()
   const validationSpy = new ValidationSpy()
   const checkAlunoByIdSpy = new CheckAlunoByIdSpy()
-  const sut = new CadeirasAlunosController(addCadeirasAlunosSpy, validationSpy, checkAlunoByIdSpy)
+  const checkCadeiraByIdSpy = new CheckCadeiraByIdSpy()
+  const sut = new CadeirasAlunosController(addCadeirasAlunosSpy, validationSpy, checkAlunoByIdSpy, checkCadeiraByIdSpy)
   return {
     sut,
     addCadeirasAlunosSpy,
     validationSpy,
-    checkAlunoByIdSpy
+    checkAlunoByIdSpy,
+    checkCadeiraByIdSpy
   }
 }
 
@@ -74,5 +77,12 @@ describe('CadeirasAlunos Controller', () => {
     checkAlunoByIdSpy.result = false
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(forbidden(new InvalidParamError('alunoId')))
+  })
+
+  test('Should return 403 if CheckCadeiraById returns false', async () => {
+    const { sut, checkCadeiraByIdSpy } = makeSut()
+    checkCadeiraByIdSpy.result = false
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(forbidden(new InvalidParamError('cadeiraId')))
   })
 })
