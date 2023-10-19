@@ -28,4 +28,11 @@ describe('DbAddCadeirasAlunos Usecase', () => {
       cadeiraId: addCadeirasAlunosParams.cadeiraId
     })
   })
+
+  test('Should throw if AddCadeirasAlunosRepository throws', async () => {
+    const { sut, addCadeirasAlunosRepositorySpy } = makeSut()
+    jest.spyOn(addCadeirasAlunosRepositorySpy, 'add').mockRejectedValueOnce(new Error())
+    const promise = sut.add(mockAddCadeirasAlunosParams())
+    await expect(promise).rejects.toThrow()
+  })
 })
