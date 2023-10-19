@@ -1,9 +1,9 @@
 import { PrismaHelper } from './helpers/prisma-helper'
-import { type CheckAlunoByEmailRepository, type AddAlunoRepository } from '@/data/protocols'
+import { type CheckAlunoByEmailRepository, type AddAlunoRepository, type CheckAlunoByIdRepository } from '@/data/protocols'
 import { type AlunoModel } from '@/domain/models'
 import { type AddAlunoParams } from '@/domain/usecases'
 
-export class AlunoPrismaRepository implements AddAlunoRepository, CheckAlunoByEmailRepository {
+export class AlunoPrismaRepository implements AddAlunoRepository, CheckAlunoByEmailRepository, CheckAlunoByIdRepository {
   async add (data: AddAlunoParams): Promise<AlunoModel> {
     const newAluno = await PrismaHelper.client.aluno.create({
       data: {
@@ -21,6 +21,15 @@ export class AlunoPrismaRepository implements AddAlunoRepository, CheckAlunoByEm
     const aluno = await PrismaHelper.client.aluno.findUnique({
       where: {
         email
+      }
+    })
+    return aluno !== null
+  }
+
+  async checkById (id: string): Promise<boolean> {
+    const aluno = await PrismaHelper.client.aluno.findUnique({
+      where: {
+        id
       }
     })
     return aluno !== null
