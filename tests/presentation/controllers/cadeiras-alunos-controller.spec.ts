@@ -3,7 +3,7 @@ import { AddCadeirasAlunosSpy, ValidationSpy } from '@/tests/presentation/mocks'
 import { type HttpRequest } from '@/presentation/protocols'
 import { CadeirasAlunosController } from '@/presentation/controllers'
 import { MissingParamError } from '@/presentation/errors'
-import { badRequest, serverError } from '@/presentation/helpers'
+import { badRequest, ok, serverError } from '@/presentation/helpers'
 
 import { faker } from '@faker-js/faker'
 
@@ -58,5 +58,11 @@ describe('CadeirasAlunos Controller', () => {
     jest.spyOn(addCadeirasAlunosSpy, 'add').mockRejectedValueOnce(new Error())
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should return 200 if valid data is provided', async () => {
+    const { sut, addCadeirasAlunosSpy } = makeSut()
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(ok(addCadeirasAlunosSpy.result))
   })
 })
