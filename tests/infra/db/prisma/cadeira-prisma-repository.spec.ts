@@ -8,6 +8,11 @@ describe('CadeiraPrismaRepository', () => {
     await PrismaHelper.connect('test')
   })
 
+  beforeEach(async () => {
+    await PrismaHelper.client.cadeira.deleteMany({})
+    await PrismaHelper.client.professor.deleteMany({})
+  })
+
   afterAll(async () => {
     await PrismaHelper.client.cadeira.deleteMany({})
     await PrismaHelper.client.professor.deleteMany({})
@@ -43,6 +48,19 @@ describe('CadeiraPrismaRepository', () => {
 
       const cadeiraExists = await sut.checkById(faker.string.uuid())
       expect(cadeiraExists).toBe(false)
+    })
+  })
+
+  describe('checkByPeriod()', () => {
+    test('Should return true if period exists', async () => {
+      const sut = new CadeiraPrismaRepository()
+      const professor = await new ProfessorPrismaRepository().add(mockAddProfessorParams())
+
+      const addCadeiraParams = mockAddCadeiraParams()
+      await sut.add(Object.assign({}, addCadeiraParams, { professorId: professor.id }))
+
+      const periodExists = await sut.checkByPeriod(addCadeiraParams.dataInicio, addCadeiraParams.dataFim)
+      expect(periodExists).toBe(true)
     })
   })
 })
