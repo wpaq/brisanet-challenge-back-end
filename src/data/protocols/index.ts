@@ -13,3 +13,4 @@ export * from './professor/check-professor-by-email-repository'
 export * from './professor/check-professor-by-id-repository'
 
 export * from './cadeiras-alunos/add-cadeiras-alunos-repository'
+export * from './cadeiras-alunos/count-cadeiras-alunos-by-id-repository'
