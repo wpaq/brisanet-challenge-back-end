@@ -21,12 +21,12 @@ export class CadeiraPrismaRepository implements AddCadeiraRepository, CheckCadei
   }
 
   async checkById (id: string): Promise<boolean> {
-    const aluno = await PrismaHelper.client.cadeira.findUnique({
+    const cadeira = await PrismaHelper.client.cadeira.findUnique({
       where: {
         id
       }
     })
-    return aluno !== null
+    return cadeira !== null
   }
 
   async checkByPeriod (dataInicio: Date, dataFim: Date): Promise<boolean> {
