@@ -1,5 +1,5 @@
 import { mockAddCadeirasAlunosParams } from '@/tests/domain'
-import { AddCadeirasAlunosRepositorySpy, CheckAlunoByIdRepositorySpy, CheckCadeiraByIdRepositorySpy } from '@/tests/data/mocks'
+import { AddCadeirasAlunosRepositorySpy, CheckAlunoByIdRepositorySpy, CheckCadeiraByIdRepositorySpy, CountCadeirasAlunosByIdRepositorySpy } from '@/tests/data/mocks'
 
 import { DbAddCadeirasAlunos } from '@/data/usecases'
 
@@ -8,18 +8,21 @@ type SutTypes = {
   addCadeirasAlunosRepositorySpy: AddCadeirasAlunosRepositorySpy
   checkAlunoByIdRepositorySpy: CheckAlunoByIdRepositorySpy
   checkCadeiraByIdRepositorySpy: CheckCadeiraByIdRepositorySpy
+  countCadeirasAlunosByIdRepositorySpy: CountCadeirasAlunosByIdRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
   const addCadeirasAlunosRepositorySpy = new AddCadeirasAlunosRepositorySpy()
   const checkAlunoByIdRepositorySpy = new CheckAlunoByIdRepositorySpy()
   const checkCadeiraByIdRepositorySpy = new CheckCadeiraByIdRepositorySpy()
-  const sut = new DbAddCadeirasAlunos(addCadeirasAlunosRepositorySpy, checkAlunoByIdRepositorySpy, checkCadeiraByIdRepositorySpy)
+  const countCadeirasAlunosByIdRepositorySpy = new CountCadeirasAlunosByIdRepositorySpy()
+  const sut = new DbAddCadeirasAlunos(addCadeirasAlunosRepositorySpy, checkAlunoByIdRepositorySpy, checkCadeiraByIdRepositorySpy, countCadeirasAlunosByIdRepositorySpy)
   return {
     sut,
     addCadeirasAlunosRepositorySpy,
     checkAlunoByIdRepositorySpy,
-    checkCadeiraByIdRepositorySpy
+    checkCadeiraByIdRepositorySpy,
+    countCadeirasAlunosByIdRepositorySpy
   }
 }
 
@@ -58,6 +61,13 @@ describe('DbAddCadeirasAlunos Usecase', () => {
   test('Should return false if CheckCadeiraByIdRepository returns false', async () => {
     const { sut, checkCadeiraByIdRepositorySpy } = makeSut()
     checkCadeiraByIdRepositorySpy.result = false
+    const isValid = await sut.add(mockAddCadeirasAlunosParams())
+    expect(isValid).toBe(false)
+  })
+
+  test('Should return false if CountCadeirasAlunosRepository returns 8', async () => {
+    const { sut, countCadeirasAlunosByIdRepositorySpy } = makeSut()
+    countCadeirasAlunosByIdRepositorySpy.result = 8
     const isValid = await sut.add(mockAddCadeirasAlunosParams())
     expect(isValid).toBe(false)
   })
