@@ -1,6 +1,6 @@
 import { mockCadeiraModel } from '@/tests/domain/mock-cadeira'
 
-import { type CheckCadeiraByIdRepository, type AddCadeiraRepository } from '@/data/protocols'
+import { type CheckCadeiraByIdRepository, type AddCadeiraRepository, type CheckCadeiraByPeriodRepository } from '@/data/protocols'
 import { type CadeiraModel } from '@/domain/models'
 import { type AddCadeiraParams } from '@/domain/usecases'
 
@@ -20,6 +20,18 @@ export class CheckCadeiraByIdRepositorySpy implements CheckCadeiraByIdRepository
 
   async checkById (id: string): Promise<boolean> {
     this.id = id
+    return this.result
+  }
+}
+
+export class CheckCadeiraByPeriodRepositorySpy implements CheckCadeiraByPeriodRepository {
+  dataInicio: Date
+  dataFim: Date
+  result = false
+
+  async checkByPeriod (dataInicio: Date, dataFim: Date): Promise<boolean> {
+    this.dataInicio = dataInicio
+    this.dataFim = dataFim
     return this.result
   }
 }
