@@ -2,6 +2,8 @@ import { mockAddProfessorParams } from '@/tests/domain'
 
 import { PrismaHelper, ProfessorPrismaRepository } from '@/infra/db/prisma'
 
+import { faker } from '@faker-js/faker'
+
 describe('ProfessorPrismaRepository', () => {
   beforeAll(async () => {
     await PrismaHelper.connect('test')
@@ -28,6 +30,13 @@ describe('ProfessorPrismaRepository', () => {
 
       const emailExists = await sut.checkByEmail(professor.email)
       expect(emailExists).toBe(true)
+    })
+
+    test('Should return false if email not exists', async () => {
+      const sut = new ProfessorPrismaRepository()
+
+      const emailExists = await sut.checkByEmail(faker.internet.email())
+      expect(emailExists).toBe(false)
     })
   })
 })
