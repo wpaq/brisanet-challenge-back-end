@@ -11,12 +11,23 @@ describe('ProfessorPrismaRepository', () => {
     await PrismaHelper.client.professor.deleteMany({})
     await PrismaHelper.disconnect('test')
   })
+  describe('add()', () => {
+    test('Should add an professor on success', async () => {
+      const sut = new ProfessorPrismaRepository()
+      await sut.add(mockAddProfessorParams())
 
-  test('Should add an professor on success', async () => {
-    const sut = new ProfessorPrismaRepository()
-    await sut.add(mockAddProfessorParams())
+      const count = await PrismaHelper.client.professor.count()
+      expect(count).toBe(1)
+    })
+  })
 
-    const count = await PrismaHelper.client.professor.count()
-    expect(count).toBe(1)
+  describe('checkByEmail()', () => {
+    test('Should return true if email exists', async () => {
+      const sut = new ProfessorPrismaRepository()
+      const professor = await sut.add(mockAddProfessorParams())
+
+      const emailExists = await sut.checkByEmail(professor.email)
+      expect(emailExists).toBe(true)
+    })
   })
 })
