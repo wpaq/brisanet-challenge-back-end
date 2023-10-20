@@ -39,4 +39,14 @@ describe('AlunoPrismaRepository', () => {
       expect(emailExists).toBe(false)
     })
   })
+
+  describe('checkById()', () => {
+    test('Should return true if aluno is valid', async () => {
+      const sut = new AlunoPrismaRepository()
+      const aluno = await sut.add(mockAddAlunoParams())
+
+      const cadeiraExists = await sut.checkById(aluno.id)
+      expect(cadeiraExists).toBe(true)
+    })
+  })
 })
