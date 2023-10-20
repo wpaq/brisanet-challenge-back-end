@@ -39,4 +39,14 @@ describe('ProfessorPrismaRepository', () => {
       expect(emailExists).toBe(false)
     })
   })
+
+  describe('checkById()', () => {
+    test('Should return true if professor is valid', async () => {
+      const sut = new ProfessorPrismaRepository()
+      const professor = await sut.add(mockAddProfessorParams())
+
+      const professorExists = await sut.checkById(professor.id)
+      expect(professorExists).toBe(true)
+    })
+  })
 })
