@@ -48,5 +48,12 @@ describe('AlunoPrismaRepository', () => {
       const cadeiraExists = await sut.checkById(aluno.id)
       expect(cadeiraExists).toBe(true)
     })
+
+    test('Should return false if aluno is not valid', async () => {
+      const sut = new AlunoPrismaRepository()
+
+      const cadeiraExists = await sut.checkById(faker.string.uuid())
+      expect(cadeiraExists).toBe(false)
+    })
   })
 })
