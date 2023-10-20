@@ -45,15 +45,15 @@ describe('AlunoPrismaRepository', () => {
       const sut = new AlunoPrismaRepository()
       const aluno = await sut.add(mockAddAlunoParams())
 
-      const cadeiraExists = await sut.checkById(aluno.id)
-      expect(cadeiraExists).toBe(true)
+      const alunoExists = await sut.checkById(aluno.id)
+      expect(alunoExists).toBe(true)
     })
 
     test('Should return false if aluno is not valid', async () => {
       const sut = new AlunoPrismaRepository()
 
-      const cadeiraExists = await sut.checkById(faker.string.uuid())
-      expect(cadeiraExists).toBe(false)
+      const alunoExists = await sut.checkById(faker.string.uuid())
+      expect(alunoExists).toBe(false)
     })
   })
 })
