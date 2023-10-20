@@ -1,4 +1,4 @@
-import { CheckProfessorByIdRepositorySpy, AddCadeiraRepositorySpy } from '@/tests/data/mocks'
+import { CheckProfessorByIdRepositorySpy, AddCadeiraRepositorySpy, CheckCadeiraByPeriodRepositorySpy } from '@/tests/data/mocks'
 import { mockAddCadeiraParams } from '@/tests/domain'
 
 import { DbAddCadeira } from '@/data/usecases'
@@ -7,16 +7,19 @@ type SutTypes = {
   sut: DbAddCadeira
   addCadeiraRepositorySpy: AddCadeiraRepositorySpy
   checkProfessorByIdRepositorySpy: CheckProfessorByIdRepositorySpy
+  checkCadeiraByPeriodRepositorySpy: CheckCadeiraByPeriodRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
   const addCadeiraRepositorySpy = new AddCadeiraRepositorySpy()
   const checkProfessorByIdRepositorySpy = new CheckProfessorByIdRepositorySpy()
-  const sut = new DbAddCadeira(addCadeiraRepositorySpy, checkProfessorByIdRepositorySpy)
+  const checkCadeiraByPeriodRepositorySpy = new CheckCadeiraByPeriodRepositorySpy()
+  const sut = new DbAddCadeira(addCadeiraRepositorySpy, checkProfessorByIdRepositorySpy, checkCadeiraByPeriodRepositorySpy)
   return {
     sut,
     addCadeiraRepositorySpy,
-    checkProfessorByIdRepositorySpy
+    checkProfessorByIdRepositorySpy,
+    checkCadeiraByPeriodRepositorySpy
   }
 }
 
@@ -52,6 +55,13 @@ describe('DbAddCadeira Usecase', () => {
   test('Should return false if CheckProfessorByIdRepository returns false', async () => {
     const { sut, checkProfessorByIdRepositorySpy } = makeSut()
     checkProfessorByIdRepositorySpy.result = false
+    const isValid = await sut.add(mockAddCadeiraParams())
+    expect(isValid).toBe(false)
+  })
+
+  test('Should return false if CheckCadeiraByPeriodRepository returns true', async () => {
+    const { sut, checkCadeiraByPeriodRepositorySpy } = makeSut()
+    checkCadeiraByPeriodRepositorySpy.result = true
     const isValid = await sut.add(mockAddCadeiraParams())
     expect(isValid).toBe(false)
   })
