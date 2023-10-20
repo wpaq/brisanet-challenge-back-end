@@ -13,13 +13,28 @@ describe('CadeiraPrismaRepository', () => {
     await PrismaHelper.disconnect('test')
   })
 
-  test('Should add an cadeira on success', async () => {
-    const sut = new CadeiraPrismaRepository()
-    const professorRepository = new ProfessorPrismaRepository()
-    const professor = await professorRepository.add(mockAddProfessorParams())
-    await sut.add(Object.assign({}, mockAddCadeiraParams(), { professorId: professor.id }))
+  describe('add()', () => {
+    test('Should add an cadeira on success', async () => {
+      const sut = new CadeiraPrismaRepository()
+      const professorRepository = new ProfessorPrismaRepository()
+      const professor = await professorRepository.add(mockAddProfessorParams())
+      await sut.add(Object.assign({}, mockAddCadeiraParams(), { professorId: professor.id }))
 
-    const count = await PrismaHelper.client.cadeira.count()
-    expect(count).toBe(1)
+      const count = await PrismaHelper.client.cadeira.count()
+      expect(count).toBe(1)
+    })
+  })
+
+  describe('checkById()', () => {
+    test('Should return true if cadeira is valid', async () => {
+      const sut = new CadeiraPrismaRepository()
+      const professor = await new ProfessorPrismaRepository().add(mockAddProfessorParams())
+
+      await sut.add(Object.assign({}, mockAddCadeiraParams(), { professorId: professor.id }))
+      const cadeira = await PrismaHelper.client.cadeira.findFirst()
+
+      const cadeiraExists = await sut.checkById(cadeira?.id as string)
+      expect(cadeiraExists).toBe(true)
+    })
   })
 })
