@@ -1,6 +1,7 @@
 import { mockAddAlunoParams } from '@/tests/domain'
 
 import { PrismaHelper, AlunoPrismaRepository } from '@/infra/db/prisma'
+import { faker } from '@faker-js/faker'
 
 describe('AlunoPrismaRepository', () => {
   beforeAll(async () => {
@@ -29,6 +30,13 @@ describe('AlunoPrismaRepository', () => {
 
       const emailExists = await sut.checkByEmail(aluno.email)
       expect(emailExists).toBe(true)
+    })
+
+    test('Should return false if email not exists', async () => {
+      const sut = new AlunoPrismaRepository()
+
+      const emailExists = await sut.checkByEmail(faker.internet.email())
+      expect(emailExists).toBe(false)
     })
   })
 })
