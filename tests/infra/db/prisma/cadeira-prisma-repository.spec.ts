@@ -62,5 +62,12 @@ describe('CadeiraPrismaRepository', () => {
       const periodExists = await sut.checkByPeriod(addCadeiraParams.dataInicio, addCadeiraParams.dataFim)
       expect(periodExists).toBe(true)
     })
+
+    test('Should return false if period not exists', async () => {
+      const sut = new CadeiraPrismaRepository()
+
+      const periodExists = await sut.checkByPeriod(faker.date.recent(), faker.date.future({ years: 2 }))
+      expect(periodExists).toBe(false)
+    })
   })
 })
