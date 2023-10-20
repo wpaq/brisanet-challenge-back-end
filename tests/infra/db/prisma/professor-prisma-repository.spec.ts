@@ -48,5 +48,12 @@ describe('ProfessorPrismaRepository', () => {
       const professorExists = await sut.checkById(professor.id)
       expect(professorExists).toBe(true)
     })
+
+    test('Should return false if professor is not valid', async () => {
+      const sut = new ProfessorPrismaRepository()
+
+      const professorExists = await sut.checkById(faker.string.uuid())
+      expect(professorExists).toBe(false)
+    })
   })
 })
