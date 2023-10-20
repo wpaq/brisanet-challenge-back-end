@@ -7,8 +7,8 @@ export const mockCadeiraModel = (): CadeiraModel => ({
   id: faker.string.uuid(),
   nome: faker.person.fullName(),
   slug: faker.word.words(),
-  dataInicio: new Date('2023-10-16'),
-  dataFim: new Date('2023-11-16'),
+  dataInicio: faker.date.recent(),
+  dataFim: faker.date.future({ years: 1 }),
   cargaHoraria: faker.number.int({ max: 100 }),
   professorId: faker.string.uuid()
 })
@@ -16,8 +16,8 @@ export const mockCadeiraModel = (): CadeiraModel => ({
 export const mockAddCadeiraParams = (): AddCadeiraParams => ({
   nome: faker.person.fullName(),
   slug: faker.word.words(),
-  dataInicio: new Date('2023-10-16'),
-  dataFim: new Date('2023-11-16'),
+  dataInicio: faker.date.recent(),
+  dataFim: faker.date.future({ years: 1 }),
   cargaHoraria: faker.number.int({ max: 100 }),
   professorId: faker.string.uuid()
 })

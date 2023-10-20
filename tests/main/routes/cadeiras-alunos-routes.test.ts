@@ -1,18 +1,12 @@
-import { AlunoPrismaRepository, CadeiraPrismaRepository, PrismaHelper, ProfessorPrismaRepository } from '@/infra/db/prisma'
+import { AlunoPrismaRepository, PrismaHelper, ProfessorPrismaRepository } from '@/infra/db/prisma'
 import app from '@/main/config/app'
 import { mockAddAlunoParams, mockAddCadeiraParams, mockAddProfessorParams } from '@/tests/domain'
 
 import request from 'supertest'
 
-let aluno, cadeira
-
 describe('CadeirasAlunos Routes', () => {
   beforeAll(async () => {
     await PrismaHelper.connect('test')
-
-    const professor = await new ProfessorPrismaRepository().add(mockAddProfessorParams())
-    aluno = await new AlunoPrismaRepository().add(mockAddAlunoParams())
-    cadeira = await new CadeiraPrismaRepository().add(Object.assign({}, mockAddCadeiraParams(), { professorId: professor.id }))
   })
 
   afterAll(async () => {
@@ -22,12 +16,19 @@ describe('CadeirasAlunos Routes', () => {
     await PrismaHelper.disconnect('test')
   })
 
-  test('should return an cadeira on success', async () => {
+  test('should return an cadeiras alunos on success', async () => {
+    const professor = await new ProfessorPrismaRepository().add(mockAddProfessorParams())
+    const aluno = await new AlunoPrismaRepository().add(mockAddAlunoParams())
+    const cadeira = await request(app)
+      .post('/api/cadeira')
+      .send(Object.assign({}, mockAddCadeiraParams(), { professorId: professor.id }))
+      .expect(200)
+
     await request(app)
       .post('/api/cadeiras-alunos')
       .send({
         alunoId: aluno.id,
-        cadeiraId: cadeira.id
+        cadeiraId: cadeira.body.id
       })
       .expect(200)
   })
