@@ -11,8 +11,11 @@ describe('LogPrisma Repository', () => {
     await PrismaHelper.connect('test')
   })
 
-  afterAll(async () => {
+  beforeEach(async () => {
     await PrismaHelper.client.logError.deleteMany({})
+  })
+
+  afterAll(async () => {
     await PrismaHelper.disconnect('test')
   })
 

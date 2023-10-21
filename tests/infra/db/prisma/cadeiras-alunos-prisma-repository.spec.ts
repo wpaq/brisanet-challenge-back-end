@@ -49,7 +49,7 @@ describe('CadeirasAlunosPrismaRepository', () => {
       const sut = makeSut()
       const alunoId: string = await mockAlunoId()
       const cadeiraId: string = await mockCadeiraId()
-      console.log(alunoId)
+
       await sut.add({
         alunoId,
         cadeiraId
