@@ -1,8 +1,8 @@
-import { AddCadeirasAlunosSpy, CheckAlunoByIdSpy, CheckCadeiraByIdSpy, ValidationSpy } from '@/tests/presentation/mocks'
+import { AddCadeirasAlunosSpy, CheckAlunoByIdSpy, CheckCadeiraByIdSpy, CountCadeirasAlunosByIdSpy, ValidationSpy } from '@/tests/presentation/mocks'
 
 import { type HttpRequest } from '@/presentation/protocols'
 import { CadeirasAlunosController } from '@/presentation/controllers'
-import { InvalidParamError, MissingParamError } from '@/presentation/errors'
+import { InvalidParamError, MissingParamError, RegistrationLimitError } from '@/presentation/errors'
 import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers'
 
 import { faker } from '@faker-js/faker'
@@ -20,6 +20,7 @@ type SutTypes = {
   validationSpy: ValidationSpy
   checkAlunoByIdSpy: CheckAlunoByIdSpy
   checkCadeiraByIdSpy: CheckCadeiraByIdSpy
+  countCadeirasAlunosByIdSpy: CountCadeirasAlunosByIdSpy
 }
 
 const makeSut = (): SutTypes => {
@@ -27,13 +28,15 @@ const makeSut = (): SutTypes => {
   const validationSpy = new ValidationSpy()
   const checkAlunoByIdSpy = new CheckAlunoByIdSpy()
   const checkCadeiraByIdSpy = new CheckCadeiraByIdSpy()
-  const sut = new CadeirasAlunosController(addCadeirasAlunosSpy, validationSpy, checkAlunoByIdSpy, checkCadeiraByIdSpy)
+  const countCadeirasAlunosByIdSpy = new CountCadeirasAlunosByIdSpy()
+  const sut = new CadeirasAlunosController(addCadeirasAlunosSpy, validationSpy, checkAlunoByIdSpy, checkCadeiraByIdSpy, countCadeirasAlunosByIdSpy)
   return {
     sut,
     addCadeirasAlunosSpy,
     validationSpy,
     checkAlunoByIdSpy,
-    checkCadeiraByIdSpy
+    checkCadeiraByIdSpy,
+    countCadeirasAlunosByIdSpy
   }
 }
 
@@ -84,5 +87,12 @@ describe('CadeirasAlunos Controller', () => {
     checkCadeiraByIdSpy.result = false
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(forbidden(new InvalidParamError('cadeiraId')))
+  })
+
+  test('Should return 403 if CountCadeirasAlunosById returns 8', async () => {
+    const { sut, countCadeirasAlunosByIdSpy } = makeSut()
+    countCadeirasAlunosByIdSpy.result = 8
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(forbidden(new RegistrationLimitError()))
   })
 })
