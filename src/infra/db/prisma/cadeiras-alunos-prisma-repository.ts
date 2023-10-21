@@ -19,7 +19,11 @@ export class CadeirasAlunosPrismaRepository implements AddCadeirasAlunosReposito
   }
 
   async countById (id: string): Promise<number> {
-    const count = await PrismaHelper.client.cadeirasAlunos.count()
+    const count = await PrismaHelper.client.cadeirasAlunos.count({
+      where: {
+        alunoId: id
+      }
+    })
     return count
   }
 }
