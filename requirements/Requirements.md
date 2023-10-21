@@ -17,7 +17,7 @@
 2. ✅ O aluno deve ser capaz de se matricular em uma ou mais cadeiras(matérias).
 3. ❌ O professor deve assentir as solicitações de matrículas dos alunos.
 4. ✅ Uma cadeira não poderá ser ofertada mais de uma vez por período.
-5. ❌ Um aluno não pode se matricular em mais de 8 cadeiras(matérias) e menos de 1.
+5. ✅ Um aluno não pode se matricular em mais de 8 cadeiras(matérias) e menos de 1.
 6. ❌ O sistema deve ser capaz de listar todas as cadeiras e seus alunos matriculados.
 7. ❌ O sistema deve possuir dois módulos "aluno e professor". Dica: pode ser utilizado o JWT.
 8. ✅ O sistema deve ser capaz de persistir essas informações em um banco de dados relacional.
