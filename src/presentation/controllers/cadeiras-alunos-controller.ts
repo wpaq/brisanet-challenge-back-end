@@ -1,6 +1,6 @@
 import { type Validation, type Controller, type HttpRequest, type HttpResponse } from '@/presentation/protocols'
 import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers'
-import { InvalidParamError, RegistrationLimitError } from '@/presentation/errors'
+import { AlreadyRegisteredError, InvalidParamError, RegistrationLimitError } from '@/presentation/errors'
 import { type CheckAlunoById, type AddCadeirasAlunos, type CheckCadeiraById, type CountCadeirasAlunosById } from '@/domain/usecases'
 
 export class CadeirasAlunosController implements Controller {
@@ -29,9 +29,13 @@ export class CadeirasAlunosController implements Controller {
         return forbidden(new InvalidParamError('cadeiraId'))
       }
 
-      const countRegistrations = await this.countCadeirasAlunosById.countByAlunoId(alunoId)
-      if (countRegistrations === 8) {
+      const countAlunoRegistrations = await this.countCadeirasAlunosById.countByAlunoId(alunoId)
+      const countCadeiraRegistrations = await this.countCadeirasAlunosById.countByCadeiraId(cadeiraId)
+      if (countAlunoRegistrations === 8) {
         return forbidden(new RegistrationLimitError())
+      }
+      if (countCadeiraRegistrations === 1) {
+        return forbidden(new AlreadyRegisteredError())
       }
 
       const cadeirasAlunos = await this.addCadeirasAlunos.add({
