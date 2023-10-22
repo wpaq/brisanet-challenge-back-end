@@ -13,9 +13,11 @@ export class DbAddCadeirasAlunos implements AddCadeirasAlunos {
   async add (data: AddCadeirasAlunosParams): Promise<CadeirasAlunosModel | boolean> {
     const alunoExists = await this.checkAlunoByIdRepository.checkById(data.alunoId)
     const cadeiraExists = await this.checkCadeiraByIdRepository.checkById(data.cadeiraId)
-    const count = await this.countCadeirasAlunosByIdRepository.countById(data.alunoId)
 
-    if (count !== 8 && alunoExists && cadeiraExists) {
+    const countAluno = await this.countCadeirasAlunosByIdRepository.countByAlunoId(data.alunoId)
+    const countCadeira = await this.countCadeirasAlunosByIdRepository.countByCadeiraId(data.cadeiraId)
+
+    if (countAluno !== 8 && countCadeira === 0 && alunoExists && cadeiraExists) {
       return await this.addCadeirasAlunosRepository.add(data)
     }
     return false
