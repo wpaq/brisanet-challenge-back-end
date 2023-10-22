@@ -22,4 +22,11 @@ describe('DbLoadCadeiras', () => {
     const cadeiras = await sut.load()
     expect(cadeiras).toEqual(loadCadeirasRepositorySpy.result)
   })
+
+  test('Should throw if LoadCadeirasRepository throws', async () => {
+    const { sut, loadCadeirasRepositorySpy } = makeSut()
+    jest.spyOn(loadCadeirasRepositorySpy, 'loadAll').mockRejectedValueOnce(new Error())
+    const promise = sut.load()
+    await expect(promise).rejects.toThrow()
+  })
 })
