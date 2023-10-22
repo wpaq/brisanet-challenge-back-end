@@ -1,3 +1,4 @@
 export interface CountCadeirasAlunosByIdRepository {
-  countById: (id: string) => Promise<number>
+  countByAlunoId: (id: string) => Promise<number>
+  countByCadeiraId: (id: string) => Promise<number>
 }
