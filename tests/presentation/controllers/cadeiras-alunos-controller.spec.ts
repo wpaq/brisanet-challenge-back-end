@@ -89,7 +89,7 @@ describe('CadeirasAlunos Controller', () => {
     expect(httpResponse).toEqual(forbidden(new InvalidParamError('cadeiraId')))
   })
 
-  test('Should return 403 if CountCadeirasAlunosById returns 8', async () => {
+  test('Should return 403 if CountCadeirasAlunosById.countByAlunoId returns 8', async () => {
     const { sut, countCadeirasAlunosByIdSpy } = makeSut()
     countCadeirasAlunosByIdSpy.result = 8
     const httpResponse = await sut.handle(mockRequest())

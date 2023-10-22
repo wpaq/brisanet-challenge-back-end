@@ -29,7 +29,7 @@ export class CadeirasAlunosController implements Controller {
         return forbidden(new InvalidParamError('cadeiraId'))
       }
 
-      const countRegistrations = await this.countCadeirasAlunosById.countById(alunoId)
+      const countRegistrations = await this.countCadeirasAlunosById.countByAlunoId(alunoId)
       if (countRegistrations === 8) {
         return forbidden(new RegistrationLimitError())
       }
