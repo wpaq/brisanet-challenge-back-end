@@ -60,7 +60,7 @@ describe('CadeirasAlunosPrismaRepository', () => {
     })
   })
 
-  describe('countById()', () => {
+  describe('countByAlunoId()', () => {
     test('Should return count on success', async () => {
       const sut = new CadeirasAlunosPrismaRepository()
       const alunoId: string = await mockAlunoId()
@@ -71,7 +71,7 @@ describe('CadeirasAlunosPrismaRepository', () => {
         cadeiraId
       })
 
-      const count = await sut.countById(alunoId)
+      const count = await sut.countByAlunoId(alunoId)
       expect(count).toBe(1)
     })
   })
