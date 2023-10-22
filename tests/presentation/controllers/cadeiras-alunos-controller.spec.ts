@@ -2,7 +2,7 @@ import { AddCadeirasAlunosSpy, CheckAlunoByIdSpy, CheckCadeiraByIdSpy, CountCade
 
 import { type HttpRequest } from '@/presentation/protocols'
 import { CadeirasAlunosController } from '@/presentation/controllers'
-import { InvalidParamError, MissingParamError, RegistrationLimitError } from '@/presentation/errors'
+import { InvalidParamError, MissingParamError, RegistrationLimitError, AlreadyRegisteredError } from '@/presentation/errors'
 import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers'
 
 import { faker } from '@faker-js/faker'
@@ -94,5 +94,12 @@ describe('CadeirasAlunos Controller', () => {
     countCadeirasAlunosByIdSpy.result = 8
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(forbidden(new RegistrationLimitError()))
+  })
+
+  test('Should return 403 if CountCadeirasAlunosById.countByCadeiraId returns 1', async () => {
+    const { sut, countCadeirasAlunosByIdSpy } = makeSut()
+    countCadeirasAlunosByIdSpy.result = 1
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(forbidden(new AlreadyRegisteredError()))
   })
 })

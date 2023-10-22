@@ -16,7 +16,7 @@ export class AddCadeirasAlunosSpy implements AddCadeirasAlunos {
 export class CountCadeirasAlunosByIdSpy implements CountCadeirasAlunosById {
   alunoId: string
   cadeiraId: string
-  result = 1
+  result = 0
 
   async countByAlunoId (id: string): Promise<number> {
     this.alunoId = id
