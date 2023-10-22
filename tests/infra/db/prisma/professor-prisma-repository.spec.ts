@@ -10,7 +10,7 @@ const makeSut = (): ProfessorPrismaRepository => {
 
 describe('ProfessorPrismaRepository', () => {
   beforeAll(async () => {
-    await PrismaHelper.connect('test')
+    await PrismaHelper.connectPrismock()
   })
 
   beforeEach(async () => {
@@ -18,7 +18,7 @@ describe('ProfessorPrismaRepository', () => {
   })
 
   afterAll(async () => {
-    await PrismaHelper.disconnect('test')
+    await PrismaHelper.disconnectPrismock()
   })
 
   describe('add()', () => {

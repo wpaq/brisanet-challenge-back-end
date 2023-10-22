@@ -6,13 +6,13 @@ import request from 'supertest'
 
 describe('Cadeira Routes', () => {
   beforeAll(async () => {
-    await PrismaHelper.connect('test')
+    await PrismaHelper.connectPrismock()
   })
 
   afterAll(async () => {
     await PrismaHelper.client.professor.deleteMany({})
     await PrismaHelper.client.cadeira.deleteMany({})
-    await PrismaHelper.disconnect('test')
+    await PrismaHelper.disconnectPrismock()
   })
 
   test('should return an cadeira on success', async () => {

@@ -8,7 +8,7 @@ const makeSut = (): LogPrismaRepository => {
 
 describe('LogPrisma Repository', () => {
   beforeAll(async () => {
-    await PrismaHelper.connect('test')
+    await PrismaHelper.connectPrismock()
   })
 
   beforeEach(async () => {
@@ -16,7 +16,7 @@ describe('LogPrisma Repository', () => {
   })
 
   afterAll(async () => {
-    await PrismaHelper.disconnect('test')
+    await PrismaHelper.disconnectPrismock()
   })
 
   test('Should create an error log on success', async () => {

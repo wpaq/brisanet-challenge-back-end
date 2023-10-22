@@ -1,29 +1,24 @@
-import { clientTest, clientProd } from './prisma-client'
+import { prisma } from './prisma-client'
+import { prismock } from './prisma-mock'
 
 export const PrismaHelper = {
-  client: clientTest || clientProd,
+  client: prismock || prisma,
 
-  async connect (database: string) {
-    if (database === 'test') {
-      await clientTest.$connect()
-      this.client = clientTest
-      return this.client
-    }
-
-    if (database === 'prod') {
-      await clientProd.$connect()
-      this.client = clientProd
-      return this.client
-    }
+  async connectPrismock () {
+    await prismock.$connect()
+    this.client = prismock
   },
 
-  async disconnect (database: string) {
-    if (database === 'test') {
-      await clientTest.$disconnect()
-    }
+  async disconnectPrismock () {
+    await prismock.$disconnect()
+  },
 
-    if (database === 'prod') {
-      await clientProd.$disconnect()
-    }
+  async connect () {
+    await prisma.$connect()
+    this.client = prisma
+  },
+
+  async disconnect () {
+    await prisma.$disconnect()
   }
 }

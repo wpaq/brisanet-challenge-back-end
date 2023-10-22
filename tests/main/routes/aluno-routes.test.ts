@@ -5,12 +5,12 @@ import request from 'supertest'
 
 describe('Aluno Routes', () => {
   beforeAll(async () => {
-    await PrismaHelper.connect('test')
+    await PrismaHelper.connectPrismock()
   })
 
   afterAll(async () => {
     await PrismaHelper.client.aluno.deleteMany({})
-    await PrismaHelper.disconnect('test')
+    await PrismaHelper.disconnectPrismock()
   })
 
   beforeEach(async () => {

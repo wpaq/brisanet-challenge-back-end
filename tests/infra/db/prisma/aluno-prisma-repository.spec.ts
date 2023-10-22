@@ -1,6 +1,7 @@
 import { mockAddAlunoParams } from '@/tests/domain'
 
-import { PrismaHelper, AlunoPrismaRepository } from '@/infra/db/prisma'
+import { AlunoPrismaRepository, PrismaHelper } from '@/infra/db/prisma'
+
 import { faker } from '@faker-js/faker'
 
 const makeSut = (): AlunoPrismaRepository => {
@@ -9,7 +10,7 @@ const makeSut = (): AlunoPrismaRepository => {
 
 describe('AlunoPrismaRepository', () => {
   beforeAll(async () => {
-    await PrismaHelper.connect('test')
+    await PrismaHelper.connectPrismock()
   })
 
   beforeEach(async () => {
@@ -17,10 +18,10 @@ describe('AlunoPrismaRepository', () => {
   })
 
   afterAll(async () => {
-    await PrismaHelper.disconnect('test')
+    await PrismaHelper.disconnectPrismock()
   })
 
-  describe('checkById()', () => {
+  describe('add()', () => {
     test('Should add an aluno on success', async () => {
       const sut = makeSut()
       await sut.add(mockAddAlunoParams())

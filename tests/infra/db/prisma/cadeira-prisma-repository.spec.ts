@@ -16,7 +16,7 @@ const makeSut = (): CadeiraPrismaRepository => {
 
 describe('CadeiraPrismaRepository', () => {
   beforeAll(async () => {
-    await PrismaHelper.connect('test')
+    await PrismaHelper.connectPrismock()
   })
 
   beforeEach(async () => {
@@ -26,7 +26,7 @@ describe('CadeiraPrismaRepository', () => {
   })
 
   afterAll(async () => {
-    await PrismaHelper.disconnect('test')
+    await PrismaHelper.disconnectPrismock()
   })
 
   describe('add()', () => {
