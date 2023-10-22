@@ -1,0 +1,25 @@
+import { LoadCadeirasRepositorySpy } from '@/tests/data/mocks'
+
+import { DbLoadCadeiras } from '@/data/usecases'
+
+type SutTypes = {
+  sut: DbLoadCadeiras
+  loadCadeirasRepositorySpy: LoadCadeirasRepositorySpy
+}
+
+const makeSut = (): SutTypes => {
+  const loadCadeirasRepositorySpy = new LoadCadeirasRepositorySpy()
+  const sut = new DbLoadCadeiras(loadCadeirasRepositorySpy)
+  return {
+    sut,
+    loadCadeirasRepositorySpy
+  }
+}
+
+describe('DbLoadCadeiras', () => {
+  test('Should return a list of Cadeiras on success', async () => {
+    const { sut, loadCadeirasRepositorySpy } = makeSut()
+    const cadeiras = await sut.load()
+    expect(cadeiras).toEqual(loadCadeirasRepositorySpy.result)
+  })
+})
