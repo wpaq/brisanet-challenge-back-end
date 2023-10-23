@@ -19,14 +19,14 @@ const makeSut = (): SutTypes => {
 describe('DbLoadCadeiras', () => {
   test('Should return a list of Cadeiras on success', async () => {
     const { sut, loadCadeirasRepositorySpy } = makeSut()
-    const cadeiras = await sut.load()
+    const cadeiras = await sut.loadAll()
     expect(cadeiras).toEqual(loadCadeirasRepositorySpy.result)
   })
 
   test('Should throw if LoadCadeirasRepository throws', async () => {
     const { sut, loadCadeirasRepositorySpy } = makeSut()
     jest.spyOn(loadCadeirasRepositorySpy, 'loadAll').mockRejectedValueOnce(new Error())
-    const promise = sut.load()
+    const promise = sut.loadAll()
     await expect(promise).rejects.toThrow()
   })
 })

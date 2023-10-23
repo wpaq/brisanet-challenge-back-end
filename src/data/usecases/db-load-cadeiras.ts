@@ -7,7 +7,7 @@ export class DbLoadCadeiras implements LoadCadeiras {
     private readonly loadCadeirasRepository: LoadCadeirasRepository
   ) {}
 
-  async load (): Promise<CadeiraModel[]> {
+  async loadAll (): Promise<CadeiraModel[]> {
     return await this.loadCadeirasRepository.loadAll()
   }
 }
