@@ -11,12 +11,14 @@ datasource db {
 }
 
 model Professor {
-  id          String    @id @default(uuid())
-  nome        String   
-  telefone    String
-  email       String    @unique
-  cpf         String    
-  cadeiras    Cadeira[]
+  id                String    @id @default(uuid())
+  nome              String   
+  telefone          String
+  email             String    @unique
+  cpf               String    
+
+  cadeiras          Cadeira[]
+  cadeirasAlunos    CadeirasAlunos[]  
 
   @@map("professores")  
 }
@@ -30,12 +32,12 @@ model LogError {
 }
 
 model Aluno {
-  id          String    @id @default(uuid())
-  nome        String   
-  telefone    String
-  email       String    @unique
-  cpf         String   
-  matricula   String 
+  id                String    @id @default(uuid())
+  nome              String   
+  telefone          String
+  email             String    @unique
+  cpf               String   
+  matricula         String 
 
   cadeirasAlunos    CadeirasAlunos[] 
 
@@ -59,13 +61,24 @@ model Cadeira {
 }
 
 model CadeirasAlunos {
-  id             String     @id @default(uuid())
+  id                String     @id @default(uuid())
   
-  cadeira        Cadeira    @relation(fields: [cadeiraId], references: [id], onDelete: Cascade)
-  cadeiraId      String   
+  cadeira           Cadeira    @relation(fields: [cadeiraId], references: [id], onDelete: Cascade)
+  cadeiraId         String   
 
-  aluno          Aluno      @relation(fields: [alunoId], references: [id], onDelete: Cascade)
-  alunoId        String     
+  aluno             Aluno      @relation(fields: [alunoId], references: [id], onDelete: Cascade)
+  alunoId           String     
+
+  professor         Professor  @relation(fields: [professorId], references: [id])
+  professorId       String
+
+  statusMatricula   MatriculaStatus
 
   @@map("cadeiras_alunos")  
+}
+
+enum MatriculaStatus {
+  Pendente
+  Aprovado
+  Rejeitado
 }
