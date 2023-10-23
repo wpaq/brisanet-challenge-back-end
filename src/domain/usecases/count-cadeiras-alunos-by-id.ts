@@ -1,4 +1,4 @@
 export interface CountCadeirasAlunosById {
-  countByAlunoId: (id: string) => Promise<number>
-  countByCadeiraId: (id: string) => Promise<number>
+  countById: (alunoId: string, cadeiraId: string) => Promise<number>
+  countByAlunoId: (alunoId: string) => Promise<number>
 }

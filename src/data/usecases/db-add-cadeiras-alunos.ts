@@ -14,10 +14,10 @@ export class DbAddCadeirasAlunos implements AddCadeirasAlunos {
     const alunoExists = await this.checkAlunoByIdRepository.checkById(data.alunoId)
     const cadeiraExists = await this.checkCadeiraByIdRepository.checkById(data.cadeiraId)
 
+    const countCadeirasAlunos = await this.countCadeirasAlunosByIdRepository.countById(data.alunoId, data.cadeiraId)
     const countAluno = await this.countCadeirasAlunosByIdRepository.countByAlunoId(data.alunoId)
-    const countCadeira = await this.countCadeirasAlunosByIdRepository.countByCadeiraId(data.cadeiraId)
 
-    if (countAluno !== 8 && countCadeira === 0 && alunoExists && cadeiraExists) {
+    if (countCadeirasAlunos === 0 && countAluno !== 8 && alunoExists && cadeiraExists) {
       return await this.addCadeirasAlunosRepository.add(data)
     }
     return false

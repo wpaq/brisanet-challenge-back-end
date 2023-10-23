@@ -72,7 +72,7 @@ describe('DbAddCadeirasAlunos Usecase', () => {
     expect(isValid).toBe(false)
   })
 
-  test('Should return false if CountCadeirasAlunosByIdRepository.countByCadeiraId returns 1', async () => {
+  test('Should return false if CountCadeirasAlunosByIdRepository.countById returns 1', async () => {
     const { sut, countCadeirasAlunosByIdRepositorySpy } = makeSut()
     countCadeirasAlunosByIdRepositorySpy.result = 1
     const isValid = await sut.add(mockAddCadeirasAlunosParams())

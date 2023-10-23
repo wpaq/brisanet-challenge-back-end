@@ -18,19 +18,20 @@ export class CadeirasAlunosPrismaRepository implements AddCadeirasAlunosReposito
     return newCadeirasAlunos
   }
 
-  async countByAlunoId (id: string): Promise<number> {
+  async countById (alunoId: string, cadeiraId: string): Promise<number> {
     const count = await PrismaHelper.client.cadeirasAlunos.count({
       where: {
-        alunoId: id
+        alunoId,
+        cadeiraId
       }
     })
     return count
   }
 
-  async countByCadeiraId (id: string): Promise<number> {
+  async countByAlunoId (alunoId: string): Promise<number> {
     const count = await PrismaHelper.client.cadeirasAlunos.count({
       where: {
-        cadeiraId: id
+        alunoId
       }
     })
     return count
