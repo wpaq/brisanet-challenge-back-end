@@ -4,11 +4,11 @@ import { type CountCadeirasAlunosById } from '@/domain/usecases'
 export class DbCountCadeirasAlunosById implements CountCadeirasAlunosById {
   constructor (private readonly countCadeirasAlunosByIdRepository: CountCadeirasAlunosByIdRepository) {}
 
-  async countByAlunoId (id: string): Promise<number> {
-    return await this.countCadeirasAlunosByIdRepository.countByAlunoId(id)
+  async countById (alunoId: string, cadeiraId: string): Promise<number> {
+    return await this.countCadeirasAlunosByIdRepository.countById(alunoId, cadeiraId)
   }
 
-  async countByCadeiraId (id: string): Promise<number> {
-    return await this.countCadeirasAlunosByIdRepository.countByCadeiraId(id)
+  async countByAlunoId (alunoId: string): Promise<number> {
+    return await this.countCadeirasAlunosByIdRepository.countByAlunoId(alunoId)
   }
 }

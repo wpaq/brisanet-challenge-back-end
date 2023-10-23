@@ -1,6 +1,6 @@
-import { mockCadeiraModel } from '@/tests/domain/mock-cadeira'
+import { mockCadeiraModel, mockCadeiraModels } from '@/tests/domain/mock-cadeira'
 
-import { type CheckCadeiraByIdRepository, type AddCadeiraRepository, type CheckCadeiraByPeriodRepository } from '@/data/protocols'
+import { type CheckCadeiraByIdRepository, type AddCadeiraRepository, type CheckCadeiraByPeriodRepository, type LoadCadeirasRepository } from '@/data/protocols'
 import { type CadeiraModel } from '@/domain/models'
 import { type AddCadeiraParams } from '@/domain/usecases'
 
@@ -32,6 +32,14 @@ export class CheckCadeiraByPeriodRepositorySpy implements CheckCadeiraByPeriodRe
   async checkByPeriod (dataInicio: Date, dataFim: Date): Promise<boolean> {
     this.dataInicio = dataInicio
     this.dataFim = dataFim
+    return this.result
+  }
+}
+
+export class LoadCadeirasRepositorySpy implements LoadCadeirasRepository {
+  result = mockCadeiraModels()
+
+  async loadAll (): Promise<CadeiraModel[]> {
     return this.result
   }
 }

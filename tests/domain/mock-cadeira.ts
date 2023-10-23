@@ -13,6 +13,11 @@ export const mockCadeiraModel = (): CadeiraModel => ({
   professorId: faker.string.uuid()
 })
 
+export const mockCadeiraModels = (): CadeiraModel[] => [
+  mockCadeiraModel(),
+  mockCadeiraModel()
+]
+
 export const mockAddCadeiraParams = (): AddCadeiraParams => ({
   nome: faker.person.fullName(),
   slug: faker.word.words(),

@@ -96,7 +96,7 @@ describe('CadeirasAlunos Controller', () => {
     expect(httpResponse).toEqual(forbidden(new RegistrationLimitError()))
   })
 
-  test('Should return 403 if CountCadeirasAlunosById.countByCadeiraId returns 1', async () => {
+  test('Should return 403 if CountCadeirasAlunosById.countById returns 1', async () => {
     const { sut, countCadeirasAlunosByIdSpy } = makeSut()
     countCadeirasAlunosByIdSpy.result = 1
     const httpResponse = await sut.handle(mockRequest())

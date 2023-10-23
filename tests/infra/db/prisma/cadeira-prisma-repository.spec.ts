@@ -75,4 +75,16 @@ describe('CadeiraPrismaRepository', () => {
       expect(periodExists).toBe(false)
     })
   })
+
+  describe('loadAll()', () => {
+    test('Should load all cadeiras on success', async () => {
+      const sut = makeSut()
+      await sut.add(Object.assign({}, mockAddCadeiraParams(), { professorId: await mockProfessorId() }))
+      await sut.add(Object.assign({}, mockAddCadeiraParams(), { professorId: await mockProfessorId() }))
+
+      const cadeiras = await sut.loadAll()
+      expect(cadeiras.length).toBe(2)
+      expect(cadeiras[0].id).toBeTruthy()
+    })
+  })
 })
