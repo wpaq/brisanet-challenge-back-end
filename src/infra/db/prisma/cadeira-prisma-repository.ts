@@ -1,9 +1,9 @@
 import { PrismaHelper } from './helpers/prisma-helper'
-import { type CheckCadeiraByIdRepository, type AddCadeiraRepository, type CheckCadeiraByPeriodRepository } from '@/data/protocols'
+import { type CheckCadeiraByIdRepository, type AddCadeiraRepository, type CheckCadeiraByPeriodRepository, type LoadCadeirasRepository } from '@/data/protocols'
 import { type CadeiraModel } from '@/domain/models'
 import { type AddCadeiraParams } from '@/domain/usecases'
 
-export class CadeiraPrismaRepository implements AddCadeiraRepository, CheckCadeiraByIdRepository, CheckCadeiraByPeriodRepository {
+export class CadeiraPrismaRepository implements AddCadeiraRepository, CheckCadeiraByIdRepository, CheckCadeiraByPeriodRepository, LoadCadeirasRepository {
   async add (data: AddCadeiraParams): Promise<CadeiraModel> {
     const newCadeira = await PrismaHelper.client.cadeira.create({
       data: {
@@ -41,5 +41,12 @@ export class CadeiraPrismaRepository implements AddCadeiraRepository, CheckCadei
       }
     })
     return cadeira !== null
+  }
+
+  async loadAll (): Promise<CadeiraModel[]> {
+    const cadeiras = await PrismaHelper.client.cadeira.findMany({
+      include: { cadeirasAlunos: true }
+    })
+    return cadeiras
   }
 }
