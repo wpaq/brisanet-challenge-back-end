@@ -1,7 +1,7 @@
 import { type Validation, type Controller, type HttpRequest, type HttpResponse } from '@/presentation/protocols'
 import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers'
 import { AlreadyRegisteredError, InvalidParamError, RegistrationLimitError } from '@/presentation/errors'
-import { type CheckAlunoById, type AddCadeirasAlunos, type CheckCadeiraById, type CountCadeirasAlunosById } from '@/domain/usecases'
+import { type CheckAlunoById, type AddCadeirasAlunos, type CheckCadeiraById, type CountCadeirasAlunosById, type LoadCadeiraById } from '@/domain/usecases'
 
 export class CadeirasAlunosController implements Controller {
   constructor (
@@ -9,7 +9,8 @@ export class CadeirasAlunosController implements Controller {
     private readonly validation: Validation,
     private readonly checkAlunoById: CheckAlunoById,
     private readonly checkCadeiraById: CheckCadeiraById,
-    private readonly countCadeirasAlunosById: CountCadeirasAlunosById
+    private readonly countCadeirasAlunosById: CountCadeirasAlunosById,
+    private readonly loadCadeiraById: LoadCadeiraById
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
@@ -38,9 +39,12 @@ export class CadeirasAlunosController implements Controller {
         return forbidden(new RegistrationLimitError())
       }
 
+      const professorId = (await this.loadCadeiraById.loadById(cadeiraId)).professorId
+
       const cadeirasAlunos = await this.addCadeirasAlunos.add({
         alunoId,
-        cadeiraId
+        cadeiraId,
+        professorId
       })
 
       return ok(cadeirasAlunos)

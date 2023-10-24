@@ -1,4 +1,4 @@
-import { AddCadeirasAlunosSpy, CheckAlunoByIdSpy, CheckCadeiraByIdSpy, CountCadeirasAlunosByIdSpy, ValidationSpy } from '@/tests/presentation/mocks'
+import { AddCadeirasAlunosSpy, CheckAlunoByIdSpy, CheckCadeiraByIdSpy, CountCadeirasAlunosByIdSpy, LoadCadeiraByIdSpy, ValidationSpy } from '@/tests/presentation/mocks'
 
 import { type HttpRequest } from '@/presentation/protocols'
 import { CadeirasAlunosController } from '@/presentation/controllers'
@@ -21,6 +21,7 @@ type SutTypes = {
   checkAlunoByIdSpy: CheckAlunoByIdSpy
   checkCadeiraByIdSpy: CheckCadeiraByIdSpy
   countCadeirasAlunosByIdSpy: CountCadeirasAlunosByIdSpy
+  loadCadeiraByIdSpy: LoadCadeiraByIdSpy
 }
 
 const makeSut = (): SutTypes => {
@@ -29,14 +30,23 @@ const makeSut = (): SutTypes => {
   const checkAlunoByIdSpy = new CheckAlunoByIdSpy()
   const checkCadeiraByIdSpy = new CheckCadeiraByIdSpy()
   const countCadeirasAlunosByIdSpy = new CountCadeirasAlunosByIdSpy()
-  const sut = new CadeirasAlunosController(addCadeirasAlunosSpy, validationSpy, checkAlunoByIdSpy, checkCadeiraByIdSpy, countCadeirasAlunosByIdSpy)
+  const loadCadeiraByIdSpy = new LoadCadeiraByIdSpy()
+  const sut = new CadeirasAlunosController(
+    addCadeirasAlunosSpy,
+    validationSpy,
+    checkAlunoByIdSpy,
+    checkCadeiraByIdSpy,
+    countCadeirasAlunosByIdSpy,
+    loadCadeiraByIdSpy
+  )
   return {
     sut,
     addCadeirasAlunosSpy,
     validationSpy,
     checkAlunoByIdSpy,
     checkCadeiraByIdSpy,
-    countCadeirasAlunosByIdSpy
+    countCadeirasAlunosByIdSpy,
+    loadCadeiraByIdSpy
   }
 }
 
@@ -59,7 +69,8 @@ describe('CadeirasAlunos Controller', () => {
     const { sut, addCadeirasAlunosSpy } = makeSut()
     const request = mockRequest()
     await sut.handle(request)
-    expect(addCadeirasAlunosSpy.addCadeirasAlunosParams).toEqual(request.body)
+    expect(addCadeirasAlunosSpy.addCadeirasAlunosParams.alunoId).toEqual(request.body.alunoId)
+    expect(addCadeirasAlunosSpy.addCadeirasAlunosParams.cadeiraId).toEqual(request.body.cadeiraId)
   })
 
   test('Should return 500 if AddCadeirasAlunos throws', async () => {
