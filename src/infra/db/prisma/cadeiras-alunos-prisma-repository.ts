@@ -7,12 +7,10 @@ export class CadeirasAlunosPrismaRepository implements AddCadeirasAlunosReposito
   async add (data: AddCadeirasAlunosParams): Promise<CadeirasAlunosModel> {
     const newCadeirasAlunos = await PrismaHelper.client.cadeirasAlunos.create({
       data: {
-        aluno: {
-          connect: { id: data.alunoId }
-        },
-        cadeira: {
-          connect: { id: data.cadeiraId }
-        }
+        cadeira: { connect: { id: data.cadeiraId } },
+        aluno: { connect: { id: data.alunoId } },
+        professor: { connect: { id: data.professorId } },
+        statusMatricula: 'Pendente'
       }
     })
     return newCadeirasAlunos

@@ -49,10 +49,12 @@ describe('CadeirasAlunosPrismaRepository', () => {
       const sut = makeSut()
       const alunoId: string = await mockAlunoId()
       const cadeiraId: string = await mockCadeiraId()
+      const professorId: string = await mockProfessorId()
 
       await sut.add({
         alunoId,
-        cadeiraId
+        cadeiraId,
+        professorId
       })
 
       const count = await PrismaHelper.client.cadeirasAlunos.count()
@@ -65,10 +67,12 @@ describe('CadeirasAlunosPrismaRepository', () => {
       const sut = new CadeirasAlunosPrismaRepository()
       const alunoId: string = await mockAlunoId()
       const cadeiraId: string = await mockCadeiraId()
+      const professorId: string = await mockProfessorId()
 
       await sut.add({
         alunoId,
-        cadeiraId
+        cadeiraId,
+        professorId
       })
 
       const count = await sut.countById(alunoId, cadeiraId)
