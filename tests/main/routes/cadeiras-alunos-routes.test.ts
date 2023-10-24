@@ -1,4 +1,4 @@
-import { AlunoPrismaRepository, PrismaHelper, ProfessorPrismaRepository } from '@/infra/db/prisma'
+import { AlunoPrismaRepository, CadeiraPrismaRepository, PrismaHelper, ProfessorPrismaRepository } from '@/infra/db/prisma'
 import app from '@/main/config/app'
 import { mockAddAlunoParams, mockAddCadeiraParams, mockAddProfessorParams } from '@/tests/domain'
 
@@ -29,6 +29,19 @@ describe('CadeirasAlunos Routes', () => {
       .send({
         alunoId: aluno.id,
         cadeiraId: cadeira.body.id
+      })
+      .expect(200)
+  })
+
+  test('should return an cadeiras alunos on success update', async () => {
+    const professor = await new ProfessorPrismaRepository().add(mockAddProfessorParams())
+    const cadeira = await new CadeiraPrismaRepository().add(Object.assign({}, mockAddCadeiraParams(), { professorId: professor.id }))
+
+    await request(app)
+      .put('/api/cadeiras-alunos')
+      .send({
+        id: cadeira.id,
+        statusMatricula: 'Aprovado'
       })
       .expect(200)
   })
