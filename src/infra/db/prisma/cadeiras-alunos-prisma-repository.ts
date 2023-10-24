@@ -1,9 +1,9 @@
 import { PrismaHelper } from './helpers/prisma-helper'
-import { type AddCadeirasAlunosRepository } from '@/data/protocols'
+import { type UpdateCadeirasAlunosRepository, type AddCadeirasAlunosRepository } from '@/data/protocols'
 import { type CadeirasAlunosModel } from '@/domain/models'
-import { type CountCadeirasAlunosById, type AddCadeirasAlunosParams } from '@/domain/usecases'
+import { type CountCadeirasAlunosById, type AddCadeirasAlunosParams, type UpdateCadeirasAlunosParams } from '@/domain/usecases'
 
-export class CadeirasAlunosPrismaRepository implements AddCadeirasAlunosRepository, CountCadeirasAlunosById {
+export class CadeirasAlunosPrismaRepository implements AddCadeirasAlunosRepository, CountCadeirasAlunosById, UpdateCadeirasAlunosRepository {
   async add (data: AddCadeirasAlunosParams): Promise<CadeirasAlunosModel> {
     const newCadeirasAlunos = await PrismaHelper.client.cadeirasAlunos.create({
       data: {
@@ -33,5 +33,17 @@ export class CadeirasAlunosPrismaRepository implements AddCadeirasAlunosReposito
       }
     })
     return count
+  }
+
+  async update (data: UpdateCadeirasAlunosParams): Promise<CadeirasAlunosModel> {
+    const cadeirasAlunosUpdate = await PrismaHelper.client.cadeirasAlunos.update({
+      where: {
+        id: data.id
+      },
+      data: {
+        statusMatricula: data.statusMatricula
+      }
+    })
+    return cadeirasAlunosUpdate
   }
 }
