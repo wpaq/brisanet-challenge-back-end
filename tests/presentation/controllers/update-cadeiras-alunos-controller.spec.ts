@@ -2,7 +2,7 @@ import { UpdateCadeirasAlunosSpy } from '@/tests/presentation/mocks'
 
 import { UpdateCadeirasAlunosController } from '@/presentation/controllers'
 import { type HttpRequest } from '@/presentation/protocols'
-import { ok } from '@/presentation/helpers'
+import { ok, serverError } from '@/presentation/helpers'
 
 import { faker } from '@faker-js/faker'
 
@@ -33,6 +33,13 @@ describe('UpdateCadeirasAlunos Controller', () => {
     const request = mockRequest()
     await sut.handle(request)
     expect(updateCadeirasAlunosSpy.updateCadeirasAlunosParam).toEqual(request.body)
+  })
+
+  test('Should return 500 if UpdateCadeirasAlunos throws', async () => {
+    const { sut, updateCadeirasAlunosSpy } = makeSut()
+    jest.spyOn(updateCadeirasAlunosSpy, 'update').mockRejectedValueOnce(new Error())
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 
   test('Should return 200 if valid data is provided', async () => {
