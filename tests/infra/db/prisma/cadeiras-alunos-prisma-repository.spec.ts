@@ -1,6 +1,8 @@
-import { mockAddAlunoParams, mockAddCadeiraParams, mockAddProfessorParams } from '@/tests/domain'
+import { mockAddAlunoParams, mockAddCadeiraParams, mockAddCadeirasAlunosParams, mockAddProfessorParams } from '@/tests/domain'
 
 import { PrismaHelper, CadeirasAlunosPrismaRepository, AlunoPrismaRepository, CadeiraPrismaRepository, ProfessorPrismaRepository } from '@/infra/db/prisma'
+
+import { faker } from '@faker-js/faker'
 
 let professorPrismaRepository: ProfessorPrismaRepository
 let alunoPrismaRepository: AlunoPrismaRepository
@@ -118,6 +120,23 @@ describe('CadeirasAlunosPrismaRepository', () => {
 
       expect(updatedCadeirasAlunos.id).toBeTruthy()
       expect(updatedCadeirasAlunos.statusMatricula).toBe('Aprovado')
+    })
+  })
+
+  describe('checkById()', () => {
+    test('Should return true if cadeira aluno is valid', async () => {
+      const sut = makeSut()
+      const cadeiraAluno = await sut.add(mockAddCadeirasAlunosParams())
+
+      const cadeiraAlunoExists = await sut.checkById(cadeiraAluno.id)
+      expect(cadeiraAlunoExists).toBe(true)
+    })
+
+    test('Should return false if cadeiraAluno is not valid', async () => {
+      const sut = makeSut()
+
+      const cadeiraAlunoExists = await sut.checkById(faker.string.uuid())
+      expect(cadeiraAlunoExists).toBe(false)
     })
   })
 })
