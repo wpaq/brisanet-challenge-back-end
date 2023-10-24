@@ -1,6 +1,6 @@
 import { mockCadeirasAlunosModel } from '@/tests/domain'
 
-import { type CountCadeirasAlunosByIdRepository, type AddCadeirasAlunosRepository, type UpdateCadeirasAlunosRepository } from '@/data/protocols'
+import { type CountCadeirasAlunosByIdRepository, type AddCadeirasAlunosRepository, type UpdateCadeirasAlunosRepository, type CheckCadeirasAlunosByIdRepository } from '@/data/protocols'
 import { type CadeirasAlunosModel } from '@/domain/models'
 import { type UpdateCadeirasAlunosParams, type AddCadeirasAlunosParams } from '@/domain/usecases'
 
@@ -37,6 +37,16 @@ export class UpdateCadeirasAlunosRepositorySpy implements UpdateCadeirasAlunosRe
 
   async update (data: UpdateCadeirasAlunosParams): Promise<CadeirasAlunosModel | boolean> {
     this.updateCadeirasAlunosParam = data
+    return this.result
+  }
+}
+
+export class CheckCadeirasAlunosByIdRepositorySpy implements CheckCadeirasAlunosByIdRepository {
+  id: string
+  result = true
+
+  async checkById (id: string): Promise<boolean> {
+    this.id = id
     return this.result
   }
 }
