@@ -1,9 +1,9 @@
-import { CheckCadeirasAlunosByIdSpy, UpdateCadeirasAlunosSpy } from '@/tests/presentation/mocks'
+import { CheckCadeirasAlunosByIdSpy, UpdateCadeirasAlunosSpy, ValidationSpy } from '@/tests/presentation/mocks'
 
 import { UpdateCadeirasAlunosController } from '@/presentation/controllers'
 import { type HttpRequest } from '@/presentation/protocols'
-import { forbidden, ok, serverError } from '@/presentation/helpers'
-import { InvalidParamError } from '@/presentation/errors'
+import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers'
+import { InvalidParamError, MissingParamError } from '@/presentation/errors'
 
 import { faker } from '@faker-js/faker'
 
@@ -18,16 +18,19 @@ type SutTypes = {
   sut: UpdateCadeirasAlunosController
   updateCadeirasAlunosSpy: UpdateCadeirasAlunosSpy
   checkCadeirasAlunosByIdSpy: CheckCadeirasAlunosByIdSpy
+  validationSpy: ValidationSpy
 }
 
 const makeSut = (): SutTypes => {
   const updateCadeirasAlunosSpy = new UpdateCadeirasAlunosSpy()
   const checkCadeirasAlunosByIdSpy = new CheckCadeirasAlunosByIdSpy()
-  const sut = new UpdateCadeirasAlunosController(updateCadeirasAlunosSpy, checkCadeirasAlunosByIdSpy)
+  const validationSpy = new ValidationSpy()
+  const sut = new UpdateCadeirasAlunosController(updateCadeirasAlunosSpy, checkCadeirasAlunosByIdSpy, validationSpy)
   return {
     sut,
     updateCadeirasAlunosSpy,
-    checkCadeirasAlunosByIdSpy
+    checkCadeirasAlunosByIdSpy,
+    validationSpy
   }
 }
 
@@ -57,5 +60,19 @@ describe('UpdateCadeirasAlunos Controller', () => {
     checkCadeirasAlunosByIdSpy.result = false
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(forbidden(new InvalidParamError('cadeirasAlunosId')))
+  })
+
+  test('Should call Validation with correct value', async () => {
+    const { sut, validationSpy } = makeSut()
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(validationSpy.input).toEqual(request.body)
+  })
+
+  test('Should return 400 if Validation returns an error', async () => {
+    const { sut, validationSpy } = makeSut()
+    validationSpy.error = new MissingParamError(faker.word.words())
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(badRequest(validationSpy.error))
   })
 })
