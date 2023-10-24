@@ -6,5 +6,5 @@ import { type Router } from 'express'
 
 export default (router: Router): void => {
   router.post('/cadeira', adaptRoute(makeCadeiraController()))
-  router.get('/cadeira', adaptRoute(makeLoadCadeirasController()))
+  router.get('/cadeiras', adaptRoute(makeLoadCadeirasController()))
 }
