@@ -28,4 +28,10 @@ describe('StatusMatricula Validation', () => {
     const error = sut.validate({ [field]: invalidField })
     expect(error).toEqual(new InvalidParamError(field))
   })
+
+  test('Should call StatusMatriculaValidator with correct data', () => {
+    const { sut, statusMatriculaValidatorSpy } = makeSut()
+    sut.validate({ [field]: field })
+    expect(statusMatriculaValidatorSpy.data).toBe(field)
+  })
 })

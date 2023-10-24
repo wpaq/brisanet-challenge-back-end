@@ -3,10 +3,10 @@ import { type MatriculaStatus } from '@prisma/client'
 
 export class StatusMatriculaValidatorSpy implements StatusMatriculaValidator {
   isStatusMatriculaValid = true
-  date: MatriculaStatus
+  data: MatriculaStatus
 
   isStatusMatricula (date: MatriculaStatus): boolean {
-    this.date = date
+    this.data = date
     return this.isStatusMatriculaValid
   }
 }
