@@ -4,6 +4,7 @@ import { makeDbCountCadeirasAlunosById } from '../usecases/count-cadeiras-alunos
 import { makeDbAddCadeirasAlunos } from '../usecases/add-cadeiras-alunos-factory'
 import { makeDbCheckCadeiraById } from '../usecases/check-cadeira-by-id-factory'
 import { makeDbCheckAlunoById } from '../usecases/check-aluno-by-id-factory'
+import { makeDbLoadCadeiraById } from '../usecases/load-cadeira-by-id-factory'
 import { CadeirasAlunosController } from '@/presentation/controllers'
 import { type Controller } from '@/presentation/protocols'
 
@@ -13,7 +14,8 @@ export const makeCadeirasAlunosController = (): Controller => {
     makeCadeirasAlunosValidation(),
     makeDbCheckAlunoById(),
     makeDbCheckCadeiraById(),
-    makeDbCountCadeirasAlunosById()
+    makeDbCountCadeirasAlunosById(),
+    makeDbLoadCadeiraById()
   )
   return makeLogControllerDecorator(controller)
 }
