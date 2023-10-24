@@ -9,7 +9,7 @@ export interface UpdateCadeirasAlunos {
   update: (data: UpdateCadeirasAlunosParams) => Promise<CadeirasAlunosModel | boolean>
 }
 
-enum MatriculaStatus {
+export enum MatriculaStatus {
   Pendente,
   Aprovado,
   Rejeitado
