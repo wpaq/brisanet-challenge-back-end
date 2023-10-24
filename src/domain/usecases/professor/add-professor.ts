@@ -1,4 +1,4 @@
-import { type ProfessorModel } from '../models/professor'
+import { type ProfessorModel } from '../../models/professor'
 
 export type AddProfessorParams = {
   nome: string

@@ -1,4 +1,4 @@
-import { type AlunoModel } from '../models/aluno'
+import { type AlunoModel } from '../../models/aluno'
 
 export type AddAlunoParams = {
   nome: string
