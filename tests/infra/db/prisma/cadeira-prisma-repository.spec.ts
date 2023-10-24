@@ -87,4 +87,15 @@ describe('CadeiraPrismaRepository', () => {
       expect(cadeiras[0].id).toBeTruthy()
     })
   })
+
+  describe('loadById()', () => {
+    test('Should load an cadeira by id on success', async () => {
+      const sut = makeSut()
+      const res = await sut.add(Object.assign({}, mockAddCadeiraParams(), { professorId: await mockProfessorId() }))
+
+      const cadeira = await sut.loadById(res.id)
+      expect(cadeira).toBeTruthy()
+      expect(cadeira.id).toBeTruthy()
+    })
+  })
 })
