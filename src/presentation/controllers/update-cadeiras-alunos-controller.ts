@@ -19,7 +19,7 @@ export class UpdateCadeirasAlunosController implements Controller {
 
       const exists = await this.checkCadeirasAlunosById.checkById(httpRequest.body.id)
       if (!exists) {
-        return forbidden(new InvalidParamError('cadeirasAlunosId'))
+        return forbidden(new InvalidParamError('id'))
       }
       const updatedCadeira = await this.updateCadeirasAlunos.update(httpRequest.body)
       return ok(updatedCadeira)

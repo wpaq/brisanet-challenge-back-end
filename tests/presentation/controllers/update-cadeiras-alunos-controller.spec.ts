@@ -59,7 +59,7 @@ describe('UpdateCadeirasAlunos Controller', () => {
     const { sut, checkCadeirasAlunosByIdSpy } = makeSut()
     checkCadeirasAlunosByIdSpy.result = false
     const httpResponse = await sut.handle(mockRequest())
-    expect(httpResponse).toEqual(forbidden(new InvalidParamError('cadeirasAlunosId')))
+    expect(httpResponse).toEqual(forbidden(new InvalidParamError('id')))
   })
 
   test('Should call Validation with correct value', async () => {
