@@ -1,7 +1,7 @@
-import { mockCadeiraModel } from '@/tests/domain'
+import { mockCadeiraModel, mockCadeirasModels } from '@/tests/domain'
 
 import { type CadeiraModel } from '@/domain/models'
-import { type CheckCadeiraById, type AddCadeira, type AddCadeiraParams, type CheckCadeiraByPeriod, type LoadCadeiraById } from '@/domain/usecases'
+import { type CheckCadeiraById, type AddCadeira, type AddCadeiraParams, type CheckCadeiraByPeriod, type LoadCadeiraById, type LoadCadeiras } from '@/domain/usecases'
 
 export class AddCadeiraSpy implements AddCadeira {
   addCadeiraParams: AddCadeiraParams
@@ -40,6 +40,14 @@ export class LoadCadeiraByIdSpy implements LoadCadeiraById {
   result = mockCadeiraModel()
 
   async loadById (id: string): Promise<CadeiraModel> {
+    return this.result
+  }
+}
+
+export class LoadCadeirasSpy implements LoadCadeiras {
+  result = mockCadeirasModels()
+
+  async loadAll (): Promise<CadeiraModel[]> {
     return this.result
   }
 }
