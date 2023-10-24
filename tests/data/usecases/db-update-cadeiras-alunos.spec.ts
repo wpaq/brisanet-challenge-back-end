@@ -35,4 +35,10 @@ describe('DbUpdateCadeirasAlunos Usecase', () => {
     const promise = sut.update(mockUpdateCadeirasAlunosParams())
     await expect(promise).rejects.toThrow()
   })
+
+  test('Should return an cadeira aluno on success', async () => {
+    const { sut, updateCadeirasAlunosRepositorySpy } = makeSut()
+    const result = await sut.update(mockUpdateCadeirasAlunosParams())
+    expect(result).toEqual(updateCadeirasAlunosRepositorySpy.result)
+  })
 })
