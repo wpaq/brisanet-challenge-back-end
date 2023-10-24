@@ -8,8 +8,8 @@ import { faker } from '@faker-js/faker'
 
 const mockRequest = (): HttpRequest => ({
   body: {
-    alunoId: faker.string.uuid(),
-    cadeiraId: faker.string.uuid()
+    id: faker.string.uuid(),
+    statusMatricula: faker.word.words()
   }
 })
 
@@ -28,6 +28,13 @@ const makeSut = (): SutTypes => {
 }
 
 describe('UpdateCadeirasAlunos Controller', () => {
+  test('Should call UpdateCadeirasAlunos with correct value', async () => {
+    const { sut, updateCadeirasAlunosSpy } = makeSut()
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(updateCadeirasAlunosSpy.updateCadeirasAlunosParam).toEqual(request.body)
+  })
+
   test('Should return 200 if valid data is provided', async () => {
     const { sut, updateCadeirasAlunosSpy } = makeSut()
     const httpResponse = await sut.handle(mockRequest())
