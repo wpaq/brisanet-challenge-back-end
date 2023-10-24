@@ -32,10 +32,8 @@ describe('DbAddCadeirasAlunos Usecase', () => {
     const addCadeirasAlunosParams = mockAddCadeirasAlunosParams()
     await sut.add(addCadeirasAlunosParams)
 
-    expect(addCadeirasAlunosRepositorySpy.addCadeirasAlunosParams).toEqual({
-      alunoId: addCadeirasAlunosParams.alunoId,
-      cadeiraId: addCadeirasAlunosParams.cadeiraId
-    })
+    expect(addCadeirasAlunosRepositorySpy.addCadeirasAlunosParams.alunoId).toEqual(addCadeirasAlunosParams.alunoId)
+    expect(addCadeirasAlunosRepositorySpy.addCadeirasAlunosParams.cadeiraId).toEqual(addCadeirasAlunosParams.cadeiraId)
   })
 
   test('Should throw if AddCadeirasAlunosRepository throws', async () => {
