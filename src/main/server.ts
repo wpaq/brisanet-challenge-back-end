@@ -6,6 +6,6 @@ import { PrismaHelper } from '@/infra/db/prisma'
 
 PrismaHelper.connect()
   .then(() => {
-    app.listen(5050, () => { console.log(`Server running at http://localhost:${5050 || process.env.API_PORT}`) })
+    app.listen(process.env.API_PORT || 5050, () => { console.log(`Server running at http://localhost:${process.env.API_PORT || 5050}`) })
   })
   .catch(console.error)
