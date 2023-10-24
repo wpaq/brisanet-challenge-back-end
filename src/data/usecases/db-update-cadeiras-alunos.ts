@@ -9,6 +9,8 @@ export class DbUpdateCadeirasAlunos implements UpdateCadeirasAlunos {
   ) {}
 
   async update (data: UpdateCadeirasAlunosParams): Promise<CadeirasAlunosModel | boolean> {
+    data.statusMatricula = data.statusMatricula.toUpperCase()
+
     const exists = await this.checkCadeirasAlunosByIdRepository.checkById(data.id)
     if (exists) {
       return await this.updateCadeirasAlunoRepository.update(data)

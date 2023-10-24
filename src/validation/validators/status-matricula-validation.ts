@@ -8,13 +8,13 @@ export class StatusMatriculaValidation implements Validation {
 
   validate (input: any): Error | null {
     enum MatriculaStatus {
-      Pendente,
-      Aprovado,
-      Rejeitado
+      PENDENTE,
+      APROVADO,
+      REJEITADO
     }
 
     const matriculaStatusValues = Object.values(MatriculaStatus)
-    if (!matriculaStatusValues.includes(input[this.fieldName])) {
+    if (!matriculaStatusValues.includes(input[this.fieldName].toUpperCase())) {
       return new InvalidParamError(this.fieldName)
     }
     return null
