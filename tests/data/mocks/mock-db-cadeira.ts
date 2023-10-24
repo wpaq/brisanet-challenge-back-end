@@ -1,4 +1,4 @@
-import { mockCadeiraModel, mockCadeirasModels } from '@/tests/domain/mock-cadeira'
+import { mockCadeiraModel, mockCadeirasModels } from '@/tests/domain'
 
 import { type CheckCadeiraByIdRepository, type AddCadeiraRepository, type CheckCadeiraByPeriodRepository, type LoadCadeirasRepository } from '@/data/protocols'
 import { type CadeiraModel } from '@/domain/models'

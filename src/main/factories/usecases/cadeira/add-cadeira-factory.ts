@@ -1,4 +1,4 @@
-import { makeDbCheckProfessorById } from './check-professor-by-id-factory'
+import { makeDbCheckProfessorById } from '../professor/check-professor-by-id-factory'
 import { makeDbCheckCadeiraByPeriod } from './check-cadeira-by-period-factory'
 import { DbAddCadeira } from '@/data/usecases'
 import { type AddCadeira } from '@/domain/usecases'

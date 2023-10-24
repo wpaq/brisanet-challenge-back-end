@@ -1,10 +1,9 @@
-import { makeLogControllerDecorator } from '../decorators'
-import { makeDbUpdateCadeirasAlunos } from '../usecases/update-cadeiras-alunos-factory'
-import { makeUpdateCadeirasAlunosValidation } from './update-cadeiras-alunos-validation-factory'
-import { makeDbCheckCadeirasAlunosById } from '../usecases/check-cadeiras-alunos-by-id-factory'
+import { makeLogControllerDecorator } from '@/main/factories/decorators'
+import { makeDbUpdateCadeirasAlunos, makeDbCheckCadeirasAlunosById } from '@/main/factories/usecases'
+import { makeUpdateCadeirasAlunosValidation } from '@/main/factories/validations'
 
 import { type Controller } from '@/presentation/protocols'
-import { UpdateCadeirasAlunosController } from '@/presentation/controllers/update-cadeiras-alunos-controller'
+import { UpdateCadeirasAlunosController } from '@/presentation/controllers'
 
 export const makeUpdateCadeirasAlunosController = (): Controller => {
   const controller = new UpdateCadeirasAlunosController(

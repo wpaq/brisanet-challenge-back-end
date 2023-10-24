@@ -1,6 +1,7 @@
-import { makeProfessorValidation } from './professor-validation-factory'
-import { makeDbAddProfessor } from '../usecases/add-professor-factory'
-import { makeLogControllerDecorator } from '../decorators'
+import { makeProfessorValidation } from '@/main/factories/validations'
+import { makeDbAddProfessor } from '@/main/factories/usecases'
+import { makeLogControllerDecorator } from '@/main/factories/decorators'
+
 import { ProfessorController } from '@/presentation/controllers'
 import { type Controller } from '@/presentation/protocols'
 

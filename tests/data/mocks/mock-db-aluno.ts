@@ -1,4 +1,4 @@
-import { mockAlunoModel } from '@/tests/domain/mock-aluno'
+import { mockAlunoModel } from '@/tests/domain'
 
 import { type CheckAlunoByEmailRepository, type AddAlunoRepository, type CheckAlunoByIdRepository } from '@/data/protocols'
 import { type AlunoModel } from '@/domain/models'

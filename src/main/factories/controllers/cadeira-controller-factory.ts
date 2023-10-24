@@ -1,8 +1,7 @@
-import { makeCadeiraValidation } from './cadeira-validation-factory'
-import { makeLogControllerDecorator } from '../decorators'
-import { makeDbAddCadeira } from '../usecases/add-cadeira-factory'
-import { makeDbCheckProfessorById } from '../usecases/check-professor-by-id-factory'
-import { makeDbCheckCadeiraByPeriod } from '../usecases/check-cadeira-by-period-factory'
+import { makeCadeiraValidation } from '@/main/factories/validations'
+import { makeLogControllerDecorator } from '@/main/factories/decorators'
+import { makeDbAddCadeira, makeDbCheckProfessorById, makeDbCheckCadeiraByPeriod } from '@/main/factories/usecases'
+
 import { CadeiraController } from '@/presentation/controllers'
 import { type Controller } from '@/presentation/protocols'
 

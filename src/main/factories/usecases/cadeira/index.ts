@@ -1,0 +1,5 @@
+export * from './add-cadeira-factory'
+export * from './check-cadeira-by-id-factory'
+export * from './check-cadeira-by-period-factory'
+export * from './load-cadeira-by-id-factory'
+export * from './load-cadeiras-factory'

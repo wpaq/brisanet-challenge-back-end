@@ -1,6 +1,7 @@
-import { makeAlunoValidation } from './aluno-validation-factory'
-import { makeLogControllerDecorator } from '../decorators'
-import { makeDbAddAluno } from '../usecases/add-aluno-factory'
+import { makeAlunoValidation } from '@/main/factories/validations'
+import { makeLogControllerDecorator } from '@/main/factories/decorators'
+import { makeDbAddAluno } from '@/main/factories/usecases'
+
 import { AlunoController } from '@/presentation/controllers'
 import { type Controller } from '@/presentation/protocols'
 

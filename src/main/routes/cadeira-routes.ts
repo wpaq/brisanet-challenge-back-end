@@ -1,6 +1,5 @@
-import { adaptRoute } from '@/main/adapters/express-route-adapter'
-import { makeCadeiraController } from '../factories/controllers/cadeira-controller-factory'
-import { makeLoadCadeirasController } from '@/main/factories/controllers/load-cadeiras-controller-factory'
+import { adaptRoute } from '@/main/adapters'
+import { makeCadeiraController, makeLoadCadeirasController } from '@/main/factories/controllers'
 
 import { type Router } from 'express'
 

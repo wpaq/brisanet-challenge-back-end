@@ -1,4 +1,4 @@
-import { mockProfessorModel } from '@/tests/domain/mock-professor'
+import { mockProfessorModel } from '@/tests/domain'
 
 import { type CheckProfessorByEmailRepository, type AddProfessorRepository, type CheckProfessorByIdRepository } from '@/data/protocols'
 import { type ProfessorModel } from '@/domain/models'

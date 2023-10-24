@@ -1,10 +1,7 @@
-import { makeCadeirasAlunosValidation } from './cadeiras-alunos-validation-factory'
-import { makeLogControllerDecorator } from '../decorators'
-import { makeDbCountCadeirasAlunosById } from '../usecases/count-cadeiras-alunos-by-id-factory'
-import { makeDbAddCadeirasAlunos } from '../usecases/add-cadeiras-alunos-factory'
-import { makeDbCheckCadeiraById } from '../usecases/check-cadeira-by-id-factory'
-import { makeDbCheckAlunoById } from '../usecases/check-aluno-by-id-factory'
-import { makeDbLoadCadeiraById } from '../usecases/load-cadeira-by-id-factory'
+import { makeCadeirasAlunosValidation } from '@/main/factories/validations'
+import { makeLogControllerDecorator } from '@/main/factories/decorators'
+import { makeDbCountCadeirasAlunosById, makeDbAddCadeirasAlunos, makeDbCheckCadeiraById, makeDbCheckAlunoById, makeDbLoadCadeiraById } from '@/main/factories/usecases'
+
 import { CadeirasAlunosController } from '@/presentation/controllers'
 import { type Controller } from '@/presentation/protocols'
 

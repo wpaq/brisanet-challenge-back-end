@@ -1,5 +1,5 @@
-import { adaptRoute } from '@/main/adapters/express-route-adapter'
-import { makeAlunoController } from '@/main/factories/controllers/aluno-controller-factory'
+import { adaptRoute } from '@/main/adapters'
+import { makeAlunoController } from '@/main/factories/controllers'
 
 import { type Router } from 'express'
 
