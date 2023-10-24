@@ -28,4 +28,11 @@ describe('DbUpdateCadeirasAlunos Usecase', () => {
       statusMatricula: updateCadeirasAlunosParams.statusMatricula
     })
   })
+
+  test('Should throw if UpdateCadeirasAlunosRepository throws', async () => {
+    const { sut, updateCadeirasAlunosRepositorySpy } = makeSut()
+    jest.spyOn(updateCadeirasAlunosRepositorySpy, 'update').mockRejectedValueOnce(new Error())
+    const promise = sut.update(mockUpdateCadeirasAlunosParams())
+    await expect(promise).rejects.toThrow()
+  })
 })
