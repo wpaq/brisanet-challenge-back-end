@@ -1,7 +1,7 @@
 import { mockCadeirasAlunosModel } from '@/tests/domain'
 
 import { type CadeirasAlunosModel } from '@/domain/models'
-import { type CountCadeirasAlunosById, type AddCadeirasAlunos, type AddCadeirasAlunosParams, type UpdateCadeirasAlunos, type UpdateCadeirasAlunosParams } from '@/domain/usecases'
+import { type CountCadeirasAlunosById, type AddCadeirasAlunos, type AddCadeirasAlunosParams, type UpdateCadeirasAlunos, type UpdateCadeirasAlunosParams, type CheckCadeirasAlunosById } from '@/domain/usecases'
 
 export class AddCadeirasAlunosSpy implements AddCadeirasAlunos {
   addCadeirasAlunosParams: AddCadeirasAlunosParams
@@ -36,6 +36,16 @@ export class UpdateCadeirasAlunosSpy implements UpdateCadeirasAlunos {
 
   async update (data: UpdateCadeirasAlunosParams): Promise<CadeirasAlunosModel | boolean> {
     this.updateCadeirasAlunosParam = data
+    return this.result
+  }
+}
+
+export class CheckCadeirasAlunosByIdSpy implements CheckCadeirasAlunosById {
+  id: string
+  result = true
+
+  async checkById (id: string): Promise<boolean> {
+    this.id = id
     return this.result
   }
 }
