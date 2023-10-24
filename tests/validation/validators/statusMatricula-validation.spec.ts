@@ -34,4 +34,12 @@ describe('StatusMatricula Validation', () => {
     sut.validate({ [field]: field })
     expect(statusMatriculaValidatorSpy.data).toBe(field)
   })
+
+  test('Should throws if StatusMatriculaValidator throws', () => {
+    const { sut, statusMatriculaValidatorSpy } = makeSut()
+    jest.spyOn(statusMatriculaValidatorSpy, 'isStatusMatricula').mockImplementationOnce(() => {
+      throw new Error()
+    })
+    expect(sut.validate).toThrow()
+  })
 })
