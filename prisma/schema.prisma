@@ -72,13 +72,7 @@ model CadeirasAlunos {
   professor         Professor  @relation(fields: [professorId], references: [id])
   professorId       String
 
-  statusMatricula   MatriculaStatus
+  statusMatricula   String
 
   @@map("cadeiras_alunos")  
-}
-
-enum MatriculaStatus {
-  Pendente
-  Aprovado
-  Rejeitado
 }
