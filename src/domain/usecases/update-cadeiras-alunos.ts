@@ -1,9 +1,8 @@
 import { type CadeirasAlunosModel } from '@/domain/models'
-import { type MatriculaStatus } from '@prisma/client'
 
 export type UpdateCadeirasAlunosParams = {
   id: string
-  statusMatricula: MatriculaStatus
+  statusMatricula: string
 }
 
 export interface UpdateCadeirasAlunos {
