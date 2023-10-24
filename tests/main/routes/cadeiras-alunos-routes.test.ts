@@ -1,4 +1,4 @@
-import { AlunoPrismaRepository, CadeiraPrismaRepository, PrismaHelper, ProfessorPrismaRepository } from '@/infra/db/prisma'
+import { AlunoPrismaRepository, CadeiraPrismaRepository, CadeirasAlunosPrismaRepository, PrismaHelper, ProfessorPrismaRepository } from '@/infra/db/prisma'
 import app from '@/main/config/app'
 import { mockAddAlunoParams, mockAddCadeiraParams, mockAddProfessorParams } from '@/tests/domain'
 
@@ -13,6 +13,7 @@ describe('CadeirasAlunos Routes', () => {
     await PrismaHelper.client.professor.deleteMany({})
     await PrismaHelper.client.aluno.deleteMany({})
     await PrismaHelper.client.cadeira.deleteMany({})
+    await PrismaHelper.client.cadeirasAlunos.deleteMany({})
     await PrismaHelper.disconnectPrismock()
   })
 
@@ -35,12 +36,14 @@ describe('CadeirasAlunos Routes', () => {
 
   test('should return an cadeiras alunos on success update', async () => {
     const professor = await new ProfessorPrismaRepository().add(mockAddProfessorParams())
+    const aluno = await new AlunoPrismaRepository().add(mockAddAlunoParams())
     const cadeira = await new CadeiraPrismaRepository().add(Object.assign({}, mockAddCadeiraParams(), { professorId: professor.id }))
+    const cadeirasAlunos = await new CadeirasAlunosPrismaRepository().add({ cadeiraId: cadeira.id, alunoId: aluno.id, professorId: professor.id })
 
     await request(app)
       .put('/api/cadeiras-alunos')
       .send({
-        id: cadeira.id,
+        id: cadeirasAlunos.id,
         statusMatricula: 'Aprovado'
       })
       .expect(200)
