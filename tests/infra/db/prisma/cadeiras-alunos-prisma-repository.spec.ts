@@ -97,4 +97,27 @@ describe('CadeirasAlunosPrismaRepository', () => {
       expect(count).toBe(1)
     })
   })
+
+  describe('update()', () => {
+    test('Should return an cadeiras alunos on success', async () => {
+      const sut = new CadeirasAlunosPrismaRepository()
+      const alunoId: string = await mockAlunoId()
+      const cadeiraId: string = await mockCadeiraId()
+      const professorId: string = await mockProfessorId()
+
+      const res = await sut.add({
+        alunoId,
+        cadeiraId,
+        professorId
+      })
+
+      const updatedCadeirasAlunos = await sut.update({
+        id: res.id,
+        statusMatricula: 'Aprovado'
+      })
+
+      expect(updatedCadeirasAlunos.id).toBeTruthy()
+      expect(updatedCadeirasAlunos.statusMatricula).toBe('Aprovado')
+    })
+  })
 })
