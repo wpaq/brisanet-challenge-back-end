@@ -1,4 +1,5 @@
-import { PrismaHelper } from '@/infra/db/prisma'
+import { PrismaHelper } from './helpers'
+
 import { type CheckProfessorByEmailRepository, type AddProfessorRepository, type CheckProfessorByIdRepository } from '@/data/protocols'
 import { type ProfessorModel } from '@/domain/models'
 import { type AddProfessorParams } from '@/domain/usecases'

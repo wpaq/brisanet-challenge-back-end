@@ -1,4 +1,5 @@
-import { PrismaHelper } from './helpers/prisma-helper'
+import { PrismaHelper } from './helpers'
+
 import { type UpdateCadeirasAlunosRepository, type AddCadeirasAlunosRepository } from '@/data/protocols'
 import { type CadeirasAlunosModel } from '@/domain/models'
 import { type CountCadeirasAlunosById, type AddCadeirasAlunosParams, type UpdateCadeirasAlunosParams, type CheckCadeirasAlunosById } from '@/domain/usecases'

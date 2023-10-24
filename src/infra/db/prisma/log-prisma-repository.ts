@@ -1,4 +1,5 @@
-import { PrismaHelper } from './helpers/prisma-helper'
+import { PrismaHelper } from './helpers'
+
 import { type LogErrorRepository } from '@/data/protocols'
 
 export class LogPrismaRepository implements LogErrorRepository {

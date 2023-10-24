@@ -1,5 +1,4 @@
-export * from './helpers/prisma-helper'
-export * from './helpers/prisma-mock'
+export * from './helpers'
 
 export * from './aluno-prisma-repository'
 export * from './cadeira-prisma-repository'

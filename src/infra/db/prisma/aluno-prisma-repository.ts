@@ -1,4 +1,5 @@
-import { PrismaHelper } from './helpers/prisma-helper'
+import { PrismaHelper } from './helpers'
+
 import { type CheckAlunoByEmailRepository, type AddAlunoRepository, type CheckAlunoByIdRepository } from '@/data/protocols'
 import { type AlunoModel } from '@/domain/models'
 import { type AddAlunoParams } from '@/domain/usecases'
