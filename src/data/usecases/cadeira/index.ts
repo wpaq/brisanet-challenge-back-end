@@ -1,0 +1,5 @@
+export * from './db-add-cadeira'
+export * from './db-check-cadeira-by-id'
+export * from './db-check-cadeira-by-period'
+export * from './db-load-cadeira-by-id'
+export * from './db-load-cadeiras'
