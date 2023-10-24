@@ -1,0 +1,5 @@
+export * from './add-cadeira-repository'
+export * from './check-cadeira-by-id-repository'
+export * from './check-cadeira-by-period-repository'
+export * from './load-cadeira-by-id-repository'
+export * from './load-cadeiras-repository'
