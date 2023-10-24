@@ -25,4 +25,10 @@ describe('Cadeira Routes', () => {
       .send(Object.assign({}, mockAddCadeiraParams(), { professorId: professor.body.id }))
       .expect(200)
   })
+
+  test('should return an list of cadeiras on success', async () => {
+    await request(app)
+      .get('/api/cadeiras')
+      .expect(200)
+  })
 })
