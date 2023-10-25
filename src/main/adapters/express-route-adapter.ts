@@ -1,4 +1,4 @@
-import { type Controller, type HttpRequest } from '@/presentation/protocols'
+import { type HttpResponse, type Controller, type HttpRequest } from '@/presentation/protocols'
 
 import { type Request, type Response } from 'express'
 
@@ -7,7 +7,7 @@ export const adaptRoute = (controller: Controller) => {
     const httpRequest: HttpRequest = {
       body: req.body
     }
-    const httpResponse = await controller.handle(httpRequest)
+    const httpResponse: HttpResponse = await controller.handle(httpRequest)
     if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
       res.status(httpResponse.statusCode).json(httpResponse.body)
     } else {
