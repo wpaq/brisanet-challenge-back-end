@@ -3,7 +3,7 @@ import { badRequest, ok, serverError, forbidden } from '@/presentation/helpers'
 import { EmailInUseError } from '@/presentation/errors/'
 import { type AddProfessor } from '@/domain/usecases'
 
-export class ProfessorController implements Controller {
+export class AddProfessorController implements Controller {
   constructor (
     private readonly addProfessor: AddProfessor,
     private readonly validation: Validation

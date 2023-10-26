@@ -1,6 +1,6 @@
 import { AddProfessorSpy, ValidationSpy } from '@/tests/presentation/mocks'
 
-import { ProfessorController } from '@/presentation/controllers'
+import { AddProfessorController } from '@/presentation/controllers'
 import { EmailInUseError, MissingParamError } from '@/presentation/errors'
 import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers'
 import { type HttpRequest } from '@/presentation/protocols'
@@ -17,7 +17,7 @@ const mockRequest = (): HttpRequest => ({
 })
 
 type SutTypes = {
-  sut: ProfessorController
+  sut: AddProfessorController
   addProfessorSpy: AddProfessorSpy
   validationSpy: ValidationSpy
 }
@@ -25,7 +25,7 @@ type SutTypes = {
 const makeSut = (): SutTypes => {
   const addProfessorSpy = new AddProfessorSpy()
   const validationSpy = new ValidationSpy()
-  const sut = new ProfessorController(addProfessorSpy, validationSpy)
+  const sut = new AddProfessorController(addProfessorSpy, validationSpy)
   return {
     sut,
     addProfessorSpy,
