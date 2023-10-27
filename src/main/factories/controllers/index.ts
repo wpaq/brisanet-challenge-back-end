@@ -1,6 +1,6 @@
 export * from './add-aluno-controller-factory'
 export * from './add-cadeira-controller-factory'
-export * from './cadeiras-alunos-controller-factory'
+export * from './add-cadeiras-alunos-controller-factory'
 export * from './load-cadeiras-controller-factory'
 export * from './add-professor-controller-factory'
 export * from './update-cadeiras-alunos-factory'

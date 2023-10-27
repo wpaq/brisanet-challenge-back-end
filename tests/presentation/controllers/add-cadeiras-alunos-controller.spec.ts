@@ -1,7 +1,7 @@
 import { AddCadeirasAlunosSpy, CheckAlunoByIdSpy, CheckCadeiraByIdSpy, CountCadeirasAlunosByIdSpy, LoadCadeiraByIdSpy, ValidationSpy } from '@/tests/presentation/mocks'
 
 import { type HttpRequest } from '@/presentation/protocols'
-import { CadeirasAlunosController } from '@/presentation/controllers'
+import { AddCadeirasAlunosController } from '@/presentation/controllers'
 import { InvalidParamError, MissingParamError, RegistrationLimitError, AlreadyRegisteredError } from '@/presentation/errors'
 import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers'
 
@@ -15,7 +15,7 @@ const mockRequest = (): HttpRequest => ({
 })
 
 type SutTypes = {
-  sut: CadeirasAlunosController
+  sut: AddCadeirasAlunosController
   addCadeirasAlunosSpy: AddCadeirasAlunosSpy
   validationSpy: ValidationSpy
   checkAlunoByIdSpy: CheckAlunoByIdSpy
@@ -31,7 +31,7 @@ const makeSut = (): SutTypes => {
   const checkCadeiraByIdSpy = new CheckCadeiraByIdSpy()
   const countCadeirasAlunosByIdSpy = new CountCadeirasAlunosByIdSpy()
   const loadCadeiraByIdSpy = new LoadCadeiraByIdSpy()
-  const sut = new CadeirasAlunosController(
+  const sut = new AddCadeirasAlunosController(
     addCadeirasAlunosSpy,
     validationSpy,
     checkAlunoByIdSpy,

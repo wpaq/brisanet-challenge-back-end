@@ -1,6 +1,6 @@
 export * from './add-aluno-controller'
 export * from './add-cadeira-controller'
-export * from './cadeiras-alunos-controller'
+export * from './add-cadeiras-alunos-controller'
 export * from './load-cadeiras-controller'
 export * from './add-professor-controller'
 export * from './update-cadeiras-alunos-controller'

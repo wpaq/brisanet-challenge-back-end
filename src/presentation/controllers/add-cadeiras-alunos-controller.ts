@@ -3,7 +3,7 @@ import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers'
 import { AlreadyRegisteredError, InvalidParamError, RegistrationLimitError } from '@/presentation/errors'
 import { type CheckAlunoById, type AddCadeirasAlunos, type CheckCadeiraById, type CountCadeirasAlunosById, type LoadCadeiraById } from '@/domain/usecases'
 
-export class CadeirasAlunosController implements Controller {
+export class AddCadeirasAlunosController implements Controller {
   constructor (
     private readonly addCadeirasAlunos: AddCadeirasAlunos,
     private readonly validation: Validation,

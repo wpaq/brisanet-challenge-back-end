@@ -1,7 +1,7 @@
 import { type Validation } from '@/presentation/protocols'
 import { ValidationComposite, RequiredFieldValidation } from '@/validation/validators'
 
-export const makeCadeirasAlunosValidation = (): ValidationComposite => {
+export const makeAddCadeirasAlunosValidation = (): ValidationComposite => {
   const validations: Validation[] = []
   for (const field of ['alunoId', 'cadeiraId']) {
     validations.push(new RequiredFieldValidation(field))
