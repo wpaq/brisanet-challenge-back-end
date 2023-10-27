@@ -1,11 +1,11 @@
-import { type CheckCadeiraByPeriodRepository, type AddCadeiraRepository } from '@/data/protocols'
+import { type CheckCadeiraByPeriodRepository, type AddCadeiraRepository, type CheckProfessorByIdRepository } from '@/data/protocols'
 import { type CadeiraModel } from '@/domain/models'
-import { type AddCadeira, type AddCadeiraParams, type CheckProfessorById } from '@/domain/usecases'
+import { type AddCadeira, type AddCadeiraParams } from '@/domain/usecases'
 
 export class DbAddCadeira implements AddCadeira {
   constructor (
     private readonly addCadeiraRepository: AddCadeiraRepository,
-    private readonly checkProfessorByIdRepository: CheckProfessorById,
+    private readonly checkProfessorByIdRepository: CheckProfessorByIdRepository,
     private readonly checkCadeiraByPeriodRepository: CheckCadeiraByPeriodRepository
   ) {}
 

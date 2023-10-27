@@ -1,7 +1,7 @@
 import { AddCadeiraSpy, CheckCadeiraByPeriodSpy, CheckProfessorByIdSpy, ValidationSpy } from '@/tests/presentation/mocks'
 
 import { type HttpRequest } from '@/presentation/protocols'
-import { CadeiraController } from '@/presentation/controllers'
+import { AddCadeiraController } from '@/presentation/controllers'
 import { InvalidParamError, MissingParamError, PeriodInUseError } from '@/presentation/errors'
 import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers'
 
@@ -19,7 +19,7 @@ const mockRequest = (): HttpRequest => ({
 })
 
 type SutTypes = {
-  sut: CadeiraController
+  sut: AddCadeiraController
   addCadeiraSpy: AddCadeiraSpy
   validationSpy: ValidationSpy
   checkProfessorByIdSpy: CheckProfessorByIdSpy
@@ -31,7 +31,7 @@ const makeSut = (): SutTypes => {
   const validationSpy = new ValidationSpy()
   const checkProfessorByIdSpy = new CheckProfessorByIdSpy()
   const checkCadeiraByPeriodSpy = new CheckCadeiraByPeriodSpy()
-  const sut = new CadeiraController(addCadeiraSpy, validationSpy, checkProfessorByIdSpy, checkCadeiraByPeriodSpy)
+  const sut = new AddCadeiraController(addCadeiraSpy, validationSpy, checkProfessorByIdSpy, checkCadeiraByPeriodSpy)
   return {
     sut,
     addCadeiraSpy,
@@ -41,7 +41,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-describe('Cadeira Controller', () => {
+describe('AddCadeira Controller', () => {
   test('Should call Validation with correct value', async () => {
     const { sut, validationSpy } = makeSut()
     const request = mockRequest()

@@ -3,7 +3,7 @@ import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers'
 import { InvalidParamError, PeriodInUseError } from '@/presentation/errors'
 import { type CheckCadeiraByPeriod, type AddCadeira, type CheckProfessorById } from '@/domain/usecases'
 
-export class CadeiraController implements Controller {
+export class AddCadeiraController implements Controller {
   constructor (
     private readonly addCadeira: AddCadeira,
     private readonly validation: Validation,
