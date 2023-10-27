@@ -1,3 +1,8 @@
+![Build Status](https://github.com/wpaq/brisanet-challenge-back-end/actions/workflows/workflow.yaml/badge.svg)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+[![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/)
+
 ## Desafio Back end Brisalabs :computer:
 
 O desafio consiste no desenvolvimento de uma API REST
