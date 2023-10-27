@@ -1,4 +1,4 @@
-import { type DateValidator } from '@/presentation/protocols'
+import { type DateValidator } from '@/validation/protocols'
 
 export class DateValidatorSpy implements DateValidator {
   isDateValid = true
