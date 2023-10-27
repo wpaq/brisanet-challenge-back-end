@@ -10,8 +10,7 @@ Segue instruções no link abaixo:
 
 https://github.com/Brisanet/challenge-back-end#readme
 
-
-Este é um guia simples sobre como rodar a aplicação "Nome do Seu Projeto". Antes de começar, você precisará configurar um banco de dados PostgreSQL.
+<br>
 
 ## Pré-requisitos
 
