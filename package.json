@@ -1,6 +1,6 @@
 {
   "name": "brisanet-challenge-back-end",
-  "version": "3.4.2",
+  "version": "3.5.2",
   "description": "NodeJs Rest API using TDD, Clean Architecture, Typescript and Design Patterns",
   "author": "Wallyson Pablo",
   "license": "ISC",
