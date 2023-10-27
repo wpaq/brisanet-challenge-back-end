@@ -1,6 +1,6 @@
 import { LoadCadeirasSpy } from '@/tests/presentation/mocks'
 
-import { LoadCadeiraController } from '@/presentation/controllers'
+import { LoadCadeirasController } from '@/presentation/controllers'
 import { type HttpRequest } from '@/presentation/protocols'
 import { ok, serverError } from '@/presentation/helpers'
 
@@ -14,13 +14,13 @@ const mockRequest = (): HttpRequest => ({
 })
 
 type SutTypes = {
-  sut: LoadCadeiraController
+  sut: LoadCadeirasController
   loadCadeirasSpy: LoadCadeirasSpy
 }
 
 const makeSut = (): SutTypes => {
   const loadCadeirasSpy = new LoadCadeirasSpy()
-  const sut = new LoadCadeiraController(loadCadeirasSpy)
+  const sut = new LoadCadeirasController(loadCadeirasSpy)
   return {
     sut,
     loadCadeirasSpy
