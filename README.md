@@ -14,10 +14,11 @@ https://github.com/Brisanet/challenge-back-end#readme
 ## APIs construídas no desafio
 
 - [Criar Professor]()
-- [Atualizar Professor]()
 - [Criar Aluno]()
 - [Criar Cadeira]()
+- [Listar Cadeiras]()
 - [Criar Cadeiras Alunos]()
+- [Atualizar Cadeiras Alunos]()
 
 ## Tecnologias utilizadas :rocket:
 
