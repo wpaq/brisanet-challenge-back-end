@@ -11,6 +11,32 @@ Segue instruções no link abaixo:
 https://github.com/Brisanet/challenge-back-end#readme
 
 
+Este é um guia simples sobre como rodar a aplicação "Nome do Seu Projeto". Antes de começar, você precisará configurar um banco de dados PostgreSQL.
+
+## Pré-requisitos
+
+- [Node.js](https://nodejs.org/) instalado
+- [npm](https://www.npmjs.com/) (gerenciador de pacotes do Node.js) instalado
+- [PostgreSQL](https://www.postgresql.org/) instalado
+
+## Configurando o Banco de Dados e Rodando a API
+
+1. `npm install` para instalar as dependências
+2. Inicie o PostgreSQL na sua máquina.
+3. Crie um banco de dados para a aplicação
+4. Crie e configure o arquivo `.env` na raiz do projeto com as seguintes variáveis ambiente:
+
+<br>
+
+- `DATABASE_URL=postgresql://USERNAME:PASSWORD@HOST:PORT/DATABASE_NAME?schema=public`
+- `API_PORT=5050`, porta de exemplo
+
+<br>
+
+5. `npm run build` para fazer o build da API
+6. `npm start` para executar a API
+
+
 ## APIs construídas no desafio
 
 - [Criar Professor]()
