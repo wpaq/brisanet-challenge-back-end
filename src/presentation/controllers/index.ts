@@ -1,4 +1,4 @@
-export * from './aluno-controller'
+export * from './add-aluno-controller'
 export * from './cadeira-controller'
 export * from './cadeiras-alunos-controller'
 export * from './load-cadeira-controller'

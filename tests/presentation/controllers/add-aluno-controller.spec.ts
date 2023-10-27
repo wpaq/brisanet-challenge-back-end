@@ -1,7 +1,7 @@
 import { AddAlunoSpy, ValidationSpy } from '@/tests/presentation/mocks'
 
 import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers'
-import { AlunoController } from '@/presentation/controllers'
+import { AddAlunoController } from '@/presentation/controllers'
 import { EmailInUseError, MissingParamError } from '@/presentation/errors'
 import { type HttpRequest } from '@/presentation/protocols'
 
@@ -18,7 +18,7 @@ const mockRequest = (): HttpRequest => ({
 })
 
 type SutTypes = {
-  sut: AlunoController
+  sut: AddAlunoController
   addAlunoSpy: AddAlunoSpy
   validationSpy: ValidationSpy
 }
@@ -26,7 +26,7 @@ type SutTypes = {
 const makeSut = (): SutTypes => {
   const addAlunoSpy = new AddAlunoSpy()
   const validationSpy = new ValidationSpy()
-  const sut = new AlunoController(addAlunoSpy, validationSpy)
+  const sut = new AddAlunoController(addAlunoSpy, validationSpy)
   return {
     sut,
     addAlunoSpy,

@@ -3,7 +3,7 @@ import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers'
 import { EmailInUseError } from '@/presentation/errors'
 import { type AddAluno } from '@/domain/usecases'
 
-export class AlunoController implements Controller {
+export class AddAlunoController implements Controller {
   constructor (
     private readonly addAluno: AddAluno,
     private readonly validation: Validation
