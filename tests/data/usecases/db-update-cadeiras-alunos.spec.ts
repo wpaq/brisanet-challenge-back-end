@@ -1,4 +1,4 @@
-import { CheckCadeirasAlunosByIdRepositorySpy, LoadProfessorByIdRepositorySpy, UpdateCadeirasAlunosRepositorySpy } from '@/tests/data/mocks'
+import { CheckCadeirasAlunosByIdRepositorySpy, LoadAlunoByIdRepositorySpy, LoadProfessorByIdRepositorySpy, UpdateCadeirasAlunosRepositorySpy } from '@/tests/data/mocks'
 import { mockUpdateCadeirasAlunosParams } from '@/tests/domain'
 
 import { DbUpdateCadeirasAlunos } from '@/data/usecases'
@@ -9,18 +9,21 @@ type SutTypes = {
   updateCadeirasAlunosRepositorySpy: UpdateCadeirasAlunosRepositorySpy
   checkCadeirasAlunosByIdRepositorySpy: CheckCadeirasAlunosByIdRepositorySpy
   loadProfessorByIdRepositorySpy: LoadProfessorByIdRepositorySpy
+  loadAlunoByIdRepositorySpy: LoadAlunoByIdRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
   const updateCadeirasAlunosRepositorySpy = new UpdateCadeirasAlunosRepositorySpy()
   const checkCadeirasAlunosByIdRepositorySpy = new CheckCadeirasAlunosByIdRepositorySpy()
   const loadProfessorByIdRepositorySpy = new LoadProfessorByIdRepositorySpy()
-  const sut = new DbUpdateCadeirasAlunos(updateCadeirasAlunosRepositorySpy, checkCadeirasAlunosByIdRepositorySpy, loadProfessorByIdRepositorySpy)
+  const loadAlunoByIdRepositorySpy = new LoadAlunoByIdRepositorySpy()
+  const sut = new DbUpdateCadeirasAlunos(updateCadeirasAlunosRepositorySpy, checkCadeirasAlunosByIdRepositorySpy, loadProfessorByIdRepositorySpy, loadAlunoByIdRepositorySpy)
   return {
     sut,
     updateCadeirasAlunosRepositorySpy,
     checkCadeirasAlunosByIdRepositorySpy,
-    loadProfessorByIdRepositorySpy
+    loadProfessorByIdRepositorySpy,
+    loadAlunoByIdRepositorySpy
   }
 }
 
@@ -67,5 +70,11 @@ describe('DbUpdateCadeirasAlunos Usecase', () => {
     jest.spyOn(loadProfessorByIdRepositorySpy, 'loadById').mockRejectedValueOnce(new Error())
     const promise = sut.update(mockUpdateCadeirasAlunosParams())
     await expect(promise).rejects.toThrow()
+  })
+
+  test('Should call LoadAlunoByIdRepository with correct id', async () => {
+    const { sut, loadAlunoByIdRepositorySpy } = makeSut()
+    const result = await sut.update(mockUpdateCadeirasAlunosParams()) as CadeirasAlunosModel
+    expect(loadAlunoByIdRepositorySpy.id).toBe(result.alunoId)
   })
 })

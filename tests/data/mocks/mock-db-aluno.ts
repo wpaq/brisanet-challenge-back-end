@@ -1,6 +1,6 @@
 import { mockAlunoModel } from '@/tests/domain'
 
-import { type CheckAlunoByEmailRepository, type AddAlunoRepository, type CheckAlunoByIdRepository } from '@/data/protocols'
+import { type CheckAlunoByEmailRepository, type AddAlunoRepository, type CheckAlunoByIdRepository, type LoadAlunoByIdRepository } from '@/data/protocols'
 import { type AlunoModel } from '@/domain/models'
 import { type AddAlunoParams } from '@/domain/usecases'
 
@@ -29,6 +29,16 @@ export class CheckAlunoByIdRepositorySpy implements CheckAlunoByIdRepository {
   result = true
 
   async checkById (id: string): Promise<boolean> {
+    this.id = id
+    return this.result
+  }
+}
+
+export class LoadAlunoByIdRepositorySpy implements LoadAlunoByIdRepository {
+  id: string
+  result = mockAlunoModel()
+
+  async loadById (id: string): Promise<AlunoModel> {
     this.id = id
     return this.result
   }
