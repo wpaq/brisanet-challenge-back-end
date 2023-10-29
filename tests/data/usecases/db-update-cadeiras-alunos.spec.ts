@@ -1,22 +1,26 @@
-import { CheckCadeirasAlunosByIdRepositorySpy, UpdateCadeirasAlunosRepositorySpy } from '@/tests/data/mocks'
+import { CheckCadeirasAlunosByIdRepositorySpy, LoadProfessorByIdRepositorySpy, UpdateCadeirasAlunosRepositorySpy } from '@/tests/data/mocks'
+import { mockUpdateCadeirasAlunosParams } from '@/tests/domain'
 
 import { DbUpdateCadeirasAlunos } from '@/data/usecases'
-import { mockUpdateCadeirasAlunosParams } from '@/tests/domain'
+import { type CadeirasAlunosModel } from '@/domain/models'
 
 type SutTypes = {
   sut: DbUpdateCadeirasAlunos
   updateCadeirasAlunosRepositorySpy: UpdateCadeirasAlunosRepositorySpy
   checkCadeirasAlunosByIdRepositorySpy: CheckCadeirasAlunosByIdRepositorySpy
+  loadProfessorByIdRepositorySpy: LoadProfessorByIdRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
   const updateCadeirasAlunosRepositorySpy = new UpdateCadeirasAlunosRepositorySpy()
   const checkCadeirasAlunosByIdRepositorySpy = new CheckCadeirasAlunosByIdRepositorySpy()
-  const sut = new DbUpdateCadeirasAlunos(updateCadeirasAlunosRepositorySpy, checkCadeirasAlunosByIdRepositorySpy)
+  const loadProfessorByIdRepositorySpy = new LoadProfessorByIdRepositorySpy()
+  const sut = new DbUpdateCadeirasAlunos(updateCadeirasAlunosRepositorySpy, checkCadeirasAlunosByIdRepositorySpy, loadProfessorByIdRepositorySpy)
   return {
     sut,
     updateCadeirasAlunosRepositorySpy,
-    checkCadeirasAlunosByIdRepositorySpy
+    checkCadeirasAlunosByIdRepositorySpy,
+    loadProfessorByIdRepositorySpy
   }
 }
 
@@ -50,5 +54,11 @@ describe('DbUpdateCadeirasAlunos Usecase', () => {
     checkCadeirasAlunosByIdRepositorySpy.result = false
     const isValid = await sut.update(mockUpdateCadeirasAlunosParams())
     expect(isValid).toBe(false)
+  })
+
+  test('Should call LoadProfessorByIdRepository with correct id', async () => {
+    const { sut, loadProfessorByIdRepositorySpy } = makeSut()
+    const result = await sut.update(mockUpdateCadeirasAlunosParams()) as CadeirasAlunosModel
+    expect(loadProfessorByIdRepositorySpy.id).toBe(result.professorId)
   })
 })

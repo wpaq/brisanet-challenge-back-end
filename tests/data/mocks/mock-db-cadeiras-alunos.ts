@@ -35,7 +35,7 @@ export class UpdateCadeirasAlunosRepositorySpy implements UpdateCadeirasAlunosRe
   updateCadeirasAlunosParam: UpdateCadeirasAlunosParams
   result = mockCadeirasAlunosModel()
 
-  async update (data: UpdateCadeirasAlunosParams): Promise<CadeirasAlunosModel | boolean> {
+  async update (data: UpdateCadeirasAlunosParams): Promise<CadeirasAlunosModel> {
     this.updateCadeirasAlunosParam = data
     return this.result
   }
