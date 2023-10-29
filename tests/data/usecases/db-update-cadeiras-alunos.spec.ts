@@ -2,7 +2,6 @@ import { CheckCadeirasAlunosByIdRepositorySpy, LoadAlunoByIdRepositorySpy, LoadP
 import { mockUpdateCadeirasAlunosParams } from '@/tests/domain'
 
 import { DbUpdateCadeirasAlunos } from '@/data/usecases'
-import { type CadeirasAlunosModel } from '@/domain/models'
 
 type SutTypes = {
   sut: DbUpdateCadeirasAlunos
@@ -60,9 +59,9 @@ describe('DbUpdateCadeirasAlunos Usecase', () => {
   })
 
   test('Should call LoadProfessorByIdRepository with correct id', async () => {
-    const { sut, loadProfessorByIdRepositorySpy } = makeSut()
-    const result = await sut.update(mockUpdateCadeirasAlunosParams()) as CadeirasAlunosModel
-    expect(loadProfessorByIdRepositorySpy.id).toBe(result.professorId)
+    const { sut, loadProfessorByIdRepositorySpy, updateCadeirasAlunosRepositorySpy } = makeSut()
+    await sut.update(mockUpdateCadeirasAlunosParams())
+    expect(loadProfessorByIdRepositorySpy.id).toBe(updateCadeirasAlunosRepositorySpy.result.professorId)
   })
 
   test('Should throw if LoadProfessorByIdRepository throws', async () => {
@@ -73,9 +72,9 @@ describe('DbUpdateCadeirasAlunos Usecase', () => {
   })
 
   test('Should call LoadAlunoByIdRepository with correct id', async () => {
-    const { sut, loadAlunoByIdRepositorySpy } = makeSut()
-    const result = await sut.update(mockUpdateCadeirasAlunosParams()) as CadeirasAlunosModel
-    expect(loadAlunoByIdRepositorySpy.id).toBe(result.alunoId)
+    const { sut, loadAlunoByIdRepositorySpy, updateCadeirasAlunosRepositorySpy } = makeSut()
+    await sut.update(mockUpdateCadeirasAlunosParams())
+    expect(loadAlunoByIdRepositorySpy.id).toBe(updateCadeirasAlunosRepositorySpy.result.alunoId)
   })
 
   test('Should throw if LoadAlunoByIdRepository throws', async () => {
