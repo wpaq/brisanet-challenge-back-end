@@ -61,4 +61,11 @@ describe('DbUpdateCadeirasAlunos Usecase', () => {
     const result = await sut.update(mockUpdateCadeirasAlunosParams()) as CadeirasAlunosModel
     expect(loadProfessorByIdRepositorySpy.id).toBe(result.professorId)
   })
+
+  test('Should throw if LoadProfessorByIdRepository throws', async () => {
+    const { sut, loadProfessorByIdRepositorySpy } = makeSut()
+    jest.spyOn(loadProfessorByIdRepositorySpy, 'loadById').mockRejectedValueOnce(new Error())
+    const promise = sut.update(mockUpdateCadeirasAlunosParams())
+    await expect(promise).rejects.toThrow()
+  })
 })
