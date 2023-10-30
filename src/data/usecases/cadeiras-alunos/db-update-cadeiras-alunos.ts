@@ -1,4 +1,4 @@
-import { type LoadProfessorByIdRepository, type CheckCadeirasAlunosByIdRepository, type UpdateCadeirasAlunosRepository, type LoadAlunoByIdRepository } from '@/data/protocols'
+import { type LoadProfessorByIdRepository, type CheckCadeirasAlunosByIdRepository, type UpdateCadeirasAlunosRepository, type LoadAlunoByIdRepository, type EmailNotification } from '@/data/protocols'
 import { type CadeirasAlunosModel } from '@/domain/models'
 import { type UpdateCadeirasAlunos, type UpdateCadeirasAlunosParams } from '@/domain/usecases'
 
@@ -7,7 +7,8 @@ export class DbUpdateCadeirasAlunos implements UpdateCadeirasAlunos {
     private readonly updateCadeirasAlunoRepository: UpdateCadeirasAlunosRepository,
     private readonly checkCadeirasAlunosByIdRepository: CheckCadeirasAlunosByIdRepository,
     private readonly loadProfessorByIdRepository: LoadProfessorByIdRepository,
-    private readonly loadAlunoByIdRepository: LoadAlunoByIdRepository
+    private readonly loadAlunoByIdRepository: LoadAlunoByIdRepository,
+    private readonly emailNotification: EmailNotification
   ) {}
 
   async update (data: UpdateCadeirasAlunosParams): Promise<CadeirasAlunosModel | boolean> {
@@ -16,8 +17,13 @@ export class DbUpdateCadeirasAlunos implements UpdateCadeirasAlunos {
     const exists = await this.checkCadeirasAlunosByIdRepository.checkById(data.id)
     if (exists) {
       const cadeirasAlunosUpdated = await this.updateCadeirasAlunoRepository.update(data)
-      await this.loadProfessorByIdRepository.loadById(cadeirasAlunosUpdated.professorId)
-      await this.loadAlunoByIdRepository.loadById(cadeirasAlunosUpdated.alunoId)
+      const professor = await this.loadProfessorByIdRepository.loadById(cadeirasAlunosUpdated.professorId)
+      const aluno = await this.loadAlunoByIdRepository.loadById(cadeirasAlunosUpdated.alunoId)
+
+      const sendEmail = await this.emailNotification.send(aluno.email, professor.email)
+      if (!sendEmail) {
+        return false
+      }
 
       return cadeirasAlunosUpdated
     }
