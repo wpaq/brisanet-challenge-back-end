@@ -93,4 +93,11 @@ describe('DbUpdateCadeirasAlunos Usecase', () => {
     const isValid = await sut.update(mockUpdateCadeirasAlunosParams())
     expect(isValid).toBe(false)
   })
+
+  test('Should throw if EmailNotification throws', async () => {
+    const { sut, emailNotificationSpy } = makeSut()
+    jest.spyOn(emailNotificationSpy, 'send').mockRejectedValueOnce(new Error())
+    const promise = sut.update(mockUpdateCadeirasAlunosParams())
+    await expect(promise).rejects.toThrow()
+  })
 })
