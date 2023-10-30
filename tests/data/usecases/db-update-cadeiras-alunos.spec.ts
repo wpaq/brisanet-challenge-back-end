@@ -1,4 +1,4 @@
-import { CheckCadeirasAlunosByIdRepositorySpy, LoadAlunoByIdRepositorySpy, LoadProfessorByIdRepositorySpy, UpdateCadeirasAlunosRepositorySpy } from '@/tests/data/mocks'
+import { CheckCadeirasAlunosByIdRepositorySpy, EmailNotificationSpy, LoadAlunoByIdRepositorySpy, LoadProfessorByIdRepositorySpy, UpdateCadeirasAlunosRepositorySpy } from '@/tests/data/mocks'
 import { mockUpdateCadeirasAlunosParams } from '@/tests/domain'
 
 import { DbUpdateCadeirasAlunos } from '@/data/usecases'
@@ -9,6 +9,7 @@ type SutTypes = {
   checkCadeirasAlunosByIdRepositorySpy: CheckCadeirasAlunosByIdRepositorySpy
   loadProfessorByIdRepositorySpy: LoadProfessorByIdRepositorySpy
   loadAlunoByIdRepositorySpy: LoadAlunoByIdRepositorySpy
+  emailNotificationSpy: EmailNotificationSpy
 }
 
 const makeSut = (): SutTypes => {
@@ -16,13 +17,15 @@ const makeSut = (): SutTypes => {
   const checkCadeirasAlunosByIdRepositorySpy = new CheckCadeirasAlunosByIdRepositorySpy()
   const loadProfessorByIdRepositorySpy = new LoadProfessorByIdRepositorySpy()
   const loadAlunoByIdRepositorySpy = new LoadAlunoByIdRepositorySpy()
-  const sut = new DbUpdateCadeirasAlunos(updateCadeirasAlunosRepositorySpy, checkCadeirasAlunosByIdRepositorySpy, loadProfessorByIdRepositorySpy, loadAlunoByIdRepositorySpy)
+  const emailNotificationSpy = new EmailNotificationSpy()
+  const sut = new DbUpdateCadeirasAlunos(updateCadeirasAlunosRepositorySpy, checkCadeirasAlunosByIdRepositorySpy, loadProfessorByIdRepositorySpy, loadAlunoByIdRepositorySpy, emailNotificationSpy)
   return {
     sut,
     updateCadeirasAlunosRepositorySpy,
     checkCadeirasAlunosByIdRepositorySpy,
     loadProfessorByIdRepositorySpy,
-    loadAlunoByIdRepositorySpy
+    loadAlunoByIdRepositorySpy,
+    emailNotificationSpy
   }
 }
 
@@ -82,5 +85,12 @@ describe('DbUpdateCadeirasAlunos Usecase', () => {
     jest.spyOn(loadAlunoByIdRepositorySpy, 'loadById').mockRejectedValueOnce(new Error())
     const promise = sut.update(mockUpdateCadeirasAlunosParams())
     await expect(promise).rejects.toThrow()
+  })
+
+  test('Should return false if EmailNotification returns false', async () => {
+    const { sut, emailNotificationSpy } = makeSut()
+    emailNotificationSpy.result = false
+    const isValid = await sut.update(mockUpdateCadeirasAlunosParams())
+    expect(isValid).toBe(false)
   })
 })
