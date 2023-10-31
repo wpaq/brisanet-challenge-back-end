@@ -20,10 +20,7 @@ export class NodemailerAdapter implements EmailNotification {
       subject: 'Email Notification',
       text: 'Olá, sua matrícula foi aprovada!'
     }
-    const sending = await transporter.sendMail(mailOptions)
-    if (!sending) {
-      return false
-    }
-    return true
+    const info = await transporter.sendMail(mailOptions)
+    return info !== null
   }
 }
