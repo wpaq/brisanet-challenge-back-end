@@ -1,3 +1,3 @@
 export interface EmailNotification {
-  send: (to: string, from: string) => Promise<boolean>
+  send: (receiverEmail: string, senderEmail: string, senderName: string, cadeiraName: string) => Promise<boolean>
 }
