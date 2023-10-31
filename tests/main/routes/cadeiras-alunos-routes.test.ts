@@ -4,6 +4,13 @@ import { mockAddAlunoParams, mockAddCadeiraParams, mockAddProfessorParams } from
 
 import request from 'supertest'
 
+const sendMailMock = jest.fn()
+jest.mock('nodemailer', () => ({
+  createTransport: jest.fn().mockImplementation(() => ({
+    sendMail: sendMailMock
+  }))
+}))
+
 describe('CadeirasAlunos Routes', () => {
   beforeAll(async () => {
     await PrismaHelper.connectPrismock()
