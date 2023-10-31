@@ -1,24 +1,14 @@
 import { prisma } from './prisma-client'
-import { prismock } from './prisma-mock'
 
 export const PrismaHelper = {
-  client: prismock || prisma,
+  client: prisma,
 
-  async connectPrismock () {
-    await prismock.$connect()
-    this.client = prismock
-  },
-
-  async disconnectPrismock () {
-    await prismock.$disconnect()
-  },
-
-  async connect () {
+  async connect (prisma) {
     await prisma.$connect()
     this.client = prisma
   },
 
-  async disconnect () {
+  async disconnect (prisma) {
     await prisma.$disconnect()
   }
 }

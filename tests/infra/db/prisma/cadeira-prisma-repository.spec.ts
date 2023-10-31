@@ -1,4 +1,5 @@
 import { mockAddProfessorParams, mockAddCadeiraParams } from '@/tests/domain'
+import { prismock } from '@/tests/infra/db/mocks'
 
 import { CadeiraPrismaRepository, PrismaHelper, ProfessorPrismaRepository } from '@/infra/db/prisma'
 import { faker } from '@faker-js/faker'
@@ -16,7 +17,7 @@ const makeSut = (): CadeiraPrismaRepository => {
 
 describe('CadeiraPrismaRepository', () => {
   beforeAll(async () => {
-    await PrismaHelper.connectPrismock()
+    await PrismaHelper.connect(prismock)
   })
 
   beforeEach(async () => {
@@ -26,7 +27,7 @@ describe('CadeiraPrismaRepository', () => {
   })
 
   afterAll(async () => {
-    await PrismaHelper.disconnectPrismock()
+    await PrismaHelper.disconnect(prismock)
   })
 
   describe('add()', () => {

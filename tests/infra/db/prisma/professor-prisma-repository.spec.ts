@@ -1,4 +1,5 @@
 import { mockAddProfessorParams } from '@/tests/domain'
+import { prismock } from '@/tests/infra/db/mocks'
 
 import { PrismaHelper, ProfessorPrismaRepository } from '@/infra/db/prisma'
 
@@ -10,7 +11,7 @@ const makeSut = (): ProfessorPrismaRepository => {
 
 describe('ProfessorPrismaRepository', () => {
   beforeAll(async () => {
-    await PrismaHelper.connectPrismock()
+    await PrismaHelper.connect(prismock)
   })
 
   beforeEach(async () => {
@@ -18,7 +19,7 @@ describe('ProfessorPrismaRepository', () => {
   })
 
   afterAll(async () => {
-    await PrismaHelper.disconnectPrismock()
+    await PrismaHelper.disconnect(prismock)
   })
 
   describe('add()', () => {

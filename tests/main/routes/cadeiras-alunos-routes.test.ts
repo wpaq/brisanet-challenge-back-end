@@ -1,6 +1,8 @@
 import { AlunoPrismaRepository, CadeiraPrismaRepository, CadeirasAlunosPrismaRepository, PrismaHelper, ProfessorPrismaRepository } from '@/infra/db/prisma'
 import app from '@/main/config/app'
+
 import { mockAddAlunoParams, mockAddCadeiraParams, mockAddProfessorParams } from '@/tests/domain'
+import { prismock } from '@/tests/infra/db/mocks'
 
 import request from 'supertest'
 
@@ -13,7 +15,7 @@ jest.mock('nodemailer', () => ({
 
 describe('CadeirasAlunos Routes', () => {
   beforeAll(async () => {
-    await PrismaHelper.connectPrismock()
+    await PrismaHelper.connect(prismock)
   })
 
   afterAll(async () => {
@@ -21,7 +23,7 @@ describe('CadeirasAlunos Routes', () => {
     await PrismaHelper.client.aluno.deleteMany({})
     await PrismaHelper.client.cadeira.deleteMany({})
     await PrismaHelper.client.cadeirasAlunos.deleteMany({})
-    await PrismaHelper.disconnectPrismock()
+    await PrismaHelper.disconnect(prismock)
   })
 
   test('should return an cadeiras alunos on success', async () => {

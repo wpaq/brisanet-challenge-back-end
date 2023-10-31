@@ -1,18 +1,20 @@
 import { PrismaHelper } from '@/infra/db/prisma'
 import app from '@/main/config/app'
+
 import { mockAddCadeiraParams, mockAddProfessorParams } from '@/tests/domain'
+import { prismock } from '@/tests/infra/db/mocks'
 
 import request from 'supertest'
 
 describe('Cadeira Routes', () => {
   beforeAll(async () => {
-    await PrismaHelper.connectPrismock()
+    await PrismaHelper.connect(prismock)
   })
 
   afterAll(async () => {
     await PrismaHelper.client.professor.deleteMany({})
     await PrismaHelper.client.cadeira.deleteMany({})
-    await PrismaHelper.disconnectPrismock()
+    await PrismaHelper.disconnect(prismock)
   })
 
   test('should return an cadeira on success', async () => {

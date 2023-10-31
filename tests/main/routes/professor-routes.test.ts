@@ -1,16 +1,18 @@
 import app from '@/main/config/app'
 import { PrismaHelper } from '@/infra/db/prisma'
 
+import { prismock } from '@/tests/infra/db/mocks'
+
 import request from 'supertest'
 
 describe('Professor Routes', () => {
   beforeAll(async () => {
-    await PrismaHelper.connectPrismock()
+    await PrismaHelper.connect(prismock)
   })
 
   afterAll(async () => {
     await PrismaHelper.client.professor.deleteMany({})
-    await PrismaHelper.disconnectPrismock()
+    await PrismaHelper.disconnect(prismock)
   })
 
   beforeEach(async () => {

@@ -1,4 +1,5 @@
 import { LogPrismaRepository, PrismaHelper } from '@/infra/db/prisma'
+import { prismock } from '@/tests/infra/db/mocks'
 
 import { faker } from '@faker-js/faker'
 
@@ -8,7 +9,7 @@ const makeSut = (): LogPrismaRepository => {
 
 describe('LogPrisma Repository', () => {
   beforeAll(async () => {
-    await PrismaHelper.connectPrismock()
+    await PrismaHelper.connect(prismock)
   })
 
   beforeEach(async () => {
@@ -16,7 +17,7 @@ describe('LogPrisma Repository', () => {
   })
 
   afterAll(async () => {
-    await PrismaHelper.disconnectPrismock()
+    await PrismaHelper.disconnect(prismock)
   })
 
   test('Should create an error log on success', async () => {

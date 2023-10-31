@@ -1,4 +1,5 @@
 import { mockAddAlunoParams, mockAddCadeiraParams, mockAddCadeirasAlunosParams, mockAddProfessorParams } from '@/tests/domain'
+import { prismock } from '@/tests/infra/db/mocks'
 
 import { PrismaHelper, CadeirasAlunosPrismaRepository, AlunoPrismaRepository, CadeiraPrismaRepository, ProfessorPrismaRepository } from '@/infra/db/prisma'
 
@@ -29,7 +30,7 @@ const makeSut = (): CadeirasAlunosPrismaRepository => {
 
 describe('CadeirasAlunosPrismaRepository', () => {
   beforeAll(async () => {
-    await PrismaHelper.connectPrismock()
+    await PrismaHelper.connect(prismock)
   })
 
   beforeEach(async () => {
@@ -43,7 +44,7 @@ describe('CadeirasAlunosPrismaRepository', () => {
   })
 
   afterAll(async () => {
-    await PrismaHelper.disconnectPrismock()
+    await PrismaHelper.disconnect(prismock)
   })
 
   describe('add()', () => {
