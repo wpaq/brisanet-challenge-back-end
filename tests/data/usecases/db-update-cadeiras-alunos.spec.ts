@@ -1,4 +1,4 @@
-import { CheckCadeirasAlunosByIdRepositorySpy, EmailNotificationSpy, LoadAlunoByIdRepositorySpy, LoadProfessorByIdRepositorySpy, UpdateCadeirasAlunosRepositorySpy } from '@/tests/data/mocks'
+import { CheckCadeirasAlunosByIdRepositorySpy, EmailNotificationSpy, LoadAlunoByIdRepositorySpy, LoadCadeiraByIdRepositorySpy, LoadProfessorByIdRepositorySpy, UpdateCadeirasAlunosRepositorySpy } from '@/tests/data/mocks'
 import { mockUpdateCadeirasAlunosParams } from '@/tests/domain'
 
 import { DbUpdateCadeirasAlunos } from '@/data/usecases'
@@ -10,6 +10,7 @@ type SutTypes = {
   loadProfessorByIdRepositorySpy: LoadProfessorByIdRepositorySpy
   loadAlunoByIdRepositorySpy: LoadAlunoByIdRepositorySpy
   emailNotificationSpy: EmailNotificationSpy
+  loadCadeiraByIdRepositorySpy: LoadCadeiraByIdRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
@@ -18,14 +19,16 @@ const makeSut = (): SutTypes => {
   const loadProfessorByIdRepositorySpy = new LoadProfessorByIdRepositorySpy()
   const loadAlunoByIdRepositorySpy = new LoadAlunoByIdRepositorySpy()
   const emailNotificationSpy = new EmailNotificationSpy()
-  const sut = new DbUpdateCadeirasAlunos(updateCadeirasAlunosRepositorySpy, checkCadeirasAlunosByIdRepositorySpy, loadProfessorByIdRepositorySpy, loadAlunoByIdRepositorySpy, emailNotificationSpy)
+  const loadCadeiraByIdRepositorySpy = new LoadCadeiraByIdRepositorySpy()
+  const sut = new DbUpdateCadeirasAlunos(updateCadeirasAlunosRepositorySpy, checkCadeirasAlunosByIdRepositorySpy, loadProfessorByIdRepositorySpy, loadAlunoByIdRepositorySpy, emailNotificationSpy, loadCadeiraByIdRepositorySpy)
   return {
     sut,
     updateCadeirasAlunosRepositorySpy,
     checkCadeirasAlunosByIdRepositorySpy,
     loadProfessorByIdRepositorySpy,
     loadAlunoByIdRepositorySpy,
-    emailNotificationSpy
+    emailNotificationSpy,
+    loadCadeiraByIdRepositorySpy
   }
 }
 
@@ -87,11 +90,18 @@ describe('DbUpdateCadeirasAlunos Usecase', () => {
     await expect(promise).rejects.toThrow()
   })
 
+  test('Should call LoadCadeiraByIdRepository with correct id', async () => {
+    const { sut, loadCadeiraByIdRepositorySpy, updateCadeirasAlunosRepositorySpy } = makeSut()
+    await sut.update(mockUpdateCadeirasAlunosParams())
+    expect(loadCadeiraByIdRepositorySpy.id).toBe(updateCadeirasAlunosRepositorySpy.result.cadeiraId)
+  })
+
   test('Should call EmailNotification with correct values', async () => {
     const { sut, emailNotificationSpy, loadProfessorByIdRepositorySpy, loadAlunoByIdRepositorySpy } = makeSut()
     await sut.update(mockUpdateCadeirasAlunosParams())
-    expect(emailNotificationSpy.to).toBe(loadAlunoByIdRepositorySpy.result.email)
-    expect(emailNotificationSpy.from).toBe(loadProfessorByIdRepositorySpy.result.email)
+    expect(emailNotificationSpy.receiverEmail).toBe(loadAlunoByIdRepositorySpy.result.email)
+    expect(emailNotificationSpy.senderEmail).toBe(loadProfessorByIdRepositorySpy.result.email)
+    expect(emailNotificationSpy.senderName).toBe(loadProfessorByIdRepositorySpy.result.nome)
   })
 
   test('Should return false if EmailNotification returns false', async () => {
