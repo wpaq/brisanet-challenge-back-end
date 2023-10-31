@@ -26,7 +26,8 @@ export class DbUpdateCadeirasAlunos implements UpdateCadeirasAlunos {
         aluno.email,
         professor.email,
         professor.nome,
-        cadeira.nome
+        cadeira.nome,
+        data.statusMatricula
       )
       if (!sendEmail) {
         return false
