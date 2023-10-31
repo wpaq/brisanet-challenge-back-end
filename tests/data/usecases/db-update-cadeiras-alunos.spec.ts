@@ -87,6 +87,13 @@ describe('DbUpdateCadeirasAlunos Usecase', () => {
     await expect(promise).rejects.toThrow()
   })
 
+  test('Should call EmailNotification with correct values', async () => {
+    const { sut, emailNotificationSpy, loadProfessorByIdRepositorySpy, loadAlunoByIdRepositorySpy } = makeSut()
+    await sut.update(mockUpdateCadeirasAlunosParams())
+    expect(emailNotificationSpy.to).toBe(loadAlunoByIdRepositorySpy.result.email)
+    expect(emailNotificationSpy.from).toBe(loadProfessorByIdRepositorySpy.result.email)
+  })
+
   test('Should return false if EmailNotification returns false', async () => {
     const { sut, emailNotificationSpy } = makeSut()
     emailNotificationSpy.result = false
