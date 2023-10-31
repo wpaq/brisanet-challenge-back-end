@@ -2,9 +2,9 @@ import { PrismaHelper } from './helpers'
 
 import { type CheckProfessorByEmailRepository, type AddProfessorRepository, type CheckProfessorByIdRepository } from '@/data/protocols'
 import { type ProfessorModel } from '@/domain/models'
-import { type AddProfessorParams } from '@/domain/usecases'
+import { type LoadProfessorById, type AddProfessorParams } from '@/domain/usecases'
 
-export class ProfessorPrismaRepository implements AddProfessorRepository, CheckProfessorByEmailRepository, CheckProfessorByIdRepository {
+export class ProfessorPrismaRepository implements AddProfessorRepository, CheckProfessorByEmailRepository, CheckProfessorByIdRepository, LoadProfessorById {
   async add (data: AddProfessorParams): Promise<ProfessorModel> {
     const newProfessor = await PrismaHelper.client.professor.create({
       data: {
@@ -33,5 +33,14 @@ export class ProfessorPrismaRepository implements AddProfessorRepository, CheckP
       }
     })
     return professor !== null
+  }
+
+  async loadById (id: string): Promise<ProfessorModel> {
+    const professor = await PrismaHelper.client.professor.findUnique({
+      where: {
+        id
+      }
+    })
+    return professor as ProfessorModel
   }
 }

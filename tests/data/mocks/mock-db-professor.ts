@@ -1,6 +1,6 @@
 import { mockProfessorModel } from '@/tests/domain'
 
-import { type CheckProfessorByEmailRepository, type AddProfessorRepository, type CheckProfessorByIdRepository } from '@/data/protocols'
+import { type CheckProfessorByEmailRepository, type AddProfessorRepository, type CheckProfessorByIdRepository, type LoadProfessorByIdRepository } from '@/data/protocols'
 import { type ProfessorModel } from '@/domain/models'
 import { type AddProfessorParams } from '@/domain/usecases'
 
@@ -29,6 +29,16 @@ export class CheckProfessorByIdRepositorySpy implements CheckProfessorByIdReposi
   result = true
 
   async checkById (id: string): Promise<boolean> {
+    this.id = id
+    return this.result
+  }
+}
+
+export class LoadProfessorByIdRepositorySpy implements LoadProfessorByIdRepository {
+  id: string
+  result = mockProfessorModel()
+
+  async loadById (id: string): Promise<ProfessorModel> {
     this.id = id
     return this.result
   }

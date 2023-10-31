@@ -64,4 +64,15 @@ describe('AlunoPrismaRepository', () => {
       expect(alunoExists).toBe(false)
     })
   })
+
+  describe('loadById()', () => {
+    test('Should load an aluno by id on success', async () => {
+      const sut = makeSut()
+      const res = await sut.add(mockAddAlunoParams())
+
+      const aluno = await sut.loadById(res.id)
+      expect(aluno).toBeTruthy()
+      expect(aluno.id).toBeTruthy()
+    })
+  })
 })

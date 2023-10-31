@@ -8,7 +8,6 @@ export class StatusMatriculaValidation implements Validation {
 
   validate (input: any): Error | null {
     enum MatriculaStatus {
-      PENDENTE,
       APROVADO,
       REJEITADO
     }

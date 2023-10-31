@@ -1,6 +1,6 @@
 import { mockCadeiraModel, mockCadeirasModels } from '@/tests/domain'
 
-import { type CheckCadeiraByIdRepository, type AddCadeiraRepository, type CheckCadeiraByPeriodRepository, type LoadCadeirasRepository } from '@/data/protocols'
+import { type CheckCadeiraByIdRepository, type AddCadeiraRepository, type CheckCadeiraByPeriodRepository, type LoadCadeirasRepository, type LoadCadeiraByIdRepository } from '@/data/protocols'
 import { type CadeiraModel } from '@/domain/models'
 import { type AddCadeiraParams } from '@/domain/usecases'
 
@@ -40,6 +40,16 @@ export class LoadCadeirasRepositorySpy implements LoadCadeirasRepository {
   result = mockCadeirasModels()
 
   async loadAll (): Promise<CadeiraModel[]> {
+    return this.result
+  }
+}
+
+export class LoadCadeiraByIdRepositorySpy implements LoadCadeiraByIdRepository {
+  id: string
+  result = mockCadeiraModel()
+
+  async loadById (id: string): Promise<CadeiraModel> {
+    this.id = id
     return this.result
   }
 }

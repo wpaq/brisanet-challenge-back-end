@@ -64,4 +64,15 @@ describe('ProfessorPrismaRepository', () => {
       expect(professorExists).toBe(false)
     })
   })
+
+  describe('loadById()', () => {
+    test('Should load an professor by id on success', async () => {
+      const sut = makeSut()
+      const res = await sut.add(mockAddProfessorParams())
+
+      const professor = await sut.loadById(res.id)
+      expect(professor).toBeTruthy()
+      expect(professor.id).toBeTruthy()
+    })
+  })
 })
