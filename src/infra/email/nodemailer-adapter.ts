@@ -12,13 +12,13 @@ const nodemailerConfig = {
 }
 
 export class NodemailerAdapter implements EmailNotification {
-  async send (to: string, from: string): Promise<boolean> {
+  async send (receiverEmail: string, senderEmail: string, senderName: string, cadeiraName: string): Promise<boolean> {
     const transporter = nodemailer.createTransport(nodemailerConfig)
     const mailOptions = {
-      to,
-      from,
+      to: receiverEmail,
+      from: senderEmail,
       subject: 'Email Notification',
-      text: 'Olá, sua matrícula foi aprovada!'
+      text: `Olá, o professor ${senderName} aprovou sua matrícula na matéria: ${cadeiraName}.`
     }
     const info = await transporter.sendMail(mailOptions)
     return info !== null
