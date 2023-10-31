@@ -6,7 +6,7 @@
 ## Desafio Back end Brisalabs :computer:
 
 O desafio consiste no desenvolvimento de uma API REST
-Segue instruções no link abaixo:
+Segue as instruções no link abaixo:
 
 https://github.com/Brisanet/challenge-back-end#readme
 
@@ -28,12 +28,17 @@ https://github.com/Brisanet/challenge-back-end#readme
 <br>
 
 - `DATABASE_URL=postgresql://USERNAME:PASSWORD@HOST:PORT/DATABASE_NAME?schema=public`
-- `API_PORT=5050`, porta de exemplo
+- `API_PORT=`, default: 5050
+- `SMTP_HOST=`
+- `SMTP_PORT=`
+- `SMTP_USER=`
+- `SMTP_PASSWORD=`
 
 <br>
+Caso não tenha um domínio SMTP e deseja utilizar a API somente para testes, recomendo utilizar: https://ethereal.email
+<br>
 
-5. `npm run build` para fazer o build da API
-6. `npm start` para executar a API
+5. `npm start` faz o build da API e a executa
 
 
 ## APIs construídas no desafio
@@ -64,6 +69,7 @@ https://github.com/Brisanet/challenge-back-end#readme
 - [Module-Alias](https://www.npmjs.com/package/module-alias)
 - [Dotenv](https://www.npmjs.com/package/dotenv)
 - [Npm-Check-Updates](https://www.npmjs.com/package/npm-check-updates)
+- [Nodemailer](https://nodemailer.com)
 - REST
 
 ## Princípios utilizados
