@@ -19,6 +19,10 @@ services:
     restart: always
     environment:
       - DATABASE_URL=postgresql://postgres:admin@host.docker.internal:5433/brisalabs?schema=public
+      - SMTP_HOST=smtp.ethereal.email
+      - SMTP_PORT=587
+      - SMTP_USER=major.kihn41@ethereal.email
+      - SMTP_PASSWORD=qrK5ksqcMVYUHNY8rp
     volumes:
       - ./dist/:/usr/src/brisanet-challenge-back-end/dist/
       - ./prisma/:/usr/src/brisanet-challenge-back-end/prisma/
