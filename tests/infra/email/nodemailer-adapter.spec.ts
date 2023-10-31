@@ -36,5 +36,13 @@ describe('NodemailerAdapter', () => {
 
       expect(email).toBeTruthy()
     })
+
+    test('Should throw if sendMail throws', async () => {
+      const sut = makeSut()
+      sendMailMock.mockRejectedValueOnce(new Error())
+
+      const promise = sut.send(to, from)
+      await expect(promise).rejects.toThrow()
+    })
   })
 })
