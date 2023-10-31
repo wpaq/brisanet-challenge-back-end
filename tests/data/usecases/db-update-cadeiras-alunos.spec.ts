@@ -105,11 +105,13 @@ describe('DbUpdateCadeirasAlunos Usecase', () => {
 
   test('Should call EmailNotification with correct values', async () => {
     const { sut, emailNotificationSpy, loadProfessorByIdRepositorySpy, loadAlunoByIdRepositorySpy, loadCadeiraByIdRepositorySpy } = makeSut()
-    await sut.update(mockUpdateCadeirasAlunosParams())
+    const updateCadeirasAlunosParams = mockUpdateCadeirasAlunosParams()
+    await sut.update(updateCadeirasAlunosParams)
     expect(emailNotificationSpy.receiverEmail).toBe(loadAlunoByIdRepositorySpy.result.email)
     expect(emailNotificationSpy.senderEmail).toBe(loadProfessorByIdRepositorySpy.result.email)
     expect(emailNotificationSpy.senderName).toBe(loadProfessorByIdRepositorySpy.result.nome)
     expect(emailNotificationSpy.cadeiraName).toBe(loadCadeiraByIdRepositorySpy.result.nome)
+    expect(emailNotificationSpy.statusMatricula).toBe(updateCadeirasAlunosParams.statusMatricula)
   })
 
   test('Should return false if EmailNotification returns false', async () => {
