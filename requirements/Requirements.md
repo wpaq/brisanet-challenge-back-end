@@ -29,4 +29,4 @@
 1. ✅ O sistema deve ser capaz de enviar um email notificando o aluno que a matricula de determinada cadeira(matéria) foi bem sucedida.
 2. ✅ O email deve conter o nome da cadeira e o nome do professor.
 3. ✅ Adicionar tratamento de erros de maneira global
-4. ❌ Adicionar um docker-compose e um Dockerfile
+4. ✅ Adicionar um docker-compose e um Dockerfile
