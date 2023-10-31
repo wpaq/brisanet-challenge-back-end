@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  postgres: 
+    container_name: postgres-container
+    image: postgres:15-alpine
+    restart: always
+    volumes: 
+      - ./data:/data/db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: brisalabs
+    ports: 
+     - "5433:5432" 
+  api:
+    container_name: api-container
+    image: node:18
+    working_dir: /usr/src/brisanet-challenge-back-end
+    restart: always
+    environment:
+      - DATABASE_URL=postgresql://postgres:admin@host.docker.internal:5433/brisalabs?schema=public
+    volumes:
+      - ./dist/:/usr/src/brisanet-challenge-back-end/dist/
+      - ./prisma/:/usr/src/brisanet-challenge-back-end/prisma/
+      - ./package.json:/usr/src/brisanet-challenge-back-end/package.json
+    command: bash -c "npm install --omit=dev && npx prisma migrate dev && npm start"
+    ports: 
+      - "5050:5050"
+    links:
+      - postgres
