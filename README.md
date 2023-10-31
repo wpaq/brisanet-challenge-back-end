@@ -17,8 +17,9 @@ https://github.com/Brisanet/challenge-back-end#readme
 - [Node.js](https://nodejs.org/) instalado
 - [npm](https://www.npmjs.com/) (gerenciador de pacotes do Node.js) instalado
 - [PostgreSQL](https://www.postgresql.org/) instalado
+- [Docker](https://www.docker.com) instalado caso prefira rodar por ele
 
-## Configurando o Banco de Dados e Rodando a API
+## Configurando o Banco de Dados e Rodando a API Manualmente
 
 1. `npm install` para instalar as dependências
 2. Inicie o PostgreSQL na sua máquina.
@@ -28,7 +29,7 @@ https://github.com/Brisanet/challenge-back-end#readme
 <br>
 
 - `DATABASE_URL=postgresql://USERNAME:PASSWORD@HOST:PORT/DATABASE_NAME?schema=public`
-- `API_PORT=`, default: 5050
+- `API_PORT=`, default: 5050 -  Opcional
 - `SMTP_HOST=`
 - `SMTP_PORT=`
 - `SMTP_USER=`
@@ -37,9 +38,27 @@ https://github.com/Brisanet/challenge-back-end#readme
 <br>
 Caso não tenha um domínio SMTP e deseja utilizar a API somente para testes, recomendo utilizar: https://ethereal.email
 <br>
+<br>
 
 5. `npm start` faz o build da API e a executa
 
+## Rodando a API com Docker
+
+Eu deixei variáveis ambientes de teste utilizando o SMTP do Ethereal no docker-compose.yml
+<br>
+Caso queira utilizar um domínio SMTP próprio ou visualizar no mailBox da conta do Ethereal que você criou, basta modificar elas na parte de environment no arquivo docker-compose.yml
+
+<br>
+
+- `SMTP_HOST=`
+- `SMTP_PORT=`
+- `SMTP_USER=`
+- `SMTP_PASSWORD=`
+
+<br>
+
+1. Para rodar o container do docker execute `npm run up`
+2. Para encerrar o container execute `npm run down`
 
 ## APIs construídas no desafio
 
