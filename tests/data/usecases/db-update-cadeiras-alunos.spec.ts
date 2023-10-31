@@ -96,6 +96,13 @@ describe('DbUpdateCadeirasAlunos Usecase', () => {
     expect(loadCadeiraByIdRepositorySpy.id).toBe(updateCadeirasAlunosRepositorySpy.result.cadeiraId)
   })
 
+  test('Should throw if LoadCadeiraByIdRepository throws', async () => {
+    const { sut, loadCadeiraByIdRepositorySpy } = makeSut()
+    jest.spyOn(loadCadeiraByIdRepositorySpy, 'loadById').mockRejectedValueOnce(new Error())
+    const promise = sut.update(mockUpdateCadeirasAlunosParams())
+    await expect(promise).rejects.toThrow()
+  })
+
   test('Should call EmailNotification with correct values', async () => {
     const { sut, emailNotificationSpy, loadProfessorByIdRepositorySpy, loadAlunoByIdRepositorySpy } = makeSut()
     await sut.update(mockUpdateCadeirasAlunosParams())
