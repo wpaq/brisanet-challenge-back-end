@@ -1,7 +1,7 @@
 import { DbUpdateCadeirasAlunos } from '@/data/usecases'
 import { type UpdateCadeirasAlunos } from '@/domain/usecases'
 import { CadeirasAlunosPrismaRepository } from '@/infra/db/prisma'
-import { makeDbCheckCadeirasAlunosById, makeDbLoadAlunoById, makeDbLoadProfessorById } from '@/main/factories/usecases'
+import { makeDbCheckCadeirasAlunosById, makeDbLoadAlunoById, makeDbLoadCadeiraById, makeDbLoadProfessorById } from '@/main/factories/usecases'
 import { NodemailerAdapter } from '@/infra/email'
 
 export const makeDbUpdateCadeirasAlunos = (): UpdateCadeirasAlunos => {
@@ -12,6 +12,7 @@ export const makeDbUpdateCadeirasAlunos = (): UpdateCadeirasAlunos => {
     makeDbCheckCadeirasAlunosById(),
     makeDbLoadProfessorById(),
     makeDbLoadAlunoById(),
-    nodemailerAdapter
+    nodemailerAdapter,
+    makeDbLoadCadeiraById()
   )
 }
