@@ -1,6 +1,6 @@
-import { type EmailNotification } from '@/data/protocols'
+import { type SendEmailNotification } from '@/data/protocols'
 
-export class EmailNotificationSpy implements EmailNotification {
+export class EmailNotificationSpy implements SendEmailNotification {
   receiverEmail: string
   senderEmail: string
   senderName: string

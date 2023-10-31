@@ -5,6 +5,7 @@ const receiverEmail = faker.internet.email()
 const senderEmail = faker.internet.email()
 const senderName = faker.person.fullName()
 const cadeiraName = faker.word.words()
+const statusMatricula = faker.word.words()
 
 const sendMailMock = jest.fn()
 jest.mock('nodemailer', () => ({
@@ -25,7 +26,7 @@ describe('NodemailerAdapter', () => {
   describe('sendMail()', () => {
     test('Should call sendEmail with correct values', async () => {
       const sut = makeSut()
-      await sut.send(receiverEmail, senderEmail, senderName, cadeiraName)
+      await sut.send(receiverEmail, senderEmail, senderName, cadeiraName, statusMatricula)
 
       const sendMailArgs = sendMailMock.mock.calls[0]
       expect(sendMailArgs[0].to).toBe(receiverEmail)
@@ -36,7 +37,7 @@ describe('NodemailerAdapter', () => {
 
     test('Should return true if sendMail return true', async () => {
       const sut = makeSut()
-      const email = await sut.send(receiverEmail, senderEmail, senderName, cadeiraName)
+      const email = await sut.send(receiverEmail, senderEmail, senderName, cadeiraName, statusMatricula)
 
       expect(email).toBeTruthy()
     })
@@ -45,7 +46,7 @@ describe('NodemailerAdapter', () => {
       const sut = makeSut()
       sendMailMock.mockRejectedValueOnce(new Error())
 
-      const promise = sut.send(receiverEmail, senderEmail, senderName, cadeiraName)
+      const promise = sut.send(receiverEmail, senderEmail, senderName, cadeiraName, statusMatricula)
       await expect(promise).rejects.toThrow()
     })
   })

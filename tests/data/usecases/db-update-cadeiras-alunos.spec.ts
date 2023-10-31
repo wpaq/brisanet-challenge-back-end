@@ -103,7 +103,7 @@ describe('DbUpdateCadeirasAlunos Usecase', () => {
     await expect(promise).rejects.toThrow()
   })
 
-  test('Should call EmailNotification with correct values', async () => {
+  test('Should call SendEmailNotification with correct values', async () => {
     const { sut, emailNotificationSpy, loadProfessorByIdRepositorySpy, loadAlunoByIdRepositorySpy, loadCadeiraByIdRepositorySpy } = makeSut()
     const updateCadeirasAlunosParams = mockUpdateCadeirasAlunosParams()
     await sut.update(updateCadeirasAlunosParams)
@@ -114,14 +114,14 @@ describe('DbUpdateCadeirasAlunos Usecase', () => {
     expect(emailNotificationSpy.statusMatricula).toBe(updateCadeirasAlunosParams.statusMatricula)
   })
 
-  test('Should return false if EmailNotification returns false', async () => {
+  test('Should return false if SendEmailNotification returns false', async () => {
     const { sut, emailNotificationSpy } = makeSut()
     emailNotificationSpy.result = false
     const isValid = await sut.update(mockUpdateCadeirasAlunosParams())
     expect(isValid).toBe(false)
   })
 
-  test('Should throw if EmailNotification throws', async () => {
+  test('Should throw if SendEmailNotification throws', async () => {
     const { sut, emailNotificationSpy } = makeSut()
     jest.spyOn(emailNotificationSpy, 'send').mockRejectedValueOnce(new Error())
     const promise = sut.update(mockUpdateCadeirasAlunosParams())

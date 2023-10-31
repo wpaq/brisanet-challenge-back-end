@@ -1,4 +1,4 @@
-import { type EmailNotification } from '@/data/protocols'
+import { type SendEmailNotification } from '@/data/protocols'
 
 import nodemailer from 'nodemailer'
 
@@ -11,14 +11,14 @@ const nodemailerConfig = {
   }
 }
 
-export class NodemailerAdapter implements EmailNotification {
-  async send (receiverEmail: string, senderEmail: string, senderName: string, cadeiraName: string): Promise<boolean> {
+export class NodemailerAdapter implements SendEmailNotification {
+  async send (receiverEmail: string, senderEmail: string, senderName: string, cadeiraName: string, statusMatricula: string): Promise<boolean> {
     const transporter = nodemailer.createTransport(nodemailerConfig)
     const mailOptions = {
       to: receiverEmail,
       from: senderEmail,
       subject: 'BrisaLabs - Email Notification',
-      text: `Prezado(a) aluno(a),\n\nÉ com satisfação que informamos que sua matrícula na disciplina de ${cadeiraName} foi devidamente aprovada pelo professor ${senderName}.`
+      text: `Prezado(a) aluno(a),\n\nInformamos que sua solicitação de matrícula na disciplina de ${cadeiraName} foi ${statusMatricula} pelo professor ${senderName}.`
     }
     const info = await transporter.sendMail(mailOptions)
     return info !== null

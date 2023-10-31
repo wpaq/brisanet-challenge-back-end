@@ -1,1 +1,1 @@
-export * from './email-notification'
+export * from './send-email-notification'

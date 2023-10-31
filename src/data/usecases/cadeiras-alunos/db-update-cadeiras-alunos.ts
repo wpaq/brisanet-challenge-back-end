@@ -1,4 +1,4 @@
-import { type LoadProfessorByIdRepository, type CheckCadeirasAlunosByIdRepository, type UpdateCadeirasAlunosRepository, type LoadAlunoByIdRepository, type EmailNotification, type LoadCadeiraByIdRepository } from '@/data/protocols'
+import { type LoadProfessorByIdRepository, type CheckCadeirasAlunosByIdRepository, type UpdateCadeirasAlunosRepository, type LoadAlunoByIdRepository, type SendEmailNotification, type LoadCadeiraByIdRepository } from '@/data/protocols'
 import { type CadeirasAlunosModel } from '@/domain/models'
 import { type UpdateCadeirasAlunos, type UpdateCadeirasAlunosParams } from '@/domain/usecases'
 
@@ -8,7 +8,7 @@ export class DbUpdateCadeirasAlunos implements UpdateCadeirasAlunos {
     private readonly checkCadeirasAlunosByIdRepository: CheckCadeirasAlunosByIdRepository,
     private readonly loadProfessorByIdRepository: LoadProfessorByIdRepository,
     private readonly loadAlunoByIdRepository: LoadAlunoByIdRepository,
-    private readonly emailNotification: EmailNotification,
+    private readonly sendEmailNotification: SendEmailNotification,
     private readonly loadCadeiraByIdRepository: LoadCadeiraByIdRepository
   ) {}
 
@@ -22,7 +22,7 @@ export class DbUpdateCadeirasAlunos implements UpdateCadeirasAlunos {
       const aluno = await this.loadAlunoByIdRepository.loadById(cadeirasAlunosUpdated.alunoId)
       const cadeira = await this.loadCadeiraByIdRepository.loadById(cadeirasAlunosUpdated.cadeiraId)
 
-      const sendEmail = await this.emailNotification.send(
+      const sendEmail = await this.sendEmailNotification.send(
         aluno.email,
         professor.email,
         professor.nome,
