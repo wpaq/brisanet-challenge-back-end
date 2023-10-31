@@ -18,7 +18,7 @@ export class NodemailerAdapter implements SendEmailNotification {
       to: receiverEmail,
       from: senderEmail,
       subject: 'BrisaLabs - Email Notification',
-      text: `Prezado(a) aluno(a),\n\nInformamos que sua solicitação de matrícula na disciplina de ${cadeiraName} foi ${statusMatricula} pelo professor ${senderName}.`
+      text: `Prezado(a) aluno(a),\n\nInformamos que sua solicitação de matrícula na disciplina de ${cadeiraName} foi ${statusMatricula} pelo(a) professor(a) ${senderName}.`
     }
     const info = await transporter.sendMail(mailOptions)
     return info !== null
