@@ -5,7 +5,7 @@
   "author": "Wallyson Pablo",
   "license": "ISC",
   "scripts": {
-    "start": "npm run build && node dist/main/server.js",
+    "start": "node dist/main/server.js",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
     "check": "npx ncu --interactive --format group",
     "test": "jest --passWithNoTests --runInBand --no-cache",
@@ -14,7 +14,8 @@
     "test:integration": "npm test -- --watch -c jest-integration-config.ts",
     "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage",
-    "prepare": "husky install"
+    "up": "npm run build && docker-compose up -d",
+    "down": "docker-compose down"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.2.0",
