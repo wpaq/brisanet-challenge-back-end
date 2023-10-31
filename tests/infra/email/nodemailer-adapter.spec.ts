@@ -1,8 +1,10 @@
 import { NodemailerAdapter } from '@/infra/email'
 import { faker } from '@faker-js/faker'
 
-const to = faker.internet.email()
-const from = faker.internet.email()
+const receiverEmail = faker.internet.email()
+const senderEmail = faker.internet.email()
+const senderName = faker.person.fullName()
+const cadeiraName = faker.word.words()
 
 const sendMailMock = jest.fn()
 jest.mock('nodemailer', () => ({
@@ -23,16 +25,18 @@ describe('NodemailerAdapter', () => {
   describe('sendMail()', () => {
     test('Should call sendEmail with correct values', async () => {
       const sut = makeSut()
-      await sut.send(to, from)
+      await sut.send(receiverEmail, senderEmail, senderName, cadeiraName)
 
       const sendMailArgs = sendMailMock.mock.calls[0]
-      expect(sendMailArgs[0].to).toBe(to)
-      expect(sendMailArgs[0].from).toBe(from)
+      expect(sendMailArgs[0].to).toBe(receiverEmail)
+      expect(sendMailArgs[0].from).toBe(senderEmail)
+      expect(sendMailArgs[0].text).toContain(senderName)
+      expect(sendMailArgs[0].text).toContain(cadeiraName)
     })
 
     test('Should return true if sendMail return true', async () => {
       const sut = makeSut()
-      const email = await sut.send(to, from)
+      const email = await sut.send(receiverEmail, senderEmail, senderName, cadeiraName)
 
       expect(email).toBeTruthy()
     })
@@ -41,7 +45,7 @@ describe('NodemailerAdapter', () => {
       const sut = makeSut()
       sendMailMock.mockRejectedValueOnce(new Error())
 
-      const promise = sut.send(to, from)
+      const promise = sut.send(receiverEmail, senderEmail, senderName, cadeiraName)
       await expect(promise).rejects.toThrow()
     })
   })
