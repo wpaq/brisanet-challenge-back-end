@@ -6,6 +6,7 @@
 ## Desafio Back end Brisalabs :computer:
 
 O desafio consiste no desenvolvimento de uma API REST
+<br>
 Segue as instruções no link abaixo:
 
 https://github.com/Brisanet/challenge-back-end#readme
@@ -21,9 +22,9 @@ https://github.com/Brisanet/challenge-back-end#readme
 
 ## Configurando o Banco de Dados e Rodando a API Manualmente
 
-1. `npm install` para instalar as dependências
-2. Inicie o PostgreSQL na sua máquina.
-3. Crie um banco de dados para a aplicação
+1. Faça o clone do repositório
+2. Na raíz do projeto execute `npm install` para instalar as dependências
+3. Inicie o PostgreSQL na sua máquina e crie um banco de dados para a aplicação
 4. Crie e configure o arquivo `.env` na raiz do projeto com as seguintes variáveis ambiente:
 
 <br>
@@ -40,7 +41,7 @@ Caso não tenha um domínio SMTP e deseja utilizar a API somente para testes, re
 <br>
 <br>
 
-5. `npx prisma migrate dev` para aplicar as migrations no banco de dados
+5. `npx prisma migrate dev` para aplicar as migrations no banco de dados que você criou
 6. `npm run build` faz o build da API
 7. `npm start` executa a API
 
