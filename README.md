@@ -40,8 +40,9 @@ Caso não tenha um domínio SMTP e deseja utilizar a API somente para testes, re
 <br>
 <br>
 
-5. `npm run build` faz o build da API
-6. `npm start` executa a API
+5. `npx prisma migrate dev` para aplicar as migrations no banco de dados
+6. `npm run build` faz o build da API
+7. `npm start` executa a API
 
 ## Rodando a API com Docker
 
