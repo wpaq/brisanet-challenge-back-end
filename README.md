@@ -65,12 +65,17 @@ Caso queira utilizar um domínio SMTP próprio ou visualizar no mailBox da conta
 
 ## APIs construídas no desafio
 
-- [Criar Professor]()
-- [Criar Aluno]()
-- [Criar Cadeira]()
-- [Listar Cadeiras]()
-- [Criar Cadeiras Alunos]()
-- [Atualizar Cadeiras Alunos]()
+- [Criar Professor](./requirements/api/add-professor.md)
+- [Criar Aluno](./requirements/api/add-aluno.md)
+- [Criar Cadeira](./requirements/api/add-cadeira.md)
+- [Listar Cadeiras](./requirements/api/load-cadeiras.md)
+- [Criar Cadeiras Alunos](./requirements/api/add-cadeiras-alunos.md)
+- [Atualizar Cadeiras Alunos](./requirements/api/update-cadeiras-alunos.md)
+
+## Requerimentos da API e Rotas do Insomnia
+
+- [Requerimentos](./requirements/Requirements.md)
+- [Rotas Insomnia](./requirements/insomnia-routes)
 
 ## Tecnologias utilizadas :rocket:
 
