@@ -1,5 +1,5 @@
 import { type HttpRequest, type Controller, type HttpResponse } from '@/presentation/protocols'
-import { ok, serverError } from '@/presentation/helpers'
+import { noContent, ok, serverError } from '@/presentation/helpers'
 import { type LoadCadeiras } from '@/domain/usecases'
 
 export class LoadCadeirasController implements Controller {
@@ -8,7 +8,10 @@ export class LoadCadeirasController implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const cadeiras = await this.loadCadeiras.loadAll()
-      return ok(cadeiras)
+      if (cadeiras.length) {
+        return ok(cadeiras)
+      }
+      return noContent()
     } catch (error) {
       return serverError(error)
     }
