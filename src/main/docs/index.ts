@@ -28,6 +28,9 @@ export default {
   }, {
     name: 'Aluno',
     description: 'APIs relacionadas ao Aluno'
+  }, {
+    name: 'Cadeira',
+    description: 'APIs relacionadas a Cadeira'
   }],
   paths,
   schemas,

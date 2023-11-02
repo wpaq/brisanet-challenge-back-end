@@ -1,11 +1,13 @@
 import {
   addProfessorParamsSchema,
   errorSchema,
-  addAlunoParamsSchema
+  addAlunoParamsSchema,
+  addCadeiraParamsSchema
 } from './schemas/'
 
 export default {
   addProfessorParams: addProfessorParamsSchema,
   error: errorSchema,
-  addAlunoParams: addAlunoParamsSchema
+  addAlunoParams: addAlunoParamsSchema,
+  addCadeiraParams: addCadeiraParamsSchema
 }
