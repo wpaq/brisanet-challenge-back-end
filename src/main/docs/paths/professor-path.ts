@@ -8,7 +8,7 @@ export const professorPath = {
       content: {
         'application/json': {
           schema: {
-            $ref: '#/schemas/professorParams'
+            $ref: '#/schemas/addProfessorParams'
           }
         }
       }
@@ -19,7 +19,7 @@ export const professorPath = {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/schemas/professorParams'
+              $ref: '#/schemas/addProfessorParams'
             }
           }
         }

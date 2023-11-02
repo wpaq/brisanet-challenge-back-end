@@ -1,4 +1,4 @@
-export const alunoParamsSchema = {
+export const addAlunoParamsSchema = {
   type: 'object',
   properties: {
     nome: {

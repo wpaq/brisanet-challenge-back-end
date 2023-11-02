@@ -1,4 +1,4 @@
-export const professorParamsSchema = {
+export const addProfessorParamsSchema = {
   type: 'object',
   properties: {
     nome: {
