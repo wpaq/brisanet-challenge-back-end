@@ -1,8 +1,9 @@
 node_modules
 dist
-.env
-
 coverage
+.env
+.vscode
+
 jest.config.ts
 jest-integration-config.ts
 jest-unit-config.ts
