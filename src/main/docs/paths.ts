@@ -1,7 +1,9 @@
 import {
-  professorPath
+  professorPath,
+  alunoPath
 } from './paths/'
 
 export default {
-  '/professor': professorPath
+  '/professor': professorPath,
+  '/aluno': alunoPath
 }

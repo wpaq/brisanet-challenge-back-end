@@ -25,6 +25,9 @@ export default {
   tags: [{
     name: 'Professor',
     description: 'APIs relacionadas ao Professor'
+  }, {
+    name: 'Aluno',
+    description: 'APIs relacionadas ao Aluno'
   }],
   paths,
   schemas,

@@ -1,9 +1,11 @@
 import {
   professorParamsSchema,
-  errorSchema
+  errorSchema,
+  alunoParamsSchema
 } from './schemas/'
 
 export default {
   professorParams: professorParamsSchema,
-  error: errorSchema
+  error: errorSchema,
+  alunoParams: alunoParamsSchema
 }
