@@ -13,9 +13,16 @@ jest.mock('nodemailer', () => ({
   }))
 }))
 
+let professorId: string
+let alunoId: string
+let cadeiraId: string
+
 describe('CadeirasAlunos Routes', () => {
   beforeAll(async () => {
     await PrismaHelper.connect(prismock)
+    professorId = (await new ProfessorPrismaRepository().add(mockAddProfessorParams())).id
+    alunoId = (await new AlunoPrismaRepository().add(mockAddAlunoParams())).id
+    cadeiraId = (await new CadeiraPrismaRepository().add(Object.assign({}, mockAddCadeiraParams(), { professorId }))).id
   })
 
   afterAll(async () => {
@@ -27,27 +34,17 @@ describe('CadeirasAlunos Routes', () => {
   })
 
   test('should return an cadeiras alunos on success', async () => {
-    const professor = await new ProfessorPrismaRepository().add(mockAddProfessorParams())
-    const aluno = await new AlunoPrismaRepository().add(mockAddAlunoParams())
-    const cadeira = await request(app)
-      .post('/api/cadeira')
-      .send(Object.assign({}, mockAddCadeiraParams(), { professorId: professor.id }))
-      .expect(200)
-
     await request(app)
       .post('/api/cadeiras-alunos')
       .send({
-        alunoId: aluno.id,
-        cadeiraId: cadeira.body.id
+        alunoId,
+        cadeiraId
       })
       .expect(200)
   })
 
   test('should return an cadeiras alunos on success update', async () => {
-    const professor = await new ProfessorPrismaRepository().add(mockAddProfessorParams())
-    const aluno = await new AlunoPrismaRepository().add(mockAddAlunoParams())
-    const cadeira = await new CadeiraPrismaRepository().add(Object.assign({}, mockAddCadeiraParams(), { professorId: professor.id }))
-    const cadeirasAlunos = await new CadeirasAlunosPrismaRepository().add({ cadeiraId: cadeira.id, alunoId: aluno.id, professorId: professor.id })
+    const cadeirasAlunos = await new CadeirasAlunosPrismaRepository().add({ cadeiraId, alunoId, professorId })
 
     await request(app)
       .put('/api/cadeiras-alunos')
