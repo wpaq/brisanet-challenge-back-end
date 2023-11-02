@@ -2,7 +2,7 @@ import { LoadCadeirasSpy } from '@/tests/presentation/mocks'
 
 import { LoadCadeirasController } from '@/presentation/controllers'
 import { type HttpRequest } from '@/presentation/protocols'
-import { ok, serverError } from '@/presentation/helpers'
+import { noContent, ok, serverError } from '@/presentation/helpers'
 
 import { faker } from '@faker-js/faker'
 
@@ -45,5 +45,12 @@ describe('LoadCadeira Controller', () => {
     const { sut, loadCadeirasSpy } = makeSut()
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(ok(loadCadeirasSpy.result))
+  })
+
+  test('Should return 204 if LoadCadeiras returns empty', async () => {
+    const { sut, loadCadeirasSpy } = makeSut()
+    loadCadeirasSpy.result = []
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(noContent())
   })
 })
