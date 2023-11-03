@@ -6,7 +6,10 @@ import {
   cadeirasSchema,
   addCadeirasAlunosParamsSchema,
   cadeirasAlunosSchema,
-  updateCadeirasAlunosParamsSchema
+  updateCadeirasAlunosParamsSchema,
+  professorSchema,
+  alunoSchema,
+  cadeiraSchema
 } from './schemas/'
 
 export default {
@@ -17,5 +20,8 @@ export default {
   cadeiras: cadeirasSchema,
   addCadeirasAlunosParams: addCadeirasAlunosParamsSchema,
   cadeirasAlunos: cadeirasAlunosSchema,
-  updateCadeirasAlunosParams: updateCadeirasAlunosParamsSchema
+  updateCadeirasAlunosParams: updateCadeirasAlunosParamsSchema,
+  professor: professorSchema,
+  aluno: alunoSchema,
+  cadeira: cadeiraSchema
 }

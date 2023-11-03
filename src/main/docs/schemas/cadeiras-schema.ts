@@ -1,6 +1,19 @@
 export const cadeirasSchema = {
   type: 'array',
   items: {
-    $ref: '#/schemas/addCadeiraParams'
+    allOf: [
+      { $ref: '#/schemas/addCadeiraParams' },
+      {
+        type: 'object',
+        properties: {
+          cadeirasAlunos: {
+            type: 'array',
+            items: {
+              $ref: '#/schemas/cadeirasAlunos'
+            }
+          }
+        }
+      }
+    ]
   }
 }

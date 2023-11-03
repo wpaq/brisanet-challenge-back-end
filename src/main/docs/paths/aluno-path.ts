@@ -19,7 +19,7 @@ export const alunoPath = {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/schemas/addAlunoParams'
+              $ref: '#/schemas/aluno'
             }
           }
         }

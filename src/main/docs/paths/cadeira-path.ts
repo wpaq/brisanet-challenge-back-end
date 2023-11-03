@@ -48,7 +48,7 @@ export const cadeiraPath = {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/schemas/addCadeiraParams'
+              $ref: '#/schemas/cadeira'
             }
           }
         }
