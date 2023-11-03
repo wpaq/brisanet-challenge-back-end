@@ -13,6 +13,9 @@ https://github.com/Brisanet/challenge-back-end#readme
 
 <br>
 
+## Documentação da API com Swagger
+A documentação da API fica na rota: http://localhost:5050/api/api-docs
+
 ## Pré-requisitos
 
 - [Node.js](https://nodejs.org/) instalado
