@@ -11,4 +11,5 @@
 
 1. ✅ Retorna erro **404** se a API não existir
 2. ✅ Retorna erro **400** se alunoId ou cadeiraId não forem fornecidos pelo client
-3. ✅ Retorna erro **500** se der erro ao tentar criar a CadeirasAlunos
+3. ✅ Retorna erro **403** se não encontrar um aluno ou uma cadeira com o id fornecido
+4. ✅ Retorna erro **500** se der erro ao tentar criar a CadeirasAlunos
