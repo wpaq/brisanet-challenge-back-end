@@ -28,7 +28,7 @@ describe('Cadeira Routes', () => {
 
   test('should return an list of cadeiras on success', async () => {
     await request(app)
-      .get('/api/cadeiras')
+      .get('/api/cadeira')
       .expect(200)
   })
 })

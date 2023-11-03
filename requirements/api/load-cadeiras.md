@@ -2,7 +2,7 @@
 
 > ## Caso de sucesso
 
-1. ✅ Recebe uma requisição do tipo **GET** na rota **/api/cadeiras**
+1. ✅ Recebe uma requisição do tipo **GET** na rota **/api/cadeira**
 3. ✅ Retorna **204** se não tiver nenhuma cadeira
 4. ✅ Retorna **200** com os dados das cadeiras
 
