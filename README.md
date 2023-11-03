@@ -53,7 +53,6 @@ Caso não tenha um domínio SMTP e deseja utilizar a API somente para testes, re
 Eu deixei variáveis ambientes de teste utilizando o SMTP do Ethereal no docker-compose.yml
 <br>
 Caso queira utilizar um domínio SMTP próprio ou visualizar no mailBox da conta do Ethereal que você criou, basta modificar elas na parte de `environment` no arquivo docker-compose.yml
-
 <br>
 
 - `SMTP_HOST=`
@@ -63,8 +62,10 @@ Caso queira utilizar um domínio SMTP próprio ou visualizar no mailBox da conta
 
 <br>
 
-1. Para rodar o container do docker execute `npm run up`
-2. Para encerrar o container execute `npm run down`
+1. Faça o clone do repositório
+2. Na raíz do projeto execute `npm install` para instalar as dependências
+3. Para rodar o container do docker execute `npm run up`, pode demorar para iniciar.
+4. Para encerrar o container execute `npm run down`
 
 ## APIs construídas no desafio
 
