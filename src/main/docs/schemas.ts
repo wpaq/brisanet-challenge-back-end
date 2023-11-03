@@ -3,7 +3,9 @@ import {
   errorSchema,
   addAlunoParamsSchema,
   addCadeiraParamsSchema,
-  cadeirasSchema
+  cadeirasSchema,
+  addCadeirasAlunosParamsSchema,
+  cadeirasAlunosSchema
 } from './schemas/'
 
 export default {
@@ -11,5 +13,7 @@ export default {
   error: errorSchema,
   addAlunoParams: addAlunoParamsSchema,
   addCadeiraParams: addCadeiraParamsSchema,
-  cadeiras: cadeirasSchema
+  cadeiras: cadeirasSchema,
+  addCadeirasAlunosParams: addCadeirasAlunosParamsSchema,
+  cadeirasAlunos: cadeirasAlunosSchema
 }
