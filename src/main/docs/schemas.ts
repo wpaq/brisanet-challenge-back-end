@@ -1,27 +1,27 @@
 import {
-  addProfessorParamsSchema,
   errorSchema,
-  addAlunoParamsSchema,
-  addCadeiraParamsSchema,
-  cadeirasSchema,
-  addCadeirasAlunosParamsSchema,
-  cadeirasAlunosSchema,
-  updateCadeirasAlunosParamsSchema,
   professorSchema,
+  addProfessorParamsSchema,
   alunoSchema,
-  cadeiraSchema
+  addAlunoParamsSchema,
+  cadeiraSchema,
+  cadeirasSchema,
+  addCadeiraParamsSchema,
+  cadeirasAlunosSchema,
+  addCadeirasAlunosParamsSchema,
+  updateCadeirasAlunosParamsSchema
 } from './schemas/'
 
 export default {
-  addProfessorParams: addProfessorParamsSchema,
   error: errorSchema,
-  addAlunoParams: addAlunoParamsSchema,
-  addCadeiraParams: addCadeiraParamsSchema,
-  cadeiras: cadeirasSchema,
-  addCadeirasAlunosParams: addCadeirasAlunosParamsSchema,
-  cadeirasAlunos: cadeirasAlunosSchema,
-  updateCadeirasAlunosParams: updateCadeirasAlunosParamsSchema,
   professor: professorSchema,
+  addProfessorParams: addProfessorParamsSchema,
   aluno: alunoSchema,
-  cadeira: cadeiraSchema
+  addAlunoParams: addAlunoParamsSchema,
+  cadeira: cadeiraSchema,
+  cadeiras: cadeirasSchema,
+  addCadeiraParams: addCadeiraParamsSchema,
+  cadeirasAlunos: cadeirasAlunosSchema,
+  addCadeirasAlunosParams: addCadeirasAlunosParamsSchema,
+  updateCadeirasAlunosParams: updateCadeirasAlunosParamsSchema
 }
